@@ -332,6 +332,51 @@ svg.pelvis{width:100%;height:auto;display:block;margin:6px 0;background:linear-g
 .pelvis .strong{font-weight:700;fill:var(--ink);font-size:9px}
 .pelvis .callln{stroke:var(--ink-3);stroke-width:.8}
 .pelvis .arw2{stroke:var(--syn);stroke-width:2;fill:none;marker-end:url(#exArrow)}
+
+/* coach */
+.coach{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;font-size:14.5px}
+.coach-fab{width:58px;height:58px;border-radius:50%;border:0;background:var(--muscle);cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 22px rgba(0,0,0,.22);transition:transform .2s;position:relative}
+.coach-fab:hover{transform:translateY(-2px) scale(1.04)}
+.coach-fab svg{width:34px;height:34px;grid-area:1/1;transition:opacity .2s,transform .2s}
+.coach-fab .fb{fill:#fff} .coach-fab .fd rect{fill:var(--muscle)}
+.coach-fab .fx{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;opacity:0;transform:rotate(-90deg)}
+.coach-fab.open svg:first-child{opacity:0;transform:scale(.6)} .coach-fab.open .fx{opacity:1;transform:none}
+.coach-hint{position:absolute;right:68px;bottom:14px;white-space:nowrap;background:var(--ink);color:var(--paper);padding:6px 12px;border-radius:999px;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
+.coach-panel{position:absolute;right:0;bottom:70px;width:min(380px,calc(100vw - 32px));height:min(580px,calc(100vh - 120px));background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden;animation:cpop .2s ease}
+.coach-panel[hidden]{display:none}
+@keyframes cpop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.coach-panel{animation:none}.coach-fab,.coach-fab svg{transition:none}}
+.coach-panel header{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--paper)}
+.coach-panel header .cav svg{width:36px;height:36px;display:block}
+.coach-panel header b{display:block;font-family:var(--f-display);font-size:16px}
+.coach-panel header span{display:block;font-size:11.5px;color:var(--ink-3)}
+.cclose{margin-left:auto;background:none;border:0;font-size:16px;color:var(--ink-3);cursor:pointer;width:32px;height:32px;border-radius:8px}
+.cclose:hover{background:var(--surface);color:var(--ink)}
+.cmsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;overscroll-behavior:contain}
+.cm{display:flex;flex-direction:column;max-width:88%}
+.cm.user{align-self:flex-end;align-items:flex-end}
+.cm .cb{padding:9px 12px;border-radius:14px;line-height:1.65;font-size:14px;overflow-wrap:anywhere}
+.cm.bot .cb{background:var(--paper);border:1px solid var(--line);border-top-left-radius:4px;color:var(--ink)}
+.cm.user .cb{background:var(--muscle);color:#fff;border-top-right-radius:4px}
+.cm .cb ul,.cm .cb ol{margin:4px 0;padding-left:1.2em}
+.cm .cb li{margin:1px 0}
+.cnote{font-size:12.5px;color:var(--ink-3)}
+.cacts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cbtn{border:1px solid var(--muscle);background:var(--surface);color:var(--muscle);border-radius:999px;padding:2px 11px;font-size:12.5px;cursor:pointer}
+.cbtn:hover{background:var(--muscle);color:#fff}
+.cchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cchip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:999px;padding:3px 11px;font-size:12.5px;cursor:pointer}
+.cchip:hover{border-color:var(--ink-3);color:var(--ink)}
+.cm.typing .cb{display:flex;gap:4px;padding:12px}
+.cm.typing i{width:6px;height:6px;border-radius:50%;background:var(--ink-3);animation:cdot 1s infinite}
+.cm.typing i:nth-child(2){animation-delay:.15s}.cm.typing i:nth-child(3){animation-delay:.3s}
+@keyframes cdot{0%,60%,100%{opacity:.3;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+.cin{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--surface)}
+.cin input{flex:1;min-width:0;font:inherit;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink)}
+.cin button{width:40px;height:40px;border-radius:50%;border:0;background:var(--muscle);cursor:pointer;display:grid;place-items:center;flex:none}
+.cin button svg{width:18px;height:18px;fill:#fff}
+@media (max-width:560px){.coach{right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px))}.coach-panel{position:fixed;left:8px;right:8px;width:auto;bottom:calc(80px + env(safe-area-inset-bottom,0px));height:min(72vh,600px)}}
+main{padding-bottom:110px}
 .exnav{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
 .exrow{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:baseline}
 .exrow>b{font-size:13px;color:var(--ink-3);font-weight:500}
@@ -1535,6 +1580,149 @@ document.addEventListener("keydown",e=>{if(e.key==="/"&&!/INPUT|TEXTAREA/.test(d
   btn.addEventListener("click",()=>{const n=isDark()?"light":"dark";root.dataset.theme=n;try{localStorage.setItem("muscle-theme",n)}catch(e){}sync()});
   if(mq&&mq.addEventListener)mq.addEventListener("change",sync);
   new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:["data-theme"]});sync();
+})();
+
+
+/* ================= 虛擬教練 ================= */
+(function(){
+const EXA={pulldown:["滑輪下拉","下拉","高拉","lat pulldown"],row:["坐姿划船","划船","seated row"],chestpress:["胸推機","胸推","推胸"],shoulderpress:["肩推機","肩推"],pecdeck:["蝴蝶機","夾胸","飛鳥"],facepull:["面拉","face pull"],pushdown:["三頭下壓","繩索下壓","下壓"],curl:["啞鈴彎舉","二頭彎舉","彎舉"],legpress:["腿推機","腿推","腿舉"],legext:["腿伸展","伸膝"],legcurl:["腿彎舉","勾腿"],hipabd:["髖外展","外展機","臀中肌機"],hipthrust:["臀推","hip thrust"],calfraise:["提踵","踮腳","小腿上提"],backext:["羅馬椅","背伸","山羊挺身"],
+ hundred:["百次拍擊","百次","hundred"],rollup:["捲上","roll up"],legcircle:["單腿畫圈","畫圈"],rolling:["滾球"],slstretch:["單腿伸展"],crisscross:["十字交叉","交叉捲腹"],spinestretch:["脊椎前伸"],swan:["天鵝"],swimming:["游泳式","游泳"],sidekick:["側躺抬腿","側抬腿"],clam:["蚌殼"],bridge:["肩橋","橋式"],mermaid:["美人魚"],plank:["平板支撐","平板","棒式","前撐","plank"],footwork:["核心床","footwork","腳部動作"]};
+const MVA={squat:["深蹲","squat"],hinge:["硬舉","髖鉸鏈","撿東西"],push:["伏地挺身","臥推"],pull:["引體向上"],overhead:["舉手過頭","過頭推"],gait:["走路","步行"]};
+const MUA={biceps:["二頭"],triceps:["三頭","蝴蝶袖"],deltoid:["三角肌"],pecmaj:["胸肌","胸大"],pecmin:["胸小"],lats:["背闊"],uptrap:["上斜方","斜方肌"],lowtrap:["下斜方","中下斜方"],glutemax:["臀大"],glutemed:["臀中"],glutemin:["臀小"],quads:["股四頭"],hamstrings:["膕旁","大腿後側肌"],gastroc:["腓腸","小腿肚"],soleus:["比目魚"],rectus:["腹直","六塊肌"],ta:["腹橫"],extobl:["外斜"],intobl:["內斜"],erector:["豎脊"],iliopsoas:["髂腰","腰大肌","髖屈肌"],adductors:["內收肌"],piriformis:["梨狀"],tfl:["闊筋膜","髂脛束"],supraspinatus:["棘上"],infraspinatus:["棘下"],subscap:["肩胛下肌"],serratus:["前鋸"],rhomboid:["菱形"],levator:["提肩胛"],scm:["胸鎖乳突"],ql:["腰方"],multifidus:["多裂"],tibant:["脛前肌"],tibpost:["脛後肌"],peroneals:["腓骨肌"],diaphragm:["橫膈"],pelvicfloor:["骨盆底"],masseter:["咬肌"],suboccipital:["枕下"],dnf:["深層頸屈"],footintrinsic:["足底肌","足內在"],wristext:["前臂伸肌","網球肘"],wristflex:["前臂屈肌","高爾夫球肘"],brachialis:["肱肌"],brachioradialis:["肱橈"],teresminor:["小圓肌"]};
+const PAINK={head:["頭痛","太陽穴","後腦","偏頭"],neck:["肩頸","脖子","頸部","落枕","頸"],shoulder:["肩前","舉手","肩膀","肩關節","夾擠","五十肩"],midback:["肩胛中間","肩胛骨中間","背中間","兩片肩胛"],elbow:["手肘","網球肘","高爾夫球肘","前臂"],lowback:["下背","腰痛","腰痠","腰"],buttock:["屁股","臀部","坐骨","腿後"],groin:["鼠蹊","胯下","大腿內側"],kneefront:["膝蓋前","膝前","髕骨","膝蓋"],kneeside:["膝外","膝蓋外","大腿外側","髂脛束"],shin:["脛","小腿前","小腿痛"],heel:["腳跟","足底","腳底","足弓","筋膜炎"]};
+const TRAIN={"胸":["pecmaj"],"背":["lats","rhomboid","lowtrap"],"肩":["deltoid","infraspinatus"],"二頭":["biceps"],"手臂":["biceps","triceps"],"三頭":["triceps"],"蝴蝶袖":["triceps"],"大腿前":["quads"],"大腿後":["hamstrings"],"腿":["quads","hamstrings","glutemax"],"臀":["glutemax","glutemed"],"屁股":["glutemax","glutemed"],"翹臀":["glutemax","glutemed"],"核心":["ta","rectus","extobl"],"腹":["rectus","ta","extobl"],"肚子":["rectus","ta","extobl"],"小腿":["gastroc","soleus"],"下背":["erector","multifidus"],"圓肩":["lowtrap","rhomboid","infraspinatus","serratus"],"駝背":["lowtrap","rhomboid","erector"],"姿勢":["lowtrap","dnf","glutemax"]};
+const TOPICS=[
+ {k:["乳酸"],a:"運動中的灼熱感和代謝產物有關，大約一小時內就清除了。<b>隔天的痠痛不是乳酸</b>，主要是離心動作或新動作造成的微小損傷與發炎。",go:["tab","soreness","看運動後痠痛曲線"]},
+ {k:["延遲性","doms","隔天痠","練完痠","練完很痠","肌肉痠痛","痠痛多久","鐵腿"],a:"運動後痠痛通常在 <b>12–24 小時後出現、24–72 小時最痛</b>，3–5 天自己緩解。<ul><li>輕度活動、睡飽最有幫助</li><li>同樣動作再做一次，痠痛會明顯減輕（重複效應）</li><li>沒痠不代表沒練到</li></ul>若出現劇痛、明顯腫脹、尿液變茶色，請立即就醫。",go:["tab","soreness","看痠痛曲線"]},
+ {k:["伸展","拉筋"],a:"伸展能改善柔軟度，但<b>幾乎不能預防痠痛</b>。<ul><li>熱身用動態伸展（擺腿、繞肩）</li><li>靜態伸展放在運動後，每個部位 20–30 秒</li><li>覺得「緊」不一定要拉：被拉長硬撐的肌肉（例如圓肩時肩胛中間）反而需要強化</li></ul>",go:["tab","soreness","看「該伸展嗎」"]},
+ {k:["冰敷","熱敷","冰浴"],a:"<ul><li><b>冰敷</b>：短期止痛，適合急性扭傷紅腫的頭兩天；想長肌肉時，練完不要馬上冰浴</li><li><b>熱敷</b>：放鬆、減少僵硬，適合慢性痠緊；急性紅腫熱期間避免</li></ul>",go:["tab","recovery","看恢復方法比較"]},
+ {k:["恢復","休息","睡眠","蛋白質","滾筒","按摩","筋膜槍"],a:"恢復效果由高到低：<ol><li>睡眠 7–9 小時</li><li>漸進增加訓練量</li><li>足夠蛋白質，分散在各餐</li><li>輕度活動</li><li>按摩、滾筒：短期舒緩，適合熱身前</li></ol>",go:["tab","recovery","看恢復方法比較"]},
+ {k:["呼吸","憋氣"],a:"<ul><li><b>重訓</b>：出力時吐氣、回程吸氣，不要憋氣（高血壓者尤其注意）</li><li><b>皮拉提斯</b>：側肋呼吸，吸氣時肋骨往兩側、往後擴張，吐氣時收攏、腹部內收</li></ul>",go:["tab","pilates","看皮拉提斯原則"]},
+ {k:["中立","印記","骨盆位置"],a:"<ul><li><b>中立骨盆</b>：髂前上棘與恥骨同高，下背和墊子間有小空隙，腳踩地的動作多用</li><li><b>印記骨盆</b>：骨盆微後傾，下背輕貼墊子；雙腳抬起、腹肌還不穩時使用</li></ul>",go:["tab","pilates","看骨盆剖視圖"]},
+ {k:["快肌","慢肌","紅肌","白肌","肌纖維"],a:"每塊肌肉都混合三種纖維：<ul><li><b>慢肌（I 型）</b>：耐力好，例如比目魚肌</li><li><b>中間型（IIa）</b></li><li><b>快肌（IIx）</b>：爆發力強、容易累，衝刺跳躍才會用到</li></ul>比例多半是天生的，訓練可以提升各型纖維的能力。",go:["tab","structure","看纖維比較"]},
+ {k:["向心","離心","等長","收縮方式"],a:"<ul><li><b>向心</b>：邊出力邊變短（舉起）</li><li><b>離心</b>：邊出力邊被拉長（放下）；最能承重，最容易痠</li><li><b>等長</b>：出力但長度不變（撐住）</li></ul>",go:["tab","mechanism","看三種出力方式"]},
+ {k:["能量","燃料","有氧","無氧","燃脂"],a:"三大能量系統同時運作，比例隨時間改變：<ul><li>約 10 秒內以<b>磷酸肌酸</b>為主</li><li>數十秒的高強度以<b>醣解</b>為主</li><li>約 1 分鐘時有氧和無氧各半，越久有氧越主導</li></ul>",go:["tab","mechanism","看能量系統圖"]},
+ {k:["重量","幾下","組數","次數","多重"],a:"一般建議：<ul><li>選能做 <b>8–12 下</b>、最後兩下吃力但姿勢不跑掉的重量</li><li>每個動作 2–4 組，組間休息 1–2 分鐘</li><li>上 1–2 秒、放下 2–3 秒</li><li>每週慢慢增加，不要一次加太多</li></ul>",go:["tab","gym","看器材通用原則"]},
+ {k:["熱身"],a:"熱身 5–10 分鐘：<ul><li>輕鬆有氧讓身體變熱</li><li>動態伸展：繞肩、擺腿、弓箭步走</li><li>正式動作先用輕重量做一組</li></ul>"},
+ {k:["抽筋"],a:"抽筋時<b>輕輕把那塊肌肉拉長</b>並維持，例如小腿抽筋就把腳尖往身體方向拉。常見原因是疲勞與神經肌肉控制異常，脫水與電解質是次要因素。經常夜間抽筋建議就醫檢查。"},
+ {k:["代償"],a:"代償是該出力的肌肉沒力，旁邊的肌肉跑來幫忙。短期能撐，長期幫忙的那塊會累、會痛。例如臀肌沒力時，下背和大腿後側就容易代償。",go:["tab","roles","看分工合作"]}
+];
+const RED=[/胸口.{0,3}(痛|悶|壓|緊)/,/胸(悶|痛)/,/(尿|小便).{0,4}(茶|可樂|深|褐)/,/喘不過/,/(昏倒|暈倒|意識)/,/大小便(失禁|控制不)/,/(突然).{0,6}(無力|麻)/,/(會陰|胯下).{0,3}麻/,/(骨折|變形|無法承重|不能走)/,/啪.{0,4}(一聲|聲)/,/(小腿).{0,6}(紅腫|腫脹).{0,4}(熱|痛)?/];
+const PAINW=/(痛|痠|酸|緊|不舒服|卡|麻|刺|僵|腫)/;
+const norm=s=>s.toLowerCase().replace(/[？?！!。，,、\s]/g,"");
+const has=(q,arr)=>{let best=0;arr.forEach(w=>{if(q.includes(norm(w)))best=Math.max(best,w.length)});return best};
+const btn=(label,act)=>`<button class="cbtn" data-cact="${act}">${label}</button>`;
+const mName=id=>MI[id]?MI[id].zh:id;
+const mBtns=ids=>ids.filter(id=>MI[id]).map(id=>btn(MI[id].zh,"m:"+id)).join("");
+
+function exAnswer(lib,id,q){
+  const v=lib.find(x=>x.id===id),isP=lib===PIL;let h=`<b>${v.t}</b>（${v.en}）<br>`;
+  const wantSteps=/(怎麼|如何|步驟|做法|教我|姿勢)/.test(q),wantErr=/(錯|注意|受傷|痛)/.test(q),wantMus=/(練到|哪裡|哪些|肌肉|部位)/.test(q);
+  if(wantMus||!(wantSteps||wantErr))h+=`主要練到：${v.prime.map(mName).join("、")}${v.syn.length?`；協同：${v.syn.map(mName).join("、")}`:""}<br>`;
+  if(wantSteps||!(wantErr||wantMus))h+=`<ol>${v.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`;
+  if(wantErr||!(wantSteps||wantMus))h+=`常見錯誤：<ul>${v.err.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`;
+  h+=`呼吸：${esc(v.br)}${v.note?`<br>提醒：${esc(v.note)}`:""}`;
+  return {h,acts:[btn("看動作圖解",(isP?"p:":"g:")+id)]};
+}
+function answer(raw){
+  const q=norm(raw);
+  if(!q)return null;
+  if(RED.some(r=>r.test(raw)))return {h:`⚠️ 你描述的情況可能需要<b>盡快就醫</b>，不建議自己處理或繼續運動。<ul><li>胸口壓迫痛、喘不過氣、意識不清、大小便失禁：請立即撥打 <b>119</b> 或到急診</li><li>尿液變茶色合併劇烈肌肉痛：可能是橫紋肌溶解，請立即就醫</li><li>受傷後無法承重、聽到「啪」一聲後無力、單側小腿紅腫熱痛：請盡快看醫師</li></ul>`,acts:[btn("看就醫警訊","t:recovery")]};
+  if(/^(你好|嗨|哈囉|hi|hello|安安|早安|午安|晚安)/.test(q))return {h:"你好！我是肌肉教練。可以問我：<ul><li>某個動作怎麼做，例如「滑輪下拉怎麼做」</li><li>想練哪裡，例如「想練臀部」</li><li>哪裡痠痛，例如「下背痛跟哪些肌肉有關」</li><li>某塊肌肉的功能，例如「臀中肌是做什麼的」</li></ul>",chips:true};
+  if(/(謝謝|感謝|thank)/.test(q))return {h:"不客氣！練習時記得動作慢、姿勢穩，有問題隨時問我 💪"};
+  if(/(你是誰|你會什麼|你能做|功能)/.test(q))return answer("你好");
+  // exercise
+  let best=null;
+  const consider=(score,fn)=>{if(score>=1&&(!best||score>best.s))best={s:score,fn}};
+  GYM.forEach(v=>consider(has(q,EXA[v.id]||[v.t])&&has(q,EXA[v.id]||[v.t])+.3,()=>exAnswer(GYM,v.id,q)));
+  PIL.forEach(v=>consider(has(q,EXA[v.id]||[v.t])&&has(q,EXA[v.id]||[v.t])+.3,()=>exAnswer(PIL,v.id,q)));
+  MOVES.forEach(v=>consider(has(q,MVA[v.k]||[v.t])&&has(q,MVA[v.k]||[v.t])+.2,()=>({h:`<b>${v.t}</b>：${esc(v.d)}<br>主力：${v.prime.map(mName).join("、")}<br>穩定：${v.stab.map(mName).join("、")}<br>${v.ct||"常見錯誤"}：<ul>${v.comp.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>`,acts:[btn("看動作拆解","v:"+v.k)]})));
+  const exBest=best;best=null;
+  // pain
+  const painIntent=PAINW.test(raw);
+  if(painIntent){
+    if(/(隔天|練完|運動後|延遲|鐵腿)/.test(q)){const t=TOPICS.find(t=>t.k.includes("延遲性"));return {h:t.a,acts:[btn(t.go[2],"t:"+t.go[1])]}}
+    let pk=null,ps=0;PAIN.forEach(v=>{const s=has(q,PAINK[v.k]||[]);if(s>ps){ps=s;pk=v}});
+    if(pk&&(!exBest||ps>=exBest.s-.3)){
+      return {h:`<b>${pk.t}</b>可能相關的肌肉：${pk.m.map(mName).join("、")}<br>常見連鎖：${pk.chain.join(" → ")}<br><span class="cnote">${esc(pk.note)}</span><br><span class="cnote">以上是學習參考，不是診斷。痛超過 2 週、越來越痛，或有麻、無力，請看醫師或物理治療師。</span>`,acts:[btn("看痠痛地圖","pain:"+pk.k),mBtns(pk.m.slice(0,3))]};
+    }
+  }
+  if(exBest&&exBest.s>=2)return exBest.fn();
+  // train target
+  if(/(練|鍛鍊|訓練|強化|增強|改善|雕塑|瘦)/.test(q)){
+    let tk=null,ts=0;Object.keys(TRAIN).forEach(k=>{if(q.includes(k)&&k.length>ts){ts=k.length;tk=k}});
+    if(tk){const ids=TRAIN[tk];const pick=lib=>lib.filter(v=>v.prime.some(i=>ids.includes(i)));
+      const g=pick(GYM),p=pick(PIL);
+      if(g.length||p.length)return {h:`想練<b>${tk}</b>，可以從這些動作開始：${g.length?`<br>器材：${g.map(v=>v.t).join("、")}`:""}${p.length?`<br>皮拉提斯：${p.map(v=>v.t).join("、")}`:""}<br><span class="cnote">每個動作 2–4 組、每組 8–12 下，動作慢、姿勢穩比重量重要。</span>`,acts:[...g.slice(0,3).map(v=>btn(v.t,"g:"+v.id)),...p.slice(0,2).map(v=>btn(v.t,"p:"+v.id))]};
+    }
+  }
+  // muscle
+  let mb=null,ms=0;M.forEach(m=>{const names=[m.zh.replace(/（.*?）/g,""),m.en,...(MUA[m.id]||[])];const s=has(q,names);if(s>ms){ms=s;mb=m}});
+  if(mb&&ms>=2){const m=mb;
+    return {h:`<b>${m.zh}</b>（${m.en}）<br>${esc(m.p)}<ul><li>負責：${esc(m.act)}</li>${m.syn.length?`<li>夥伴：${m.syn.map(mName).join("、")}</li>`:""}${m.ant.length?`<li>對手：${m.ant.map(mName).join("、")}</li>`:""}${m.bad?`<li>出問題時：${esc(m.bad)}</li>`:""}${m.tip?`<li>小提醒：${esc(m.tip)}</li>`:""}</ul>`,acts:[btn("在人體圖上看","m:"+m.id),...[...GYM,...PIL].filter(v=>v.prime.includes(m.id)).slice(0,2).map(v=>btn("練法："+v.t,(GYM.includes(v)?"g:":"p:")+v.id))]};}
+  if(exBest)return exBest.fn();
+  // topics
+  let tb=null,tsc=0;TOPICS.forEach(t=>{const s=has(q,t.k);if(s>tsc){tsc=s;tb=t}});
+  if(tb)return {h:tb.a,acts:tb.go?[btn(tb.go[2],"t:"+tb.go[1])]:[]};
+  // glossary
+  let gb=null,gs=0;GLOSS.forEach((g,i)=>{const s=has(q,[...g[0].split(" / "),...g[1].split(" / ")]);if(s>gs){gs=s;gb=i}});
+  if(gb!==null&&gs>=2){const g=GLOSS[gb];return {h:`<b>${g[0]}</b>（${g[1]}）：${esc(g[2])}`,acts:[btn("看名詞速查","t:glossary")]}}
+  // pain without location
+  if(painIntent)return {h:"哪個部位不舒服呢？可以說得具體一點，例如「下背痛」「膝蓋前面痛」「肩頸緊」。",chips:"pain"};
+  return {h:"這個問題我可能答不好 😅 我是根據本站內容回答的簡易教練，比較擅長：肌肉功能、器材與皮拉提斯動作、痠痛部位的可能原因、恢復方法。試試下面的問題：",chips:true};
+}
+
+/* UI */
+const wrap=document.createElement("div");wrap.className="coach";
+wrap.innerHTML=`
+<div class="coach-hint" id="coachHint" hidden>有問題問我 👋</div>
+<button class="coach-fab" id="coachFab" aria-label="開啟虛擬教練" aria-expanded="false">
+  <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8,12 a6,6 0 0 1 6,-6 h20 a6,6 0 0 1 6,6 v14 a6,6 0 0 1 -6,6 h-12 l-8,7 v-7 h0 a6,6 0 0 1 -6,-6 z" class="fb"/><g class="fd"><rect x="16" y="17" width="16" height="3" rx="1.5"/><rect x="12.5" y="13.5" width="4" height="10" rx="1.4"/><rect x="31.5" y="13.5" width="4" height="10" rx="1.4"/></g></svg>
+  <svg viewBox="0 0 24 24" class="fx" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+</button>
+<section class="coach-panel" id="coachPanel" role="dialog" aria-label="虛擬教練" hidden>
+  <header><div class="cav"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="13" fill="var(--muscle-soft)"/><g transform="rotate(-35 24 24)"><line x1="5" y1="24" x2="13" y2="24" stroke="var(--tendon)" stroke-width="3.6" stroke-linecap="round"/><line x1="35" y1="24" x2="43" y2="24" stroke="var(--tendon)" stroke-width="3.6" stroke-linecap="round"/><path d="M11,24 Q24,7 37,24 Q24,41 11,24 Z" fill="var(--muscle)"/></g></svg></div>
+    <div><b>肌肉教練</b><span>根據本站內容回答 · 非醫療診斷</span></div>
+    <button class="cclose" id="coachClose" aria-label="關閉">✕</button></header>
+  <div class="cmsgs" id="coachMsgs" aria-live="polite"></div>
+  <form class="cin" id="coachForm"><input id="coachInput" type="text" placeholder="輸入問題，例如：深蹲練到哪裡？" autocomplete="off" aria-label="輸入問題"><button type="submit" aria-label="送出"><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg></button></form>
+</section>`;
+document.body.appendChild(wrap);
+const fab=wrap.querySelector("#coachFab"),panel=wrap.querySelector("#coachPanel"),msgs=wrap.querySelector("#coachMsgs"),form=wrap.querySelector("#coachForm"),inp=wrap.querySelector("#coachInput"),hint=wrap.querySelector("#coachHint");
+const CHIPS=["深蹲練到哪裡？","滑輪下拉怎麼做？","想練臀部","下背痛","膝蓋前面痛","練完隔天很痠","臀中肌是做什麼的","百次拍擊怎麼做"];
+const PCHIPS=["下背痛","肩頸痠","膝蓋前面痛","手肘痛","腳跟痛","頭痛"];
+function add(role,html,acts,chips){
+  const d=document.createElement("div");d.className="cm "+role;
+  d.innerHTML=(role==="bot"?`<div class="cb">${html}${acts&&acts.length?`<div class="cacts">${acts.join("")}</div>`:""}</div>`:`<div class="cb">${esc(html)}</div>`);
+  if(chips){const list=chips==="pain"?PCHIPS:CHIPS;d.innerHTML+=`<div class="cchips">${list.map(c=>`<button class="cchip" data-q="${c}">${c}</button>`).join("")}</div>`}
+  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
+}
+function ask(text){
+  text=text.trim();if(!text)return;add("user",text);inp.value="";
+  const t=document.createElement("div");t.className="cm bot typing";t.innerHTML=`<div class="cb"><i></i><i></i><i></i></div>`;msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;
+  setTimeout(()=>{t.remove();let r;try{r=answer(text)}catch(e){r=null}
+    r=r||{h:"抱歉，我沒有理解這個問題，可以換個說法嗎？",chips:true};add("bot",r.h,r.acts,r.chips)},450+Math.random()*350);
+}
+let opened=false;
+function toggle(open){panel.hidden=!open;fab.classList.toggle("open",open);fab.setAttribute("aria-expanded",open);hint.hidden=true;
+  if(open){if(!opened){opened=true;add("bot","你好！我是<b>肌肉教練</b> 👋<br>可以問我肌肉功能、器材或皮拉提斯動作怎麼做、哪裡痠痛可能跟哪些肌肉有關。",[],true)}setTimeout(()=>inp.focus(),50)}}
+fab.addEventListener("click",()=>toggle(panel.hidden));
+wrap.querySelector("#coachClose").addEventListener("click",()=>toggle(false));
+form.addEventListener("submit",e=>{e.preventDefault();ask(inp.value)});
+msgs.addEventListener("click",e=>{
+  const c=e.target.closest(".cchip");if(c){ask(c.dataset.q);return}
+  const b=e.target.closest(".cbtn");if(!b)return;const [k,v]=b.dataset.cact.split(":");
+  if(innerWidth<640)toggle(false);
+  if(k==="m")select(v,true);
+  else if(k==="g"){renderEx(GYM,gymNav,gymPanel,v);document.getElementById("gymBlock").scrollIntoView({block:"start"})}
+  else if(k==="p"){renderEx(PIL,pilNav,pilPanel,v);document.getElementById("pilBlock").scrollIntoView({block:"start"})}
+  else if(k==="v"){renderMove(v);mvPanel.scrollIntoView({block:"start"})}
+  else if(k==="pain"){renderPain(v);document.getElementById("painBlock").scrollIntoView({block:"start"})}
+  else if(k==="t"){history.pushState(null,"","#"+v);showTab(v)}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)toggle(false)});
+setTimeout(()=>{if(panel.hidden&&!opened){hint.hidden=false;setTimeout(()=>hint.hidden=true,6000)}},2500);
+window.coachAnswer=answer;
 })();
 
 /* ================= TABS ================= */
