@@ -215,6 +215,26 @@ dl.gloss dd{margin:2px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .flash{animation:fl 1.6s ease}
 @keyframes fl{0%,40%{box-shadow:0 0 0 3px var(--muscle)}100%{box-shadow:0 0 0 0 transparent}}
 @media (prefers-reduced-motion: reduce){.flash{animation:none}}
+.visrow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.visrow.two{grid-template-columns:repeat(2,minmax(0,1fr));max-width:560px}
+@media (max-width:560px){.visrow{grid-template-columns:repeat(2,minmax(0,1fr))}.visrow .eqp{grid-column:1/-1}}
+figure.vis{margin:0;background:var(--paper);border-radius:10px;padding:6px 6px 4px}
+figure.vis svg{width:100%;height:auto;display:block}
+figure.vis figcaption{text-align:center;font-size:13px;color:var(--ink-2);font-weight:500}
+.vis .eq{fill:var(--tendon-soft);stroke:var(--tendon);stroke-width:1.2}
+.vis .eql{stroke:var(--tendon);stroke-linecap:round;fill:none}
+.vis .eqline{stroke:var(--tendon);stroke-width:.8;opacity:.6}
+.vis .mat{fill:var(--tendon-soft);stroke:var(--tendon);stroke-width:1}
+.vis .cable{stroke:var(--ink-3);stroke-width:1.2}
+.vis .limb{stroke:var(--ink-2);stroke-linecap:round;fill:none}
+.vis .limb.hi{stroke:var(--muscle)}
+.vis .limb.ghost{stroke:var(--ink-3);opacity:.45}
+.vis .headc{fill:var(--surface);stroke:var(--ink-2);stroke-width:3}
+.vis .grip{fill:var(--ink)}
+.vis .arw{fill:none;stroke:var(--syn);stroke-width:2;stroke-dasharray:4 3;marker-end:url(#exArrow)}
+.vis .lead{stroke:var(--ink-3);stroke-width:.8}
+.vis .leaddot{fill:var(--muscle)}
+.vis .lbl{font-size:10.5px;fill:var(--ink);font-family:var(--f-body);font-weight:500}
 .exnav{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
 .exrow{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:baseline}
 .exrow>b{font-size:13px;color:var(--ink-3);font-weight:500}
@@ -247,6 +267,7 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
 }
 </style>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><marker id="exArrow" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--syn)"/></marker></defs></svg>
 <div class="shell">
 <aside class="side">
   <div class="brandrow">
@@ -1037,6 +1058,123 @@ const PIL=[
 {id:"footwork",g:"核心床",t:"腳部動作",en:"Reformer Footwork",lv:"初階",prime:["quads","glutemax","gastroc"],syn:["hamstrings","adductors","soleus"],stab:["ta","multifidus"],
  steps:["仰躺在滑車上，肩膀靠住肩墊，腳放在踏桿","骨盆維持中立","吐氣推出，到腿伸直但不鎖膝","吸氣控制滑車慢慢回來，不撞擊"],err:["回程讓彈簧把滑車拉回撞擊","膝蓋往內倒"],br:"推出吐氣，回來吸氣",note:"變化：用腳跟、腳尖、提踵踩踏桿，分別強調臀腿與小腿。"}
 ];
+/* ---------- 器材與動作圖 ---------- */
+const P=a=>({h:[a[0],a[1]],s:[a[2],a[3]],e:[a[4],a[5]],w:[a[6],a[7]],p:[a[8],a[9]],k:[a[10],a[11]],a:[a[12],a[13]],t:[a[14],a[15]]});
+const SEAT=["r 70 114 44 6","l 92 120 92 160 4","l 62 161 126 161 4"],BACK="r 72 44 8 70",STACK=["s 12 58 18 100","c 21 44 4"];
+const LEGS=[90,112,128,113,130,152,142,155];
+const sit=(e,w)=>P([92,42,90,56,...e,...w,...LEGS]);
+const MAT=["m"];
+const VIS={
+chestpress:{eq:[...SEAT,BACK,...STACK,"l 150 10 150 160 3","l 118 14 150 14 3"],lv:[118,16],g:"bar",A:sit([78,80],[104,74]),B:sit([118,70],[146,68]),hi:["ua","fa"],
+ lb:[["握把對齊胸口",118,96,104,74],["座椅高度調整",100,146,92,117],["配重片",34,100,21,104]]},
+shoulderpress:{eq:[...SEAT,BACK,...STACK],lv:[52,14],g:"bar",A:sit([98,80],[100,56]),B:sit([96,34],[98,10]),hi:["ua","fa"],
+ lb:[["握把在肩膀高度",112,52,100,56],["座椅高度調整",100,146,92,117],["配重片",34,100,21,104]]},
+pecdeck:{eq:[...SEAT,BACK,...STACK,"l 92 6 92 44 3"],lv:[92,8],g:"fpad",A:sit([64,62],[64,36]),B:sit([118,62],[118,36]),hi:["ua","fa"],
+ lb:[["前臂貼住護墊",108,22,64,42],["座椅：手臂與肩同高",96,146,92,117]]},
+pulldown:{eq:["r 70 114 44 6","l 92 120 92 160 4","l 62 161 126 161 4","r 110 101 30 7","l 130 108 130 160 3",...STACK,"l 21 40 100 4 1","c 100 6 4"],cb:[100,6],g:"bar",A:sit([96,34],[100,10]),B:sit([80,84],[100,68]),hi:["ua","fa"],
+ lb:[["橫桿：握距比肩稍寬",108,30,100,12],["大腿護墊卡住腿",120,92,124,104],["配重片",34,100,21,104]]},
+row:{eq:["r 34 132 80 6","l 44 138 44 160 3","l 104 138 104 160 3","l 152 104 152 148 4","l 30 161 190 161 4","s 176 30 14 128","c 172 100 4"],cb:[172,100],g:"bar",
+ A:P([74,62,72,76,100,84,128,92,72,128,114,110,144,126,152,114]),B:P([74,62,72,76,50,94,76,100,72,128,114,110,144,126,152,114]),hi:["ua","fa"],
+ lb:[["握把",116,74,128,92],["腳踩踏板、膝微彎",108,154,152,128]]},
+facepull:{eq:["s 176 6 12 150","c 172 30 4","l 40 161 190 161 4"],cb:[172,30],g:"bar",
+ A:P([80,24,80,40,106,42,132,36,80,96,82,128,82,158,94,160]),B:P([80,24,80,40,64,32,88,24,80,96,82,128,82,158,94,160]),hi:["ua","fa"],
+ lb:[["滑輪調到眼睛高度",104,14,172,30],["繩索握把",118,60,132,36]]},
+pushdown:{eq:["s 160 10 14 148","l 160 10 112 10 3","c 110 12 4","l 40 161 190 161 4"],cb:[110,12],g:"bar",
+ A:P([80,24,80,40,84,70,108,60,80,96,82,128,82,158,94,160]),B:P([80,24,80,40,84,70,90,98,80,96,82,128,82,158,94,160]),hi:["fa"],
+ lb:[["高位滑輪",120,30,110,12],["繩索或直桿",116,76,108,60]]},
+curl:{eq:["l 40 161 170 161 4"],eqOnly:["r 64 82 72 6","r 52 66 14 38","r 134 66 14 38"],g:"db",
+ A:P([80,24,80,40,82,70,84,98,80,96,82,128,82,158,94,160]),B:P([80,24,80,40,84,70,100,48,80,96,82,128,82,158,94,160]),hi:["fa"],
+ lb:[["選能做 8–12 下的重量",40,132,100,86]]},
+legpress:{eq:["l 34 74 74 128 10","l 74 128 96 128 8","l 100 140 182 58 3","l 30 161 190 161 4","l 60 130 60 160 3","l 150 90 150 160 3"],g:"plate",gAt:"a",tr:"a",
+ A:P([40,80,52,92,62,112,74,124,80,122,90,86,122,96,126,84]),B:P([40,80,52,92,62,112,74,124,80,122,116,100,150,78,152,64]),hi:["th","sh"],
+ lb:[["腳踩踏板中間",116,30,128,90],["背和屁股貼緊椅墊",4,150,56,104]]},
+legext:{eq:[...SEAT,BACK,"c 128 114 4"],lv:[128,114],lvAt:"a",g:"pad",gAt:"a",tr:"a",A:sit([96,84],[108,104]),B:{...sit([96,84],[108,104]),a:[166,104],t:[170,92]},hi:["sh"],
+ lb:[["膝蓋對齊轉軸",140,96,128,114],["腳踝護墊",140,144,134,152],["座椅",76,108,92,117]]},
+legcurl:{eq:[...SEAT,BACK,"r 100 100 32 7","c 128 114 4"],lv:[128,114],lvAt:"a",g:"pad",gAt:"a",tr:"a",
+ A:{...sit([96,84],[108,104]),a:[166,112],t:[172,102]},B:{...sit([96,84],[108,104]),a:[120,150],t:[132,155]},hi:["sh"],
+ lb:[["大腿護墊壓住",96,84,116,102],["膝蓋對齊轉軸",132,136,128,114],["腳踝護墊",150,100,166,112]]},
+hipabd:{custom:1,eq:["r 82 40 36 68","r 76 108 48 6","l 100 114 100 160 4","l 70 161 130 161 4"],
+ A:{head:[100,32],segs:[[100,42,100,52,3],[100,52,100,108,7,1],[86,56,114,56,5],[86,56,82,84,5],[82,84,86,104,4],[114,56,118,84,5],[118,84,114,104,4],[92,110,108,110,6],[92,110,92,132,6,1],[108,110,108,132,6,1],[92,132,92,160,5],[108,132,108,160,5]],eq:["r 80 120 6 18","r 114 120 6 18"],ar:"M88,126 Q80,116 68,122"},
+ B:{head:[100,32],segs:[[100,42,100,52,3],[100,52,100,108,7,1],[86,56,114,56,5],[86,56,82,84,5],[82,84,86,104,4],[114,56,118,84,5],[118,84,114,104,4],[92,110,108,110,6],[92,110,74,128,6,1],[108,110,126,128,6,1],[74,128,76,160,5],[126,128,124,160,5]],eq:["r 62 116 6 18","r 132 116 6 18"]},
+ lb:[["護墊在膝蓋外側",120,140,118,128],["屁股坐滿椅墊",8,124,82,110]],eqA:["r 80 120 6 18","r 114 120 6 18"],front:1},
+hipthrust:{eq:["r 18 104 46 8","l 26 112 26 160 3","l 56 112 56 160 3","l 10 161 190 161 4"],g:"big",gAt:"p",tr:"p",
+ A:P([46,96,60,104,76,118,92,132,94,140,126,114,132,158,144,160]),B:P([50,92,60,104,78,106,96,98,98,104,130,108,132,158,144,160]),hi:["tr","th"],
+ lb:[["上背靠在長椅邊緣",4,90,46,104],["槓鈴放髖部，加護墊",96,40,98,92]]},
+calfraise:{eq:["r 92 156 70 12","l 20 167 190 167 3"],tr:"a",
+ A:P([86,22,86,36,88,62,90,86,86,86,86,122,86,158,100,156]),B:P([88,10,88,24,90,50,92,74,88,74,90,110,92,146,100,156]),hi:["sh"],
+ lb:[["前腳掌踩在台階邊緣",104,140,100,156]]},
+backext:{eq:["l 112 92 128 108 10","l 124 108 132 160 4","l 152 160 166 128 3","c 168 124 5","l 50 161 190 161 4"],tr:"h",
+ A:P([88,150,94,138,104,126,100,132,118,94,140,112,160,130,166,138]),B:P([67,51,78,60,88,74,84,80,118,94,140,112,160,130,166,138]),hi:["tr"],
+ lb:[["護墊在骨盆下方",56,84,120,100],["腳跟勾住",150,152,168,124]]},
+/* pilates */
+hundred:{eq:MAT,tr:"h",ca:["起始","動作中"],A:P([42,147,56,152,78,154,98,154,102,152,102,122,130,122,138,118]),B:P([52,132,64,144,84,140,106,140,102,152,102,122,130,122,138,118]),hi:["tr"]},
+rollup:{eq:MAT,tr:"h",ca:["起始","捲起到最前"],A:P([48,148,62,152,40,153,18,153,104,152,130,153,156,153,160,145]),B:P([136,112,124,122,146,126,166,136,104,152,130,153,156,153,160,145]),hi:["tr"]},
+legcircle:{eq:MAT,tr:"a",ca:["起始","畫圈中"],A:{...P([42,147,56,152,78,154,98,154,102,152,104,118,106,84,114,80]),x:[[102,152,158,153,5]]},B:{...P([42,147,56,152,78,154,98,154,102,152,110,118,124,86,132,84]),x:[[102,152,158,153,5]]},hi:["th","sh"]},
+rolling:{eq:MAT,tr:"h",ca:["平衡起始","往後滾"],A:P([98,98,88,112,104,118,114,126,100,146,118,108,116,132,126,134]),B:P([66,146,80,150,96,128,108,112,108,128,118,98,100,92,106,84]),hi:["tr"]},
+slstretch:{eq:MAT,tr:"a",ca:["右腳拉近","換腳"],A:{...P([52,132,64,144,78,132,90,120,102,152,88,118,108,112,114,104]),x:[[102,152,164,128,5]]},B:{...P([52,132,64,144,78,132,90,120,102,152,132,140,162,126,168,120]),x:[[102,152,88,118,5],[88,118,108,112,4.5]]},hi:["th","sh"]},
+crisscross:{eq:MAT,tr:"a",ca:["轉向一側","換邊"],A:{...P([52,130,64,144,62,122,48,126,102,152,88,118,108,112,114,104]),x:[[102,152,164,128,5]]},B:{...P([52,130,64,144,62,122,48,126,102,152,132,140,162,126,168,120]),x:[[102,152,88,118,5],[88,118,108,112,4.5]]},hi:["tr"]},
+spinestretch:{eq:MAT,tr:"h",ca:["坐高","往前捲"],A:P([80,86,80,100,102,104,124,106,80,150,120,152,158,152,162,142]),B:P([122,126,108,118,128,126,150,138,80,150,120,152,158,152,162,142]),hi:["tr"]},
+swan:{eq:MAT,tr:"h",ca:["俯臥","胸口抬起"],A:P([44,146,58,150,70,140,64,156,104,152,130,153,156,153,164,156]),B:P([52,112,64,128,72,142,66,156,104,152,130,153,156,153,164,156]),hi:["tr"]},
+swimming:{eq:MAT,tr:"w",ca:["俯臥延伸","對側手腳抬起"],A:P([44,146,58,150,40,151,22,151,104,152,130,153,156,153,166,153]),B:{...P([46,140,60,146,42,140,24,132,104,152,130,148,156,138,166,136]),x:[[60,148,42,154,4],[42,154,24,154,3.5],[104,152,130,155,5],[130,155,156,156,4.5]]},hi:["ua","fa","th","sh"]},
+sidekick:{eq:MAT,tr:"a",ca:["側躺","上方腿抬起"],A:{...P([32,142,48,146,36,156,30,150,104,148,132,148,160,148,164,142]),x:[[104,150,132,154,5],[132,154,160,155,4.5],[50,148,68,154,3.5]]},B:{...P([32,142,48,146,36,156,30,150,104,148,132,136,160,124,164,118]),x:[[104,150,132,154,5],[132,154,160,155,4.5],[50,148,68,154,3.5]]},hi:["th","sh"]},
+clam:{eq:MAT,tr:"k",ca:["膝蓋併攏","上方膝打開"],A:{...P([32,142,48,146,36,156,30,150,104,148,130,146,108,150,100,150]),x:[[104,150,130,154,5],[130,154,108,156,4.5]]},B:{...P([32,142,48,146,36,156,30,150,104,148,126,120,108,148,100,150]),x:[[104,150,130,154,5],[130,154,108,156,4.5]]},hi:["th"]},
+bridge:{eq:MAT,tr:"p",ca:["仰躺屈膝","捲起到頂端"],A:P([42,147,56,152,76,154,96,154,100,152,124,124,134,156,146,158]),B:P([42,147,58,150,76,154,96,154,100,120,126,118,134,156,146,158]),hi:["tr","th"]},
+mermaid:{eq:MAT,custom:1,ca:["坐正，手往上","往側邊延伸"],
+ A:{head:[100,70],segs:[[100,79,100,88,3],[100,88,100,138,7,1],[94,92,80,118,4.5],[80,118,74,150,4],[106,92,110,66,4.5],[110,66,112,42,4],[100,138,128,148,6],[128,148,112,156,5],[100,138,76,150,6],[76,150,94,156,5]],ar:"M116,40 Q100,22 74,38"},
+ B:{head:[78,78],segs:[[84,90,80,86,3],[100,138,86,92,7,1],[88,96,76,122,4.5],[76,122,74,150,4],[90,94,82,64,4.5],[82,64,62,48,4],[100,138,128,148,6],[128,148,112,156,5],[100,138,76,150,6],[76,150,94,156,5]]}},
+plank:{eq:MAT,tr:"a",ca:["前撐","一腳抬起"],A:P([146,104,132,112,132,134,132,156,86,130,62,140,40,150,34,158]),B:{...P([146,104,132,112,132,134,132,156,86,130,62,126,40,116,32,114]),x:[[86,130,62,141,5],[62,141,40,151,4.5],[40,151,34,158,3]]},hi:["th","sh"]},
+footwork:{eq:["r 8 140 184 8","l 16 148 16 162 3","l 184 148 184 162 3","l 164 140 164 96 4","c 164 96 4"],tr:"p",ca:["膝蓋彎曲","推出伸直"],
+ A:{...P([54,122,68,126,88,128,106,128,112,126,132,92,160,104,166,94]),eq:["r 58 130 64 8","r 62 116 6 12","l 122 136 164 140 1"]},
+ B:{...P([36,122,50,126,70,128,88,128,94,124,127,114,160,104,166,94]),eq:["r 40 130 64 8","r 44 116 6 12","l 104 136 164 140 1"]},hi:["th","sh"],
+ eqA:["r 58 130 64 8","r 62 116 6 12","l 122 136 164 140 1"],lb:[["踏桿",168,80,164,96],["肩墊",40,104,65,118],["滑車",62,160,90,134],["彈簧",128,158,140,138]]}
+};
+const SW={nk:3,tr:7,th:6,sh:5,ft:3.5,ua:5,fa:4};
+function shp(str){const [k,...n]=str.split(" ");const v=n.map(Number);
+  if(k==="r")return `<rect x="${v[0]}" y="${v[1]}" width="${v[2]}" height="${v[3]}" rx="2" class="eq"/>`;
+  if(k==="l")return `<line x1="${v[0]}" y1="${v[1]}" x2="${v[2]}" y2="${v[3]}" class="eql" stroke-width="${v[4]||3}"/>`;
+  if(k==="c")return `<circle cx="${v[0]}" cy="${v[1]}" r="${v[2]}" class="eq"/>`;
+  if(k==="m")return `<rect x="6" y="157" width="188" height="6" rx="3" class="mat"/>`;
+  if(k==="s"){let s=`<rect x="${v[0]}" y="${v[1]}" width="${v[2]}" height="${v[3]}" rx="2" class="eq"/>`;for(let y=v[1]+8;y<v[1]+v[3];y+=8)s+=`<line x1="${v[0]}" y1="${y}" x2="${v[0]+v[2]}" y2="${y}" class="eqline"/>`;return s}
+  return ""}
+function grip(type,[x,y],o){
+  if(type==="bar")return `<circle cx="${x}" cy="${y}" r="4" class="grip"/>`;
+  if(type==="db")return `<rect x="${x-9}" y="${y-3}" width="18" height="6" rx="2" class="grip"/><rect x="${x-11}" y="${y-6}" width="5" height="12" rx="1" class="grip"/><rect x="${x+6}" y="${y-6}" width="5" height="12" rx="1" class="grip"/>`;
+  if(type==="pad")return `<circle cx="${x}" cy="${y}" r="6" class="eq"/>`;
+  if(type==="plate"){const cx=x+6,cy=y-6;return `<line x1="${cx-12}" y1="${cy-12}" x2="${cx+12}" y2="${cy+12}" class="eql" stroke-width="5"/>`}
+  if(type==="big")return `<circle cx="${x}" cy="${y-12}" r="11" class="eq"/><circle cx="${x}" cy="${y-12}" r="2.5" class="grip"/>`;
+  return ""}
+function figSVG(v,F,mode){
+  let g="";
+  const eqs=[...(v.eq||[]),...(mode==="eq"?(v.eqOnly||[]):[]),...(mode==="eq"?(v.eqA||[]):(F&&F.eq)||[])];
+  g+=eqs.map(shp).join("");
+  if(mode!=="eq"&&v.custom){
+    g+=F.segs.map(([a,b,c,d,w,h])=>`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" class="limb${h?" hi":""}" stroke-width="${w}"/>`).join("")+`<circle cx="${F.head[0]}" cy="${F.head[1]}" r="9" class="headc"/>`;
+    if(F.ar)g+=`<path d="${F.ar}" class="arw"/>`;
+    return g;
+  }
+  const at=v.gAt||"w";
+  const pt=mode==="eq"?v.A[at]:F[at];
+  if(v.cb)g+=`<line x1="${v.cb[0]}" y1="${v.cb[1]}" x2="${pt[0]}" y2="${pt[1]}" class="cable"/>`;
+  if(v.lv){const lp=mode==="eq"?v.A[v.lvAt||"w"]:F[v.lvAt||"w"];g+=`<line x1="${v.lv[0]}" y1="${v.lv[1]}" x2="${lp[0]}" y2="${lp[1]}" class="eql" stroke-width="4"/>`}
+  if(mode==="eq"){if(v.g)g+=grip(v.g,pt);return g}
+  if(v.g==="fpad")g+=`<line x1="${F.e[0]}" y1="${F.e[1]}" x2="${F.w[0]}" y2="${F.w[1]}" class="eql" stroke-width="11" stroke-opacity=".5"/>`;
+  (F.x||[]).forEach(([a,b,c,d,w])=>g+=`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}" class="limb ghost" stroke-width="${w}"/>`);
+  const S=[["nk","h","s"],["tr","s","p"],["th","p","k"],["sh","k","a"],["ft","a","t"],["ua","s","e"],["fa","e","w"]];
+  S.forEach(([n,a,b])=>g+=`<line x1="${F[a][0]}" y1="${F[a][1]}" x2="${F[b][0]}" y2="${F[b][1]}" class="limb${(v.hi||[]).includes(n)?" hi":""}" stroke-width="${SW[n]}"/>`);
+  g+=`<circle cx="${F.h[0]}" cy="${F.h[1]}" r="9" class="headc"/>`;
+  if(v.g&&v.g!=="fpad")g+=grip(v.g,F[at]);
+  if(mode==="A"){const tr=v.tr||"w",p1=F[tr],p2=v.B[tr],mx=(p1[0]+p2[0])/2,my=(p1[1]+p2[1])/2,dx=p2[0]-p1[0],dy=p2[1]-p1[1],L=Math.hypot(dx,dy)||1;
+    if(L>6)g+=`<path d="M${p1[0]},${p1[1]} Q${mx+dy/L*16},${my-dx/L*16} ${p2[0]},${p2[1]}" class="arw"/>`;}
+  return g;
+}
+function visHTML(id){
+  const v=VIS[id];if(!v)return "";
+  const sv=(inner,cap,cls="")=>`<figure class="vis ${cls}"><svg viewBox="0 0 200 170" role="img" aria-label="${cap}">${inner}</svg><figcaption>${cap}</figcaption></figure>`;
+  const ca=v.ca||["起始","結束"];
+  let eqPanel="";
+  if(v.lb){let s=figSVG(v,null,"eq");v.lb.forEach(([t,tx,ty,ax,ay])=>{s+=`<line x1="${ax}" y1="${ay}" x2="${tx+4}" y2="${ty-4}" class="lead"/><circle cx="${ax}" cy="${ay}" r="2.5" class="leaddot"/><text x="${tx}" y="${ty}" class="lbl">${t}</text>`});eqPanel=sv(s,"器材","eqp")}
+  return `<div class="visrow${eqPanel?"":" two"}">${eqPanel}${sv(figSVG(v,v.A,"A"),"① "+ca[0])}${sv(figSVG(v,v.B,"B"),"② "+ca[1])}</div><p class="small" style="margin:4px 0 10px">紅色線條＝主要在動的部位，虛線箭頭＝移動方向。</p>`;
+}
 function exLinks(ids,role){return ids&&ids.length?mlinks(ids,role):"<span class='small'>—</span>"}
 function renderEx(lib,nav,panel,id){
   const v=lib.find(x=>x.id===id),hl={};
@@ -1044,7 +1182,7 @@ function renderEx(lib,nav,panel,id){
   const groups=[...new Set(lib.map(x=>x.g))];
   nav.innerHTML=groups.map(g=>`<div class="exrow"><b>${g}</b><div class="chips">${lib.filter(x=>x.g===g).map(x=>`<button class="chip${x.id===id?" on":""}" data-ex="${x.id}">${x.t}</button>`).join("")}</div></div>`).join("");
   const lg=[["prime","主力"],["syn","協同"],["stab","穩定"]];if(v.str)lg.push(["ant","伸展部位"]);
-  panel.innerHTML=`<div class="split"><div>${duo({hl})}${legendHTML(lg)}</div><div>
+  panel.innerHTML=visHTML(id)+`<div class="split"><div>${duo({hl})}${legendHTML(lg)}</div><div>
    <div class="exhead"><h3>${v.t}</h3><span class="en">${v.en}</span><span class="lvl">${v.lv}</span></div>
    <div class="exsec" style="margin-top:8px"><p class="small"><b style="color:var(--muscle)">主力</b>　${exLinks(v.prime,"prime")}</p>
    ${v.syn.length?`<p class="small"><b style="color:var(--syn)">協同</b>　${exLinks(v.syn,"syn")}</p>`:""}
