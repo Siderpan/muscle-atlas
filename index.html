@@ -20,7 +20,7 @@
 <style>
 /* Layout: 圖譜式 — 左側目錄＋搜尋；主區以可點擊的人體肌肉圖為核心，每章先圖後字。紅＝主角/緊繃，橘＝協同，紫＝拮抗，藍＝穩定/無力，黃＝痛區 */
 :root{
-  --paper:#F3F5F3; --fig-skin:#E7BE9C; --fig-line:#9A7258; --fig-shirt:#4D6577; --fig-short:#26323C; --fig-shoe:#1A2026; --fig-far:#C9A386; --fig-hair:#2B2420; --frame:#B9C2C8; --frame-d:#6E7A84; --pad:#2F3943; --pad-d:#1D242B; --pad-hi:#55626F; --plate:#59656F; --plate2:#7B8791; --mat:#9CC3D3;  --surface:#FFFFFF; --ink:#17201E; --ink-2:#4B5955; --ink-3:#7A8783; --line:#D6DDD9;
+  --paper:#F3F5F3; --c1:#B3263E; --c2:#D07F14; --c3:#1F6FA8; --bone:#EFE8D8; --bone-line:#A3957A; --fig-skin:#E7BE9C; --fig-line:#9A7258; --fig-shirt:#4D6577; --fig-short:#26323C; --fig-shoe:#1A2026; --fig-far:#C9A386; --fig-hair:#2B2420; --frame:#B9C2C8; --frame-d:#6E7A84; --pad:#2F3943; --pad-d:#1D242B; --pad-hi:#55626F; --plate:#59656F; --plate2:#7B8791; --mat:#9CC3D3;  --surface:#FFFFFF; --ink:#17201E; --ink-2:#4B5955; --ink-3:#7A8783; --line:#D6DDD9;
   --muscle:#B3263E; --muscle-soft:#F5E2E6; --tendon:#2C6884; --tendon-soft:#E0ECF1;
   --syn:#D07F14; --ant:#6A57B0; --zone:#E5A50F; --warn:#9A5B00; --warn-soft:#FBF0DC;
   --skin:#E2E7E4; --skin-line:#C5CEC9; --m-idle:#E8C9CF; --m-hover:#D79AA7;
@@ -29,12 +29,12 @@
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#101615; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
+  --paper:#101615; --c1:#E0457A; --c2:#C28620; --c3:#3D8BCB; --bone:#4A463C; --bone-line:#9A907A; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
   --muscle:#EA6A80; --muscle-soft:#3A1D24; --tendon:#6FB2D2; --tendon-soft:#15303B;
   --syn:#EBA24B; --ant:#A592EA; --zone:#F2BE45; --warn:#E9B25A; --warn-soft:#3A2C12;
   --skin:#25302D; --skin-line:#35423E; --m-idle:#4A2C33; --m-hover:#6E3D49; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#101615; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
+  --paper:#101615; --c1:#E0457A; --c2:#C28620; --c3:#3D8BCB; --bone:#4A463C; --bone-line:#9A907A; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
   --muscle:#EA6A80; --muscle-soft:#3A1D24; --tendon:#6FB2D2; --tendon-soft:#15303B;
   --syn:#EBA24B; --ant:#A592EA; --zone:#F2BE45; --warn:#E9B25A; --warn-soft:#3A2C12;
   --skin:#25302D; --skin-line:#35423E; --m-idle:#4A2C33; --m-hover:#6E3D49; color-scheme:dark}
@@ -265,6 +265,73 @@ figure.vis figcaption{text-align:center;font-size:13px;color:var(--ink-2);font-w
 .vis .callnum{font-size:8.5px;font-weight:700;fill:#fff;font-family:var(--f-mono)}
 ol.calllist{margin:6px 4px 2px;padding-left:1.4em;font-size:12.5px;line-height:1.55;color:var(--ink-2)}
 ol.calllist li::marker{color:var(--muscle);font-weight:700;font-family:var(--f-mono)}
+
+.chart.pro text{font-family:var(--f-body)}
+.chart.pro{min-width:560px}
+.chart.pro .plotbg{fill:var(--surface)}
+.chart.pro .grid{stroke:var(--line);stroke-width:1;stroke-dasharray:2 4}
+.chart.pro .axis{stroke:var(--ink-3);stroke-width:1}
+.chart.pro .tk{font-size:12px;fill:var(--ink-2);font-variant-numeric:tabular-nums}
+.chart.pro .tk2{font-size:12.5px;fill:var(--ink-2)}
+.chart.pro .strong{font-weight:700;fill:var(--ink)}
+.chart.pro .ar{stroke:var(--surface);stroke-width:2;stroke-linejoin:round}
+.chart.pro .ar.c1{fill:var(--c1)} .chart.pro .ar.c2{fill:var(--c2)} .chart.pro .ar.c3{fill:var(--c3)}
+.chart.pro .alab{font-size:15px;font-weight:700;fill:#fff}
+.chart.pro .alab2{font-size:12px;fill:#fff;opacity:.92}
+.chart.pro .evt{stroke:var(--ink-3);stroke-width:1;stroke-dasharray:3 3}
+.chart.pro .xhair{stroke:var(--ink);stroke-width:1;opacity:0;pointer-events:none}
+.chart.pro .peakband{fill:var(--c1);opacity:.07}
+.chart.pro .bandlab{font-size:12.5px;font-weight:700;fill:var(--c1)}
+.chart.pro .afill{fill:var(--c1);opacity:.1}
+.chart.pro .ln{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.chart.pro .ln.c1{stroke:var(--c1)} .chart.pro .ln.c3{stroke:var(--c3)} .chart.pro .ln.dash{stroke-dasharray:7 5}
+.chart.pro .pk{stroke:var(--surface);stroke-width:2} .chart.pro .pk.c1{fill:var(--c1)} .chart.pro .pk.c3{fill:var(--c3)}
+.cwrap{padding:14px 14px 8px}
+.clegend{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px;color:var(--ink-2);margin:0 0 6px 6px}
+.clegend span,.ctip span{display:inline-flex;align-items:center;gap:6px}
+.sw{display:inline-block;width:14px;height:10px;border-radius:3px}
+.sw.c1{background:var(--c1)} .sw.c2{background:var(--c2)} .sw.c3{background:var(--c3)}
+.sw.swd{height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,var(--c3) 0 6px,transparent 6px 9px)}
+.ctip{position:absolute;z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12.5px;line-height:1.55;box-shadow:0 6px 18px rgba(0,0,0,.14);pointer-events:none;display:flex;flex-direction:column;min-width:130px;color:var(--ink-2)}
+.ctip[hidden]{display:none}
+.ctip b{color:var(--ink);font-size:13px}
+.ctcard{display:flex;flex-direction:column;gap:6px}
+.ctcard .ctfig{width:100%;max-width:190px;height:auto;margin:0 auto;display:block;background:linear-gradient(var(--surface),var(--paper));border-radius:10px}
+.ctgauge{display:flex;align-items:center;justify-content:space-between;gap:6px;background:var(--paper);border-radius:8px;padding:4px 10px}
+.ctgauge .gauge{width:110px;height:auto}
+.gauge .gten{stroke:var(--frame-d);stroke-width:3;stroke-linecap:round}
+.gauge .garr{fill:none;stroke:var(--c2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.gauge .mbelly{fill:var(--muscle)}
+.vis .clk,.ctfig .clk{fill:var(--surface);stroke:var(--c2);stroke-width:2}
+.ctfig .clkh{fill:none;stroke:var(--c2);stroke-width:1.8;stroke-linecap:round}
+.ctfig .clkb{fill:var(--c2)}
+.ctfig .shadow{fill:var(--ink);opacity:.06} .ctfig .base{stroke:var(--frame-d);stroke-linecap:round}
+.ctfig .cl-skin{fill:var(--fig-skin);stroke:var(--fig-line);stroke-width:.8} .ctfig .cl-shirt{fill:var(--fig-shirt);stroke:var(--fig-line);stroke-width:.8} .ctfig .cl-short{fill:var(--fig-short);stroke:var(--fig-line);stroke-width:.8}
+.ctfig .cl-shoe{fill:var(--fig-shoe)} .ctfig .cl-far{fill:var(--fig-far);stroke:var(--fig-line);stroke-width:.6} .ctfig .cl-farshoe{fill:var(--fig-shoe);opacity:.7} .ctfig .cl-hair,.ctfig .cl-eye{fill:var(--fig-hair)}
+.ctfig .ghostfig{opacity:.16} .ctfig .mbelly{fill:var(--muscle);opacity:.92;stroke:var(--surface);stroke-width:.6} .ctfig .mfiber{fill:none;stroke:var(--surface);stroke-width:.6;opacity:.55}
+.ctfig .arw{fill:none;stroke:var(--syn);stroke-width:2.2;stroke-linecap:round;marker-end:url(#exArrow)}
+.ctfig .handle{fill:var(--pad-d)} .ctfig .plate{fill:var(--plate)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.pcard .pt{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.pcard .pt b{font-family:var(--f-display);font-size:18px}
+.pcard .pt span{font-size:12.5px;color:var(--ink-3)}
+svg.pelvis{width:100%;height:auto;display:block;margin:6px 0;background:linear-gradient(var(--surface),var(--paper));border-radius:10px}
+.pelvis .mat2{fill:var(--mat)}
+.pelvis .silh{fill:var(--fig-skin);fill-opacity:.32;stroke:var(--fig-line);stroke-width:.9}
+.pelvis .gapz{fill:var(--zone);opacity:.75}
+.pelvis .rib{fill:none;stroke:var(--bone-line);stroke-width:2.2;stroke-linecap:round}
+.pelvis .bone{fill:var(--bone);stroke:var(--bone-line);stroke-width:1}
+.pelvis .bonel{stroke:var(--bone-line);stroke-width:2.4;stroke-linecap:round}
+.pelvis .joint{fill:var(--bone);stroke:var(--bone-line);stroke-width:1.2}
+.pelvis .femur{stroke:var(--bone-line);stroke-width:8;stroke-linecap:round;fill:none;opacity:.85}
+.pelvis .refl{stroke:var(--muscle);stroke-width:1.6;stroke-dasharray:3 2}
+.pelvis .lm{fill:var(--muscle)}
+.pelvis .hz{stroke:var(--ink-3);stroke-width:.8;stroke-dasharray:1.5 2.5}
+.pelvis .plab{font-size:8.5px;fill:var(--ink-2);font-family:var(--f-body)}
+.pelvis .strong{font-weight:700;fill:var(--ink);font-size:9px}
+.pelvis .callln{stroke:var(--ink-3);stroke-width:.8}
+.pelvis .arw2{stroke:var(--syn);stroke-width:2;fill:none;marker-end:url(#exArrow)}
 .exnav{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
 .exrow{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:baseline}
 .exrow>b{font-size:13px;color:var(--ink-3);font-weight:500}
@@ -482,7 +549,8 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
 
   <div class="block" data-topic="能量系統：磷酸肌酸、醣解、有氧，乳酸迷思">
     <h3>燃料從哪來</h3>
-    <div class="figwrap"><svg id="energy" viewBox="0 0 620 240" class="chart"></svg></div>
+    <div class="figwrap cwrap"><div class="clegend"><span><i class="sw c1"></i>磷酸肌酸系統</span><span><i class="sw c2"></i>醣解系統</span><span><i class="sw c3"></i>有氧系統</span></div><svg id="energy" viewBox="0 0 620 300" class="chart pro"></svg></div>
+    <p class="small" style="font-size:12.5px;color:var(--ink-3)">全力運動時三大能量系統的約略貢獻比例，整理自運動生理學研究（如 Gastin, 2001）。移動游標可看各時間點的比例。</p>
     <p class="small">三個系統同時運作，只是比例隨時間改變。運動中的灼熱感約一小時內就消退，<b>隔天痠痛不是乳酸</b>。</p>
   </div>
 
@@ -590,21 +658,16 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
   <h2>皮拉提斯動作指導</h2>
   <p class="lede">皮拉提斯重視控制與呼吸。每個動作 5–10 次，做得準比做得多重要。</p>
   <div class="block" data-topic="皮拉提斯基本原則：側肋呼吸、核心啟動、中立骨盆、印記骨盆">
-    <div class="grid g2">
+    <div class="grid">
       <div class="card"><div class="tag">呼吸</div><h3>側肋呼吸</h3><p class="small">吸氣時肋骨往兩側、往後擴張；吐氣時肋骨收攏、腹部往內收。</p></div>
       <div class="card"><div class="tag">核心</div><h3>輕輕收腹</h3><p class="small">像穿上緊身褲，肚臍微微往脊椎靠，大約出力三成，不憋氣。</p></div>
-      <div class="card" style="text-align:center"><div class="tag">骨盆位置</div>
-        <svg viewBox="0 0 220 96" style="width:100%;max-width:240px">
-          <text x="4" y="14" style="font-size:11px;fill:var(--ink-2);font-family:var(--f-body)">中立：下背有小空隙</text>
-          <line x1="4" y1="40" x2="216" y2="40" stroke="var(--line)" stroke-width="2"/>
-          <path d="M20,34 Q60,30 90,34 Q110,26 130,34 L200,34" fill="none" stroke="var(--muscle)" stroke-width="5" stroke-linecap="round"/>
-          <text x="4" y="64" style="font-size:11px;fill:var(--ink-2);font-family:var(--f-body)">印記：下背輕貼地面</text>
-          <line x1="4" y1="90" x2="216" y2="90" stroke="var(--line)" stroke-width="2"/>
-          <path d="M20,84 L200,84" fill="none" stroke="var(--tendon)" stroke-width="5" stroke-linecap="round"/>
-        </svg>
-        <p class="small">腳抬起、腹肌還不夠穩時，用印記保護下背。</p></div>
       <div class="card"><div class="tag">品質</div><h3>慢、準、延伸</h3><p class="small">每個動作都往兩端拉長，像被兩端輕輕拉開。</p></div>
     </div>
+  </div>
+  <div class="block" data-topic="骨盆位置：中立骨盆與印記骨盆">
+    <h3>骨盆位置：中立 vs 印記</h3>
+    <p class="sub">仰躺屈膝的側面剖視。看髂前上棘（骨盆前上方的骨突）和恥骨的高低，以及腰椎和墊子之間有沒有空隙。</p>
+    <div class="pgrid" id="pelvisFig"></div>
   </div>
   <div class="block" id="pilBlock" data-topic="皮拉提斯動作：百次拍擊、捲上、單腿畫圈、滾球、單腿伸展、十字交叉、脊椎前伸、天鵝、游泳、側躺抬腿、蚌殼式、肩橋、美人魚、前撐、核心床腳部動作">
     <div class="exnav" id="pilNav"></div>
@@ -633,7 +696,8 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
 
   <div class="block" data-topic="延遲性肌肉痠痛 DOMS 曲線與重複效應">
     <h3>運動後痠痛，什麼時候最痛？</h3>
-    <div class="figwrap"><svg id="doms" viewBox="0 0 620 250" class="chart"></svg></div>
+    <div class="figwrap cwrap"><div class="clegend"><span><i class="sw c1"></i>第一次做新動作</span><span><i class="sw c3 swd"></i>同樣動作再做一次</span></div><svg id="doms" viewBox="0 0 620 250" class="chart pro"></svg></div>
+    <p class="small" style="font-size:12.5px;color:var(--ink-3)">示意曲線，依延遲性肌肉痠痛研究的典型趨勢繪製；實際程度因人與訓練量而異。</p>
     <div class="grid" style="margin-top:12px">
       <div class="card"><h3>原因</h3><p class="small">多半來自「離心」動作（下坡、放下重物）或新動作造成的微小損傷與發炎。</p></div>
       <div class="card"><h3>不是乳酸</h3><p class="small">乳酸一小時內就清掉了，痠痛卻隔天才來。</p></div>
@@ -963,41 +1027,6 @@ renderChips();renderAtlas();renderMap();
   N.forEach(([t,d,x,y])=>{s+=`<circle cx="${x}" cy="${y}" r="30" fill="var(--surface)" stroke="var(--muscle)" stroke-width="1.5"/><text x="${x}" y="${y+4}" text-anchor="middle" style="font-size:13px;font-family:var(--f-body);fill:var(--ink);font-weight:700">${t}</text>`});
   s+=`<text x="150" y="146" text-anchor="middle" style="font-size:13px;fill:var(--ink-2);font-family:var(--f-body)">每圈用掉</text><text x="150" y="166" text-anchor="middle" style="font-size:15px;fill:var(--muscle);font-weight:700">1 ATP</text>`;
   c.innerHTML=s;
-  // contraction types
-  const T=[["向心","邊出力邊變短","舉起啞鈴、爬樓梯上去",40,40,"up"],["離心","邊出力邊被拉長","放下啞鈴、下樓梯；最容易隔天痠",120,108,"down"],["等長","出力但長度不變","平板撐、靠牆蹲；可短暫止痛",128,90,"hold"]];
-  document.getElementById("ctypes").innerHTML=T.map(([t,s1,ex,hx,hy,mode])=>{
-    const bl=mode==="up"?{y1:34,y2:78,rx:11}:mode==="down"?{y1:24,y2:92,rx:6}:{y1:30,y2:86,rx:8.5};
-    const arrow=mode==="up"?`<path d="M${hx+18},${hy+30} Q${hx+26},${hy+8} ${hx+10},${hy-6}" fill="none" stroke="var(--muscle)" stroke-width="2.5" marker-end="url(#arT)"/>`:mode==="down"?`<path d="M${hx+10},${hy-30} Q${hx+22},${hy-14} ${hx+14},${hy+4}" fill="none" stroke="var(--muscle)" stroke-width="2.5" marker-end="url(#arT)"/>`:`<g stroke="var(--muscle)" stroke-width="3"><line x1="${hx-8}" y1="${hy-24}" x2="${hx+8}" y2="${hy-24}"/><line x1="${hx-8}" y1="${hy-16}" x2="${hx+8}" y2="${hy-16}"/></g>`;
-    return `<div class="card" style="text-align:center"><svg viewBox="0 0 170 130" style="width:100%;max-width:200px"><defs><marker id="arT" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--muscle)"/></marker></defs>
-    <line x1="50" y1="14" x2="50" y2="100" stroke="var(--skin-line)" stroke-width="12" stroke-linecap="round"/>
-    <line x1="50" y1="100" x2="${hx}" y2="${hy}" stroke="var(--skin-line)" stroke-width="10" stroke-linecap="round"/>
-    <ellipse cx="57" cy="${(bl.y1+bl.y2)/2}" rx="${bl.rx}" ry="${(bl.y2-bl.y1)/2}" fill="var(--muscle)"/>
-    <g fill="var(--ink-2)"><rect x="${hx-14}" y="${hy-3}" width="28" height="6" rx="2"/><rect x="${hx-18}" y="${hy-9}" width="7" height="18" rx="2"/><rect x="${hx+11}" y="${hy-9}" width="7" height="18" rx="2"/></g>${arrow}</svg>
-    <h3>${t}收縮</h3><p class="small"><b>${s1}</b><br>${ex}</p></div>`}).join("");
-  // energy chart
-  const e=document.getElementById("energy");const X0=60,X1=600,Y0=190,Y1=24,xs=[0,10,30,120,600],lab=["0","10 秒","30 秒","2 分","10 分以上"];
-  const px=i=>X0+(X1-X0)*i/4;const py=v=>Y0-(Y0-Y1)*v;
-  let g=`<line class="ax" x1="${X0}" y1="${Y0}" x2="${X1}" y2="${Y0}"/><line class="ax" x1="${X0}" y1="${Y1}" x2="${X0}" y2="${Y0}"/>`;
-  lab.forEach((l,i)=>g+=`<line class="ax" x1="${px(i)}" y1="${Y0}" x2="${px(i)}" y2="${Y0+5}"/><text x="${px(i)}" y="${Y0+20}" text-anchor="middle">${l}</text>`);
-  g+=`<text x="${X0-8}" y="${Y1+4}" text-anchor="end">多</text><text x="${X0-8}" y="${Y0}" text-anchor="end">少</text><text x="${X1}" y="${Y0+38}" text-anchor="end" style="fill:var(--ink-3);font-size:11px">時間（示意，刻度非等比）</text>`;
-  const curve=(pts,col,name,lx,ly)=>`<path d="M${pts.map(([i,v])=>px(i)+","+py(v)).join(" L")}" fill="none" stroke="${col}" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"/><text x="${lx}" y="${ly}" style="fill:${col};font-weight:500;font-family:var(--f-body);font-size:13px">${name}</text>`;
-  g+=curve([[0,.9],[.6,.95],[1,.6],[1.6,.2],[2.4,.06],[4,.03]],"var(--muscle)","磷酸肌酸：爆發",px(0.15),py(1)+2);
-  g+=curve([[0,.2],[.8,.55],[1.5,.85],[2.2,.7],[3,.3],[4,.1]],"var(--syn)","醣解：高強度數十秒",px(1.25),py(.92));
-  g+=curve([[0,.08],[1,.15],[2,.35],[3,.85],[4,.95]],"var(--tendon)","有氧：長時間",px(2.95),py(.98)+2);
-  e.innerHTML=g;
-  // DOMS chart
-  const d=document.getElementById("doms");const A=60,B=600,C=200,D=30;const hx=h=>A+(B-A)*h/120,vy=v=>C-(C-D)*v/10;
-  let q=`<rect x="${hx(24)}" y="${D}" width="${hx(72)-hx(24)}" height="${C-D}" fill="var(--muscle-soft)"/><text x="${(hx(24)+hx(72))/2}" y="${D+16}" text-anchor="middle" style="fill:var(--muscle);font-family:var(--f-body);font-size:13px;font-weight:700">24–72 小時最痛</text>`;
-  q+=`<line class="ax" x1="${A}" y1="${C}" x2="${B}" y2="${C}"/><line class="ax" x1="${A}" y1="${D}" x2="${A}" y2="${C}"/>`;
-  [0,24,48,72,96,120].forEach((h,i)=>q+=`<line class="ax" x1="${hx(h)}" y1="${C}" x2="${hx(h)}" y2="${C+5}"/><text x="${hx(h)}" y="${C+20}" text-anchor="middle">${i?i+" 天":"運動"}</text>`);
-  [0,5,10].forEach(v=>q+=`<text x="${A-8}" y="${vy(v)+4}" text-anchor="end">${v}</text>`);
-  q+=`<text x="${A-8}" y="${D-12}" text-anchor="end" style="font-size:11px">痠痛</text>`;
-  const p1=[[0,0],[12,2],[24,5],[48,8],[72,6],[96,3],[120,1]],p2=[[0,0],[12,1],[24,2],[48,3],[72,2],[96,1],[120,.3]];
-  q+=`<polyline points="${p2.map(([h,v])=>hx(h)+","+vy(v)).join(" ")}" fill="none" stroke="var(--tendon)" stroke-width="2.5" stroke-dasharray="6 4"/>`;
-  q+=`<polyline points="${p1.map(([h,v])=>hx(h)+","+vy(v)).join(" ")}" fill="none" stroke="var(--muscle)" stroke-width="3.5" stroke-linejoin="round"/>`;
-  p1.forEach(([h,v])=>q+=`<circle cx="${hx(h)}" cy="${vy(v)}" r="4" fill="var(--muscle)"/>`);
-  q+=`<text x="${hx(100)}" y="${vy(4.4)}" style="fill:var(--muscle);font-family:var(--f-body);font-size:13px">第一次做</text><text x="${hx(100)}" y="${vy(1.8)}" style="fill:var(--tendon);font-family:var(--f-body);font-size:13px">再做同樣動作</text>`;
-  d.innerHTML=q;
 })();
 
 /* ================= ROLES ================= */
@@ -1292,6 +1321,131 @@ const gymNav=document.getElementById("gymNav"),gymPanel=document.getElementById(
 gymNav.addEventListener("click",e=>{const b=e.target.closest("[data-ex]");if(b)renderEx(GYM,gymNav,gymPanel,b.dataset.ex)});
 pilNav.addEventListener("click",e=>{const b=e.target.closest("[data-ex]");if(b)renderEx(PIL,pilNav,pilPanel,b.dataset.ex)});
 renderEx(GYM,gymNav,gymPanel,"pulldown");renderEx(PIL,pilNav,pilPanel,"hundred");
+/* ================= 專業圖表：收縮方式、能量系統、DOMS、骨盆位置 ================= */
+function smoothPath(pts){ // Catmull-Rom → cubic Bézier
+  let d=`M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+  for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    d+=` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`}
+  return d}
+function attachTip(svg,wrap,fn){
+  const tip=document.createElement("div");tip.className="ctip";tip.hidden=true;wrap.style.position="relative";wrap.appendChild(tip);
+  const line=svg.querySelector(".xhair");
+  const move=ev=>{const r=svg.getBoundingClientRect(),vb=svg.viewBox.baseVal,x=(ev.clientX-r.left)/r.width*vb.width+vb.x;const out=fn(x);
+    if(!out){tip.hidden=true;if(line)line.style.opacity=0;return}
+    tip.innerHTML=out.html;tip.hidden=false;if(line){line.setAttribute("x1",out.x);line.setAttribute("x2",out.x);line.style.opacity=1}
+    const px=(out.x-vb.x)/vb.width*r.width,left=Math.min(Math.max(px+12,0),r.width-tip.offsetWidth-4);tip.style.left=(px>r.width*.6?px-tip.offsetWidth-12:left)+"px";tip.style.top="8px"};
+  svg.addEventListener("pointermove",move);svg.addEventListener("pointerleave",()=>{tip.hidden=true;if(line)line.style.opacity=0});
+}
+
+/* --- 三種收縮方式：專業插圖 --- */
+function renderCtypes(){
+  const down=st([80,22],[80,40],[82,70],[84,98]),mid=st([80,22],[80,40],[84,70],[110,66]),up=st([80,22],[80,40],[84,70],[100,46]);
+  const v={hi:["ua"],g:"db"};
+  const arrow=(a,b)=>{const mx=(a[0]+b[0])/2,my=(a[1]+b[1])/2,dx=b[0]-a[0],dy=b[1]-a[1],Ln=Math.hypot(dx,dy);const s1=L(a,b,.15),s2=L(a,b,.88);
+    return `<path d="M${s1[0]},${s1[1]} Q${(mx+dy/Ln*20).toFixed(1)},${(my-dx/Ln*20).toFixed(1)} ${s2[0].toFixed(1)},${s2[1].toFixed(1)}" class="arw"/>`};
+  const scn=(ghost,main,extra)=>`<svg viewBox="34 4 132 166" class="ctfig"><ellipse cx="100" cy="161" rx="56" ry="4" class="shadow"/><line x1="40" y1="158" x2="160" y2="158" class="base" stroke-width="3"/>${ghost?human(ghost,v,true)+grip("db",ghost.w).replace(/class="(handle|plate)"/g,'class="$1" opacity=".2"'):""}${human(main,v,false)}${grip("db",main.w)}${extra}</svg>`;
+  const gauge=(rx,mode)=>{const arr=mode==="short"?`<path d="M14,15 h14 m-5,-4 l5,4 l-5,4 M106,15 h-14 m5,-4 l-5,4 l5,4" class="garr"/>`:mode==="long"?`<path d="M28,15 h-16 m5,-4 l-5,4 l5,4 M92,15 h16 m-5,-4 l5,4 l-5,4" class="garr"/>`:`<path d="M20,9 v12 M100,9 v12" class="garr" stroke-width="2.6"/>`;
+    return `<svg viewBox="0 0 120 30" class="gauge"><line x1="${60-rx-10}" y1="15" x2="${60-rx}" y2="15" class="gten"/><line x1="${60+rx}" y1="15" x2="${60+rx+10}" y2="15" class="gten"/><ellipse cx="60" cy="15" rx="${rx}" ry="${mode==="short"?9:mode==="long"?5.5:7}" class="mbelly"/>${arr}</svg>`};
+  const clock=`<g transform="translate(130,58)"><circle r="10" class="clk"/><path d="M0,-6 V0 L4,3" class="clkh"/><rect x="-3" y="-14.5" width="6" height="3" rx="1" class="clkb"/></g>`;
+  const T=[
+   ["向心收縮","Concentric","肌肉一邊出力一邊縮短","舉起啞鈴、爬樓梯往上、深蹲起身",scn(down,up,arrow(down.w,up.w)),gauge(17,"short"),"變短"],
+   ["離心收縮","Eccentric","肌肉一邊出力一邊被拉長","放下啞鈴、下樓梯、深蹲往下；最能承重，也最容易隔天痠痛",scn(up,down,arrow(up.w,down.w)),gauge(30,"long"),"被拉長"],
+   ["等長收縮","Isometric","肌肉出力但長度不變","平板撐、靠牆蹲、手肘撐 90° 停住；可短暫減輕疼痛",scn(null,mid,clock),gauge(23,"hold"),"不變"]];
+  document.getElementById("ctypes").innerHTML=T.map(([t,en,a,b,svg,g,lv])=>`<div class="card ctcard">${svg}<div class="ctgauge"><span class="tag">肌肉長度：${lv}</span>${g}</div><h3>${t} <span class="en" style="font-family:var(--f-mono);font-size:11.5px;color:var(--ink-3);font-weight:400">${en}</span></h3><p class="small"><b>${a}</b><br>${b}</p></div>`).join("");
+}
+
+/* --- 能量系統：100% 堆疊面積圖（對數時間軸） --- */
+function renderEnergy(){
+  const svg=document.getElementById("energy"),wrap=svg.parentElement;
+  const t=[10,30,60,120,240,600],D={pc:[50,23,12,6,3,1],gl:[44,50,38,29,18,9],ae:[6,27,50,65,79,90]};
+  const X0=62,X1=600,Y0=40,Y1=236,lx=v=>X0+(Math.log10(v)-1)/(Math.log10(600)-1)*(X1-X0),ly=p=>Y1-(Y1-Y0)*p/100;
+  const cum=t.map((_,i)=>[D.pc[i],D.pc[i]+D.gl[i],100]);
+  const band=(lo,hi,cls)=>{const top=t.map((v,i)=>[lx(v),ly(hi(i))]),bot=t.map((v,i)=>[lx(v),ly(lo(i))]).reverse();
+    return `<path d="M${top.map(q=>q.map(n=>n.toFixed(1)).join(",")).join(" L")} L${bot.map(q=>q.map(n=>n.toFixed(1)).join(",")).join(" L")} Z" class="${cls}"/>`};
+  let g=`<rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}" class="plotbg"/>`;
+  g+=band(()=>0,i=>cum[i][0],"ar c1")+band(i=>cum[i][0],i=>cum[i][1],"ar c2")+band(i=>cum[i][1],()=>100,"ar c3");
+  [25,50,75].forEach(p=>g+=`<line x1="${X0}" x2="${X1}" y1="${ly(p)}" y2="${ly(p)}" class="grid"/>`);
+  [0,25,50,75,100].forEach(p=>g+=`<text x="${X0-8}" y="${ly(p)+4}" text-anchor="end" class="tk">${p}%</text>`);
+  const xl=[[10,"10 秒"],[30,"30 秒"],[60,"1 分"],[120,"2 分"],[240,"4 分"],[600,"10 分"]];
+  xl.forEach(([v,l])=>g+=`<line x1="${lx(v)}" x2="${lx(v)}" y1="${Y1}" y2="${Y1+5}" class="axis"/><text x="${lx(v)}" y="${Y1+20}" text-anchor="middle" class="tk">${l}</text>`);
+  g+=`<line x1="${X0}" x2="${X1}" y1="${Y1}" y2="${Y1}" class="axis"/>`;
+  g+=`<text x="${(X0+X1)/2}" y="${Y1+40}" text-anchor="middle" class="tk2">全力運動的持續時間（對數刻度）</text>`;
+  [[10,"100 公尺"],[48,"400 公尺"],[230,"1500 公尺"]].forEach(([v,l])=>g+=`<line x1="${lx(v)}" x2="${lx(v)}" y1="${Y0-6}" y2="${Y1}" class="evt"/><text x="${lx(v)+(v===10?4:0)}" y="${Y0-10}" text-anchor="${v===10?"start":"middle"}" class="tk2">${l}</text>`);
+  g+=`<text x="${lx(13)}" y="${ly(18)}" class="alab">磷酸肌酸</text><text x="${lx(13)}" y="${ly(18)+16}" class="alab2">爆發、約 10 秒</text>`;
+  g+=`<text x="${lx(46)}" y="${ly(48)}" class="alab">醣解</text><text x="${lx(46)}" y="${ly(48)+16}" class="alab2">高強度數十秒</text>`;
+  g+=`<text x="${lx(250)}" y="${ly(68)}" class="alab">有氧</text><text x="${lx(250)}" y="${ly(68)+16}" class="alab2">時間越長越主導</text>`;
+  g+=`<line class="xhair" y1="${Y0}" y2="${Y1}" x1="0" x2="0"/>`;
+  svg.setAttribute("viewBox","0 0 620 300");svg.innerHTML=g;
+  attachTip(svg,wrap,x=>{if(x<X0||x>X1)return null;const lt=1+(x-X0)/(X1-X0)*(Math.log10(600)-1),tv=Math.pow(10,lt);
+    let i=0;while(i<t.length-2&&tv>t[i+1])i++;const f=Math.min(1,Math.max(0,(Math.log10(tv)-Math.log10(t[i]))/(Math.log10(t[i+1])-Math.log10(t[i]))));
+    const iv=k=>Math.round(D[k][i]+(D[k][i+1]-D[k][i])*f);const pc=iv("pc"),gl=iv("gl"),ae=100-pc-gl;
+    const lab=tv<60?Math.round(tv)+" 秒":(tv/60).toFixed(tv<120?1:0)+" 分";
+    return {x,html:`<b>${lab}</b><span><i class="sw c1"></i>磷酸肌酸 ${pc}%</span><span><i class="sw c2"></i>醣解 ${gl}%</span><span><i class="sw c3"></i>有氧 ${ae}%</span>`}});
+}
+
+/* --- DOMS 曲線 --- */
+function renderDoms(){
+  const svg=document.getElementById("doms"),wrap=svg.parentElement;
+  const A=[[0,0],[6,1],[12,2.5],[24,5.5],[36,7.2],[48,7.8],[60,7.1],[72,5.8],[96,3],[120,1.2]],R=[[0,0],[12,1],[24,2.2],[36,2.8],[48,3],[72,2.2],[96,1],[120,.3]];
+  const X0=56,X1=596,Y0=34,Y1=214,hx=h=>X0+(X1-X0)*h/120,vy=v=>Y1-(Y1-Y0)*v/10;
+  const P1=A.map(([h,v])=>[hx(h),vy(v)]),P2=R.map(([h,v])=>[hx(h),vy(v)]);
+  let g=`<rect x="${X0}" y="${Y0}" width="${X1-X0}" height="${Y1-Y0}" class="plotbg"/>`;
+  g+=`<rect x="${hx(24)}" y="${Y0}" width="${hx(72)-hx(24)}" height="${Y1-Y0}" class="peakband"/><text x="${(hx(24)+hx(72))/2}" y="${Y0+16}" text-anchor="middle" class="bandlab">最痛期 24–72 小時</text>`;
+  [2.5,5,7.5,10].forEach(v=>g+=`<line x1="${X0}" x2="${X1}" y1="${vy(v)}" y2="${vy(v)}" class="grid"/>`);
+  [0,5,10].forEach(v=>g+=`<text x="${X0-8}" y="${vy(v)+4}" text-anchor="end" class="tk">${v}</text>`);
+  g+=`<text x="16" y="${(Y0+Y1)/2}" transform="rotate(-90 16 ${(Y0+Y1)/2})" text-anchor="middle" class="tk2">痠痛程度（0–10）</text>`;
+  [[0,"0"],[12,"12 小時"],[24,"1 天"],[48,"2 天"],[72,"3 天"],[96,"4 天"],[120,"5 天"]].forEach(([h,l])=>g+=`<line x1="${hx(h)}" x2="${hx(h)}" y1="${Y1}" y2="${Y1+5}" class="axis"/><text x="${hx(h)}" y="${Y1+20}" text-anchor="${h===0?"start":h===120?"end":"middle"}" class="tk">${l}</text>`);
+  g+=`<line x1="${X0}" x2="${X1}" y1="${Y1}" y2="${Y1}" class="axis"/>`;
+  const d1=smoothPath(P1);g+=`<path d="${d1} L${hx(120)},${Y1} L${hx(0)},${Y1} Z" class="afill"/>`;
+  g+=`<path d="${smoothPath(P2)}" class="ln c3 dash"/><path d="${d1}" class="ln c1"/>`;
+  g+=`<circle cx="${hx(48)}" cy="${vy(7.8)}" r="5" class="pk c1"/><text x="${hx(48)+10}" y="${vy(7.8)-8}" class="tk2 strong">高峰：約 48 小時</text>`;
+  g+=`<circle cx="${hx(48)}" cy="${vy(3)}" r="4.5" class="pk c3"/><text x="${hx(48)+10}" y="${vy(3)-12}" class="tk2">第二次做同樣訓練：明顯減輕</text>`;
+  g+=`<line class="xhair" y1="${Y0}" y2="${Y1}" x1="0" x2="0"/>`;
+  svg.setAttribute("viewBox","0 0 620 250");svg.innerHTML=g;
+  const interp=(arr,h)=>{let i=0;while(i<arr.length-2&&h>arr[i+1][0])i++;const [h0,v0]=arr[i],[h1,v1]=arr[i+1];return v0+(v1-v0)*Math.min(1,Math.max(0,(h-h0)/(h1-h0)))};
+  attachTip(svg,wrap,x=>{if(x<X0||x>X1)return null;const h=(x-X0)/(X1-X0)*120;const lab=h<24?Math.round(h)+" 小時":(h/24).toFixed(1)+" 天";
+    return {x,html:`<b>運動後 ${lab}</b><span><i class="sw c1"></i>第一次：${interp(A,h).toFixed(1)}</span><span><i class="sw c3"></i>第二次：${interp(R,h).toFixed(1)}</span>`}});
+}
+
+/* --- 皮拉提斯骨盆位置：解剖側視圖 --- */
+function pelvisSVG(mode){
+  const N=mode==="neutral",bot=x=>N&&x>70&&x<150?104-8*Math.sin(Math.PI*(x-70)/80):104;
+  let g=`<rect x="4" y="105" width="232" height="9" rx="4" class="mat2"/>`;
+  // body silhouette
+  const bp=[];for(let x=8;x<=200;x+=4)bp.push([x,bot(x)]);
+  const top=[[200,82],[188,66],[170,60],[146,64],[118,N?70:72],[88,64],[56,54],[26,56],[8,62]];
+  g+=`<path d="M${bp.map(q=>q[0]+","+q[1].toFixed(1)).join(" L")} L${top.map(q=>q.join(",")).join(" L")} Z" class="silh"/>`;
+  if(N){const gp=[];for(let x=72;x<=148;x+=2)gp.push([x,bot(x)]);g+=`<path d="M72,104 L${gp.map(q=>q[0]+","+q[1].toFixed(1)).join(" L")} L148,104 Z" class="gapz"/>`;}
+  // ribs
+  [22,36,50,64].forEach(x=>{const y=bot(x)-15;g+=`<path d="M${x},${y} Q${x+4},${y-30} ${x+18},${y-36}" class="rib"/>`});
+  // vertebrae
+  const vert=(x,w=12,h=9,lab)=>{const y=bot(x)-14,sl=(bot(x+2)-bot(x-2))/4,ang=Math.atan(sl)*180/Math.PI;return `<g transform="translate(${x},${y.toFixed(1)}) rotate(${ang.toFixed(1)})"><rect x="${-w/2}" y="${-h/2}" width="${w}" height="${h}" rx="2.5" class="bone"/><path d="M-2,${h/2} l0,6" class="bonel"/></g>`};
+  [24,38,52,64].forEach(x=>g+=vert(x,11,8));
+  [78,92,106,120,134].forEach(x=>g+=vert(x,12,10));
+  g+=`<text x="106" y="${N?72:76}" text-anchor="middle" class="plab">腰椎 L1–L5</text>`;
+  // pelvis group (rotates for imprint)
+  const rot=N?0:-11;
+  g+=`<g transform="rotate(${rot} 186 88)">`;
+  g+=`<path d="M146,96 L152,84 L164,90 L160,100 Z" class="bone"/>`;
+  g+=`<path d="M158,98 L160,80 L168,64 L180,65 L185,72 L194,72 L205,64 L210,70 L199,87 L187,93 L176,102 Z" class="bone"/>`;
+  g+=`<circle cx="186" cy="86" r="4.5" class="joint"/>`;
+  g+=`<line x1="181" y1="67" x2="207" y2="67" class="refl"/><circle cx="181" cy="67" r="3" class="lm"/><circle cx="207" cy="67" r="3" class="lm"/>`;
+  g+=`</g>`;
+  g+=`<line x1="168" y1="${N?67:58}" x2="226" y2="${N?67:58}" class="hz"/>`;
+  g+=`<path d="M186,86 L236,46" class="femur"/><circle cx="236" cy="46" r="5" class="joint"/>`;
+  g+=`<text x="166" y="54" class="plab" text-anchor="end">髂前上棘</text><text x="232" y="${N?86:80}" class="plab" text-anchor="end">恥骨</text>`;
+  if(N)g+=`<path d="M110,123 L110,104" class="callln"/><text x="110" y="134" text-anchor="middle" class="plab strong">小空隙＝自然腰椎曲線</text>`;
+  else g+=`<path d="M118,40 L118,62" class="arw2"/><text x="124" y="44" class="plab strong">肚臍輕收</text><text x="110" y="134" text-anchor="middle" class="plab strong">下背輕貼墊子，沒有空隙</text>`;
+  return `<svg viewBox="0 30 240 108" class="pelvis" role="img" aria-label="${N?"中立骨盆":"印記骨盆"}">${g}</svg>`;
+}
+function renderPelvis(){
+  document.getElementById("pelvisFig").innerHTML=`
+  <div class="pcard"><div class="pt"><b>中立骨盆</b><span>髂前上棘與恥骨同高（虛線水平）</span></div>${pelvisSVG("neutral")}<p class="small">保留腰椎自然弧度，下背與墊子之間約一個手掌薄的空隙。腳踩地的動作多用中立。</p></div>
+  <div class="pcard"><div class="pt"><b>印記骨盆</b><span>骨盆微微後傾，恥骨略高</span></div>${pelvisSVG("imprint")}<p class="small">腹部輕收，下背輕貼墊子。雙腳抬離地面、腹肌還撐不穩時使用，保護下背。</p></div>`;
+}
+renderCtypes();renderEnergy();renderDoms();renderPelvis();
+
 
 /* ================= PAIN ================= */
 const painTabs=document.getElementById("painTabs"),painPanel=document.getElementById("painPanel");
