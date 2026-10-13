@@ -1251,7 +1251,10 @@ const off2=(q,dx,dy)=>[q[0]+dx,q[1]+dy];
 function visHTML(id){
   const v=VIS[id];if(!v)return "";
   const ca=v.ca||["起始","結束"];
-  const sv=(inner,cap,cls="",extra="")=>`<figure class="vis ${cls}"><svg viewBox="0 0 200 170" role="img" aria-label="${cap}">${inner}</svg><figcaption>${cap}</figcaption>${extra}</figure>`;
+  const ys=[];[v.A,v.B].forEach(F=>{if(!F)return;if(F.segs){F.segs.forEach(q=>ys.push(q[1],q[3]));ys.push(F.head[1])}else Object.values(F).forEach(q=>{if(Array.isArray(q)&&typeof q[1]==="number")ys.push(q[1])})});
+  (v.eq||[]).forEach(e=>{const n=e.split(" ");if(["F","D","W","U"].includes(n[0]))ys.push(+n[2])});(v.lb||[]).forEach(l=>ys.push(l[1]));
+  const top=Math.max(0,Math.min(...ys)-26),vh=170-top;
+  const sv=(inner,cap,cls="",extra="")=>`<figure class="vis ${cls}"><svg viewBox="0 ${top} 200 ${vh}" role="img" aria-label="${cap}">${inner}</svg><figcaption>${cap}</figcaption>${extra}</figure>`;
   let eqPanel="";
   if(v.lb){let s=scene(v,null,"eq");v.lb.forEach(([ax,ay],i)=>{s+=`<circle cx="${ax}" cy="${ay}" r="6.5" class="callout"/><text x="${ax}" y="${ay+3.4}" text-anchor="middle" class="callnum">${i+1}</text>`});
     eqPanel=sv(s,"器材","eqp",`<ol class="calllist">${v.lb.map(l=>`<li>${esc(l[2])}</li>`).join("")}</ol>`)}
