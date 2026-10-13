@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="點選人體圖學肌肉：構造、收縮、分工、動作拆解與痠痛地圖。">
+<meta name="description" content="點選人體圖學肌肉：構造、收縮、分工、動作拆解、健身器材與皮拉提斯指導、痠痛地圖。">
 <style>[hidden]{display:none!important}body{margin:0}img{max-width:100%}</style>
-<title>肌肉學習地圖</title>
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="apple-mobile-web-app-title" content="肌肉地圖">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#F3F5F3">
+<title>肌肉學習地圖</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='13' fill='%23F5E2E6'/%3E%3Cg transform='rotate(-35 24 24)'%3E%3Cline x1='5' y1='24' x2='13' y2='24' stroke='%232C6884' stroke-width='3.6' stroke-linecap='round'/%3E%3Cline x1='35' y1='24' x2='43' y2='24' stroke='%232C6884' stroke-width='3.6' stroke-linecap='round'/%3E%3Cpath d='M11,24 Q24,7 37,24 Q24,41 11,24 Z' fill='%23B3263E'/%3E%3Cg stroke='%23F5E2E6' stroke-width='1.8' stroke-linecap='round'%3E%3Cline x1='18.5' y1='18.5' x2='18.5' y2='29.5'/%3E%3Cline x1='24' y1='16.5' x2='24' y2='31.5'/%3E%3Cline x1='29.5' y1='18.5' x2='29.5' y2='29.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;900&display=swap">
@@ -215,6 +215,24 @@ dl.gloss dd{margin:2px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.6}
 .flash{animation:fl 1.6s ease}
 @keyframes fl{0%,40%{box-shadow:0 0 0 3px var(--muscle)}100%{box-shadow:0 0 0 0 transparent}}
 @media (prefers-reduced-motion: reduce){.flash{animation:none}}
+.exnav{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.exrow{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:baseline}
+.exrow>b{font-size:13px;color:var(--ink-3);font-weight:500}
+.exrow .chips{margin:0}
+.exhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px}
+.exhead h3{font-family:var(--f-display);font-size:24px;margin:0}
+.exhead .en{font-family:var(--f-mono);font-size:12px;color:var(--ink-3)}
+.lvl{font-size:12px;border-radius:999px;padding:0 10px;border:1px solid var(--line);color:var(--ink-2)}
+.exsec{margin-top:14px}
+.exsec .tag{display:block;margin-bottom:4px}
+ol.exsteps{counter-reset:s;list-style:none;padding:0;margin:0}
+ol.exsteps li{counter-increment:s;position:relative;padding-left:32px;margin-bottom:6px;font-size:15px;line-height:1.6}
+ol.exsteps li::before{content:counter(s);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;background:var(--muscle);color:var(--surface);font-family:var(--f-mono);font-size:12px;display:grid;place-items:center}
+ul.exerr{list-style:none;padding:0;margin:0}
+ul.exerr li{position:relative;padding-left:24px;font-size:14.5px;line-height:1.6;margin-bottom:4px}
+ul.exerr li::before{content:"✕";position:absolute;left:4px;color:var(--muscle);font-weight:700}
+.exnote{background:var(--paper);border-radius:8px;padding:8px 12px;font-size:14px;margin-top:12px;color:var(--ink-2)}
+@media (max-width:520px){.exrow{grid-template-columns:1fr;gap:2px}}
 footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);max-width:70ch}
 
 @media (max-width:900px){
@@ -260,9 +278,11 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
     <a href="#mechanism"><span>3</span>怎麼收縮</a>
     <a href="#roles"><span>4</span>分工合作</a>
     <a href="#movement"><span>5</span>動作拆解</a>
-    <a href="#soreness"><span>6</span>痠痛地圖</a>
-    <a href="#recovery"><span>7</span>恢復與就醫</a>
-    <a href="#glossary"><span>8</span>名詞速查</a>
+    <a href="#gym"><span>6</span>健身器材</a>
+    <a href="#pilates"><span>7</span>皮拉提斯</a>
+    <a href="#soreness"><span>8</span>痠痛地圖</a>
+    <a href="#recovery"><span>9</span>恢復與就醫</a>
+    <a href="#glossary"><span>10</span>名詞速查</a>
   </nav>
   <p class="note">學習用整理，不能取代醫師或物理治療師的評估。</p>
 </aside>
@@ -494,9 +514,56 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
   </div>
 </section>
 
-<!-- 6 SORENESS -->
+<!-- 6 GYM -->
+<section class="chap" id="gym">
+  <div class="eyebrow">06 · 健身器材</div>
+  <h2>健身房器材動作指導</h2>
+  <p class="lede">選一個器材，看它練到哪裡、怎麼做、最常做錯什麼。</p>
+  <div class="block" data-topic="器材訓練通用原則：調整機器、速度、重量、呼吸">
+    <div class="grid g2">
+      <div class="card"><div class="tag">先調機器</div><h3>關節對齊轉軸</h3><p class="small">座椅高度、護墊位置調好，關節對準機器轉動的軸心。</p></div>
+      <div class="card"><div class="tag">速度</div><h3>上 1–2 秒，下 2–3 秒</h3><p class="small">放回時慢一點，別讓重量砸回去。</p></div>
+      <div class="card"><div class="tag">重量</div><h3>8–12 下剛好吃力</h3><p class="small">最後兩下很累，但姿勢沒有跑掉。</p></div>
+      <div class="card"><div class="tag">呼吸</div><h3>出力吐氣，不憋氣</h3><p class="small">回程吸氣。有高血壓者特別避免憋氣。</p></div>
+    </div>
+  </div>
+  <div class="block" id="gymBlock" data-topic="健身器材動作：胸推、肩推、蝴蝶機、下拉、划船、面拉、三頭下壓、彎舉、腿推、腿伸展、腿彎舉、髖外展、臀推、提踵、背伸">
+    <div class="exnav" id="gymNav"></div>
+    <div class="card expanel" id="gymPanel"></div>
+  </div>
+</section>
+
+<!-- 7 PILATES -->
+<section class="chap" id="pilates">
+  <div class="eyebrow">07 · 皮拉提斯</div>
+  <h2>皮拉提斯動作指導</h2>
+  <p class="lede">皮拉提斯重視控制與呼吸。每個動作 5–10 次，做得準比做得多重要。</p>
+  <div class="block" data-topic="皮拉提斯基本原則：側肋呼吸、核心啟動、中立骨盆、印記骨盆">
+    <div class="grid g2">
+      <div class="card"><div class="tag">呼吸</div><h3>側肋呼吸</h3><p class="small">吸氣時肋骨往兩側、往後擴張；吐氣時肋骨收攏、腹部往內收。</p></div>
+      <div class="card"><div class="tag">核心</div><h3>輕輕收腹</h3><p class="small">像穿上緊身褲，肚臍微微往脊椎靠，大約出力三成，不憋氣。</p></div>
+      <div class="card" style="text-align:center"><div class="tag">骨盆位置</div>
+        <svg viewBox="0 0 220 96" style="width:100%;max-width:240px">
+          <text x="4" y="14" style="font-size:11px;fill:var(--ink-2);font-family:var(--f-body)">中立：下背有小空隙</text>
+          <line x1="4" y1="40" x2="216" y2="40" stroke="var(--line)" stroke-width="2"/>
+          <path d="M20,34 Q60,30 90,34 Q110,26 130,34 L200,34" fill="none" stroke="var(--muscle)" stroke-width="5" stroke-linecap="round"/>
+          <text x="4" y="64" style="font-size:11px;fill:var(--ink-2);font-family:var(--f-body)">印記：下背輕貼地面</text>
+          <line x1="4" y1="90" x2="216" y2="90" stroke="var(--line)" stroke-width="2"/>
+          <path d="M20,84 L200,84" fill="none" stroke="var(--tendon)" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <p class="small">腳抬起、腹肌還不夠穩時，用印記保護下背。</p></div>
+      <div class="card"><div class="tag">品質</div><h3>慢、準、延伸</h3><p class="small">每個動作都往兩端拉長，像被兩端輕輕拉開。</p></div>
+    </div>
+  </div>
+  <div class="block" id="pilBlock" data-topic="皮拉提斯動作：百次拍擊、捲上、單腿畫圈、滾球、單腿伸展、十字交叉、脊椎前伸、天鵝、游泳、側躺抬腿、蚌殼式、肩橋、美人魚、前撐、核心床腳部動作">
+    <div class="exnav" id="pilNav"></div>
+    <div class="card expanel" id="pilPanel"></div>
+  </div>
+</section>
+
+<!-- 8 SORENESS -->
 <section class="chap" id="soreness">
-  <div class="eyebrow">06 · 痠痛</div>
+  <div class="eyebrow">08 · 痠痛</div>
   <h2>痠痛地圖</h2>
   <p class="lede">痛的地方，不一定是問題的源頭。</p>
 
@@ -546,7 +613,7 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
 
 <!-- 7 RECOVERY -->
 <section class="chap" id="recovery">
-  <div class="eyebrow">07 · 恢復</div>
+  <div class="eyebrow">09 · 恢復</div>
   <h2>恢復與就醫</h2>
 
   <div class="block" data-topic="恢復方法效果比較：睡眠、蛋白質、按摩、滾筒、冰敷、熱敷、伸展">
@@ -574,7 +641,7 @@ footer{margin-top:56px;padding-top:16px;border-top:1px solid var(--line);font-si
 
 <!-- 8 GLOSSARY -->
 <section class="chap" id="glossary">
-  <div class="eyebrow">08 · 名詞</div>
+  <div class="eyebrow">10 · 名詞</div>
   <h2>名詞速查</h2>
   <dl class="gloss" id="gloss"></dl>
 </section>
@@ -905,6 +972,94 @@ function renderMove(k){
 mvTabs.addEventListener("click",e=>{const b=e.target.closest("[data-mv]");if(b)renderMove(b.dataset.mv)});
 renderMove("squat");
 
+/* ================= GYM & PILATES ================= */
+const GYM=[
+{id:"chestpress",g:"胸肩",t:"胸推機",en:"Chest Press Machine",lv:"初階",prime:["pecmaj","triceps"],syn:["deltoid","serratus"],stab:["rectus","ta"],
+ steps:["調座椅，讓握把對齊胸口中段","背貼椅背，肩胛微微往後下收","吐氣往前推，推到手肘快打直但不鎖死","吸氣慢慢收回，約 2–3 秒"],err:["聳肩、肩膀往前頂","手肘完全鎖死","回程太快讓重量砸回"],br:"推出吐氣，收回吸氣"},
+{id:"shoulderpress",g:"胸肩",t:"肩推機",en:"Shoulder Press Machine",lv:"初階",prime:["deltoid","triceps"],syn:["uptrap","serratus","lowtrap"],stab:["ta","rectus","erector"],
+ steps:["調座椅，握把在肩膀高度","背貼椅背，肋骨往下收不外翻","吐氣往上推到手臂快打直","吸氣慢慢放回耳朵高度"],err:["挺腰拱背借力","聳肩推","放得太低讓肩前不舒服"],br:"上推吐氣，下放吸氣",note:"舉手會痛或有肩夾擠，先減輕重量、縮小範圍。"},
+{id:"pecdeck",g:"胸肩",t:"蝴蝶機",en:"Pec Deck",lv:"初階",prime:["pecmaj"],syn:["deltoid"],stab:["ta"],
+ steps:["調座椅，讓手臂和肩膀同高","手肘微彎，角度全程固定","像抱大樹一樣往中間夾","慢慢打開到胸前有伸展感即可"],err:["打開太大，拉傷肩膀前側","手肘彎來彎去變成推"],br:"夾起吐氣，打開吸氣"},
+{id:"pulldown",g:"背",t:"滑輪下拉",en:"Lat Pulldown",lv:"初階",prime:["lats","biceps"],syn:["rhomboid","lowtrap","brachialis","teresminor"],stab:["rectus","ta"],
+ steps:["大腿卡住護墊，握距比肩稍寬","先把肩膀往下沉，再開始拉","手肘往下、往身體兩側拉，橫桿到上胸","慢慢放回，讓手臂伸直"],err:["拉到脖子後面","身體大幅往後倒借力","聳肩拉"],br:"拉下吐氣，放回吸氣"},
+{id:"row",g:"背",t:"坐姿划船",en:"Seated Cable Row",lv:"初階",prime:["lats","rhomboid","lowtrap"],syn:["biceps","deltoid","teresminor"],stab:["erector","ta","multifidus"],
+ steps:["坐直、膝蓋微彎","胸口挺起，眼睛看前方","手肘貼身往後拉到肚子，夾肩胛停 1 秒","慢慢放回，肩胛自然往前"],err:["身體前後擺動","圓背","聳肩"],br:"拉回吐氣，放回吸氣"},
+{id:"facepull",g:"背",t:"繩索面拉",en:"Face Pull",lv:"初階",prime:["lowtrap","infraspinatus","deltoid"],syn:["rhomboid","teresminor"],stab:["ta"],
+ steps:["滑輪調到眼睛高度，雙手握繩","往臉的方向拉，手肘比手腕高","拉到底時雙手往外分開","慢慢放回"],err:["重量太重變成划船","腰往後仰"],br:"拉回吐氣，放回吸氣",note:"改善圓肩、保護肩膀的好動作，重量輕即可。"},
+{id:"pushdown",g:"手臂",t:"繩索三頭下壓",en:"Triceps Pushdown",lv:"初階",prime:["triceps"],syn:[],stab:["lats","ta","wristflex"],
+ steps:["站穩，上臂貼在身體兩側","只動手肘，往下壓到打直","底部時繩子往外分開","慢慢回到手肘約 90°"],err:["手肘前後移動","身體往前壓，用體重借力"],br:"下壓吐氣，回來吸氣"},
+{id:"curl",g:"手臂",t:"啞鈴彎舉",en:"Dumbbell Curl",lv:"初階",prime:["biceps","brachialis"],syn:["brachioradialis"],stab:["deltoid","wristflex","ta"],
+ steps:["站直，手肘貼住身體兩側","掌心朝前，往上彎起","頂端停一下","慢慢放下，約 2–3 秒"],err:["甩身體借力","手肘往前跑","放得太快"],br:"舉起吐氣，放下吸氣",note:"拇指朝上做（錘式彎舉）會多練到肱橈肌。"},
+{id:"legpress",g:"腿臀",t:"腿推機",en:"Leg Press",lv:"初階",prime:["quads","glutemax"],syn:["adductors","hamstrings"],stab:["glutemed","ta"],
+ steps:["背和屁股貼緊椅墊","雙腳與肩同寬，踩在踏板中間","慢慢彎膝到約 90°，下背不離開墊子","推回去，膝蓋不鎖死"],err:["放太低，屁股離墊、下背捲起","膝蓋往內倒","膝蓋完全鎖死"],br:"推出吐氣，彎膝吸氣",note:"腳放高一點多練臀部與大腿後，放低一點多練大腿前。"},
+{id:"legext",g:"腿臀",t:"腿伸展機",en:"Leg Extension",lv:"初階",prime:["quads"],syn:[],stab:["ta"],
+ steps:["膝蓋對齊機器的轉軸","腳踝護墊放在腳踝上方","伸直膝蓋，停 1 秒","慢慢放下"],err:["甩腿","屁股離開座椅"],br:"伸直吐氣，放下吸氣",note:"膝前痛的人先用小範圍、輕重量。"},
+{id:"legcurl",g:"腿臀",t:"腿彎舉機",en:"Leg Curl",lv:"初階",prime:["hamstrings"],syn:["gastroc"],stab:["ta","glutemax"],
+ steps:["膝蓋對齊轉軸，護墊在腳踝上方","骨盆貼緊椅墊","彎膝把護墊拉向屁股","慢慢放回"],err:["屁股翹起來借力","放回太快"],br:"彎起吐氣，放回吸氣"},
+{id:"hipabd",g:"腿臀",t:"髖外展機",en:"Hip Abduction Machine",lv:"初階",prime:["glutemed","glutemin"],syn:["tfl","piriformis"],stab:["ta"],
+ steps:["坐好，屁股坐滿椅墊","雙腿往外推開到底，停 1 秒","慢慢收回，不讓重量撞擊"],err:["用甩的推開","收回太快"],br:"推開吐氣，收回吸氣",note:"身體微微前傾，臀部側邊會更有感覺。對膝內扣、走路骨盆晃很有幫助。"},
+{id:"hipthrust",g:"腿臀",t:"臀推",en:"Hip Thrust",lv:"中階",prime:["glutemax"],syn:["hamstrings","adductors"],stab:["rectus","ta","glutemed"],
+ steps:["上背靠在長椅邊，槓鈴放在髖部（加護墊）","腳踩穩，在頂點時小腿與地面垂直","下巴微收，往上推到肩到膝成一直線，夾臀","慢慢放下"],err:["頂點用拱腰代替伸髖","腳放太遠，變成只練大腿後"],br:"上推吐氣，放下吸氣"},
+{id:"calfraise",g:"腿臀",t:"提踵（踮腳）",en:"Calf Raise",lv:"初階",prime:["gastroc","soleus"],syn:[],stab:["peroneals","tibpost","footintrinsic"],
+ steps:["前腳掌踩在台階邊緣","腳跟慢慢往下沉到有伸展感","往上踮到最高，停 1 秒","慢慢放下"],err:["彈跳式快速上下","腳踝往外倒"],br:"踮起吐氣，放下吸氣",note:"站姿多練腓腸肌；坐姿（膝蓋彎）多練比目魚肌。"},
+{id:"backext",g:"核心",t:"羅馬椅背伸",en:"Back Extension",lv:"初階",prime:["erector","glutemax"],syn:["hamstrings","multifidus"],stab:["ta"],
+ steps:["護墊在骨盆下方，腳跟勾住","以髖為軸，身體往下彎","用屁股出力帶身體回到一直線","回到一直線就停"],err:["往上抬過頭、過度後仰","用甩的上來"],br:"往上吐氣，往下吸氣"}
+];
+const PIL=[
+{id:"hundred",g:"墊上",t:"百次拍擊",en:"The Hundred",lv:"初階",prime:["rectus","ta"],syn:["iliopsoas","extobl"],stab:["dnf","pelvicfloor"],
+ steps:["仰躺，雙腿抬成桌面式（膝蓋 90°）","吐氣捲起頭肩，到肩胛下緣離地","手臂離地，上下小幅拍打","吸氣 5 拍、吐氣 5 拍，共 100 下"],err:["脖子用力、下巴往前凸","下背離地拱起","腿放太低超過能控制的範圍"],br:"吸 5 拍、吐 5 拍",note:"降階：頭放在地上，或雙腳踩地。"},
+{id:"rollup",g:"墊上",t:"捲上",en:"Roll Up",lv:"中階",prime:["rectus","ta"],syn:["iliopsoas","extobl","intobl"],stab:["dnf"],str:["erector","hamstrings"],
+ steps:["仰躺，手臂舉過頭","吸氣，手臂舉向天花板，下巴微收","吐氣，一節一節捲起，往前延伸到腳尖","吸氣停住，吐氣一節一節躺回"],err:["用甩的衝起來","雙腳離地翹起"],br:"起身吐氣，躺回吐氣，中間吸氣",note:"降階：膝蓋彎曲，用手扶大腿後側幫忙。"},
+{id:"legcircle",g:"墊上",t:"單腿畫圈",en:"Single Leg Circle",lv:"初階",prime:["iliopsoas","adductors","quads"],syn:["glutemed"],stab:["ta","rectus"],
+ steps:["仰躺，一腿伸直指向天花板","骨盆完全不動","腿往內、往下、往外畫一個小圓，回到頂端","5 次後反方向，再換腿"],err:["圈畫太大，骨盆跟著晃","肩膀離地"],br:"畫半圈吸氣、半圈吐氣",note:"大腿後太緊時，下方腿可以彎曲踩地。"},
+{id:"rolling",g:"墊上",t:"滾球",en:"Rolling Like a Ball",lv:"初階",prime:["rectus","ta"],syn:["iliopsoas"],stab:["dnf"],str:["erector"],
+ steps:["坐姿抱小腿，身體縮成一顆球","腳離地，找到平衡點","吸氣往後滾到肩胛","吐氣滾回平衡點停住"],err:["滾到脖子","滾回來時腳先著地"],br:"往後吸氣，回來吐氣",note:"骨質疏鬆或脊椎有問題的人避免做。"},
+{id:"slstretch",g:"墊上",t:"單腿伸展",en:"Single Leg Stretch",lv:"初階",prime:["rectus","ta","iliopsoas"],syn:["extobl"],stab:["dnf"],
+ steps:["捲起頭肩","一膝拉向胸口，另一腿往前伸","外側手扶腳踝、內側手扶膝蓋","換腳，每換兩次一個呼吸"],err:["骨盆左右晃","伸出去的腿太低"],br:"換兩次吸氣、換兩次吐氣"},
+{id:"crisscross",g:"墊上",t:"十字交叉",en:"Criss-Cross",lv:"中階",prime:["extobl","intobl","rectus"],syn:["iliopsoas"],stab:["ta","dnf"],
+ steps:["雙手放在頭後，捲起頭肩","轉身，讓腋下靠近對側膝蓋","另一腿往前伸","換邊，轉的是胸口不是手肘"],err:["用手拉脖子","只動手肘，胸口沒轉"],br:"轉身吐氣，回中間吸氣"},
+{id:"spinestretch",g:"墊上",t:"脊椎前伸",en:"Spine Stretch Forward",lv:"初階",prime:["rectus","ta"],syn:[],stab:["multifidus"],str:["erector","hamstrings"],
+ steps:["坐直，腿伸直略比肩寬，腳尖朝上","吸氣，頭頂往上長高","吐氣，從頭開始一節一節往前捲，像越過一顆大球","吸氣停住，吐氣從尾椎一節一節疊回坐直"],err:["只從髖往前倒，背是平的","肩膀聳起"],br:"往前吐氣，回正吐氣",note:"坐不直時，坐在毛巾或墊子上、膝蓋微彎。"},
+{id:"swan",g:"墊上",t:"天鵝",en:"Swan",lv:"初階",prime:["erector","lowtrap"],syn:["glutemax","multifidus"],stab:["ta"],str:["rectus"],
+ steps:["俯臥，手放在肩膀旁邊","吸氣，頭帶領往前延伸，胸口往前上抬","腹部輕收，恥骨貼著墊子","吐氣一節一節放下"],err:["用手硬撐起來，下背被擠壓","後頸往後仰"],br:"抬起吸氣，放下吐氣"},
+{id:"swimming",g:"墊上",t:"游泳",en:"Swimming",lv:"中階",prime:["erector","glutemax","lowtrap"],syn:["multifidus","hamstrings","deltoid"],stab:["ta"],
+ steps:["俯臥，手腳伸直往兩端延長","手腳離地","對側手腳小幅交替上下打水","維持身體不左右晃"],err:["抬太高壓迫下背","聳肩"],br:"吸 5 拍、吐 5 拍",note:"降階：四足跪姿，對側手腳伸直（鳥狗式）。"},
+{id:"sidekick",g:"墊上",t:"側躺抬腿",en:"Side Leg Lift",lv:"初階",prime:["glutemed","glutemin"],syn:["tfl"],stab:["ql","extobl","ta"],
+ steps:["側躺，身體成一直線","腰和墊子間留一點小空隙","上方腿與髖同高往上抬，腳尖微朝前","慢慢放下，不碰到下方腿"],err:["骨盆往後翻","腿往前跑，變成用大腿前側"],br:"抬起吐氣，放下吸氣"},
+{id:"clam",g:"墊上",t:"蚌殼式",en:"Clam",lv:"初階",prime:["glutemed","piriformis"],syn:["glutemin"],stab:["ta","ql"],
+ steps:["側躺，膝蓋彎約 45°，腳跟與屁股對齊","腳跟併攏，上方膝蓋往上打開","骨盆不往後翻","慢慢關上"],err:["骨盆往後翻","打開太大"],br:"打開吐氣，關上吸氣",note:"不是經典皮拉提斯動作，但復健與課堂很常用。"},
+{id:"bridge",g:"墊上",t:"肩橋",en:"Shoulder Bridge",lv:"初階",prime:["glutemax","hamstrings"],syn:["adductors"],stab:["ta","multifidus","glutemed"],
+ steps:["仰躺屈膝，腳與髖同寬","吐氣，從尾椎一節一節捲起","捲到肩膀、髖、膝成一直線","吐氣，從胸椎一節一節放回"],err:["拱腰，把肋骨往上頂","膝蓋往外開"],br:"捲起吐氣，頂端吸氣，放回吐氣",note:"進階：在頂端把一腳伸直。"},
+{id:"mermaid",g:"墊上",t:"美人魚",en:"Mermaid",lv:"初階",prime:["extobl","intobl"],syn:[],stab:["ta"],str:["lats","ql"],
+ steps:["側坐，一手扶地","另一手往上舉，往扶地那側側彎延伸","回正，再往反方向","兩邊坐骨盡量貼地"],err:["往前或往後倒，而不是側彎","聳肩"],br:"側彎吐氣，回正吸氣"},
+{id:"plank",g:"墊上",t:"前撐",en:"Leg Pull Front",lv:"中階",prime:["rectus","ta","extobl"],syn:["serratus","deltoid","glutemax"],stab:["lowtrap","quads"],
+ steps:["手在肩膀正下方","身體從頭到腳跟成一直線","手把地板推遠，肩胛不塌陷","進階：交替把一腳往上抬"],err:["塌腰","屁股翹太高","肩胛夾在一起往下陷"],br:"穩定呼吸，抬腳吐氣"},
+{id:"footwork",g:"核心床",t:"腳部動作",en:"Reformer Footwork",lv:"初階",prime:["quads","glutemax","gastroc"],syn:["hamstrings","adductors","soleus"],stab:["ta","multifidus"],
+ steps:["仰躺在滑車上，肩膀靠住肩墊，腳放在踏桿","骨盆維持中立","吐氣推出，到腿伸直但不鎖膝","吸氣控制滑車慢慢回來，不撞擊"],err:["回程讓彈簧把滑車拉回撞擊","膝蓋往內倒"],br:"推出吐氣，回來吸氣",note:"變化：用腳跟、腳尖、提踵踩踏桿，分別強調臀腿與小腿。"}
+];
+function exLinks(ids,role){return ids&&ids.length?mlinks(ids,role):"<span class='small'>—</span>"}
+function renderEx(lib,nav,panel,id){
+  const v=lib.find(x=>x.id===id),hl={};
+  (v.str||[]).forEach(i=>hl[i]="ant");v.stab.forEach(i=>hl[i]="stab");v.syn.forEach(i=>hl[i]="syn");v.prime.forEach(i=>hl[i]="prime");
+  const groups=[...new Set(lib.map(x=>x.g))];
+  nav.innerHTML=groups.map(g=>`<div class="exrow"><b>${g}</b><div class="chips">${lib.filter(x=>x.g===g).map(x=>`<button class="chip${x.id===id?" on":""}" data-ex="${x.id}">${x.t}</button>`).join("")}</div></div>`).join("");
+  const lg=[["prime","主力"],["syn","協同"],["stab","穩定"]];if(v.str)lg.push(["ant","伸展部位"]);
+  panel.innerHTML=`<div class="split"><div>${duo({hl})}${legendHTML(lg)}</div><div>
+   <div class="exhead"><h3>${v.t}</h3><span class="en">${v.en}</span><span class="lvl">${v.lv}</span></div>
+   <div class="exsec" style="margin-top:8px"><p class="small"><b style="color:var(--muscle)">主力</b>　${exLinks(v.prime,"prime")}</p>
+   ${v.syn.length?`<p class="small"><b style="color:var(--syn)">協同</b>　${exLinks(v.syn,"syn")}</p>`:""}
+   <p class="small"><b style="color:var(--tendon)">穩定</b>　${exLinks(v.stab,"stab")}</p>
+   ${v.str?`<p class="small"><b style="color:var(--ant)">伸展</b>　${exLinks(v.str,"ant")}</p>`:""}</div>
+   <div class="exsec"><span class="tag">怎麼做</span><ol class="exsteps">${v.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol></div>
+   <div class="exsec"><span class="tag">常見錯誤</span><ul class="exerr">${v.err.map(s=>`<li>${esc(s)}</li>`).join("")}</ul></div>
+   <div class="exnote"><b>呼吸：</b>${esc(v.br)}${v.note?`<br><b>提醒：</b>${esc(v.note)}`:""}</div>
+  </div></div>`;
+}
+const gymNav=document.getElementById("gymNav"),gymPanel=document.getElementById("gymPanel"),pilNav=document.getElementById("pilNav"),pilPanel=document.getElementById("pilPanel");
+gymNav.addEventListener("click",e=>{const b=e.target.closest("[data-ex]");if(b)renderEx(GYM,gymNav,gymPanel,b.dataset.ex)});
+pilNav.addEventListener("click",e=>{const b=e.target.closest("[data-ex]");if(b)renderEx(PIL,pilNav,pilPanel,b.dataset.ex)});
+renderEx(GYM,gymNav,gymPanel,"pulldown");renderEx(PIL,pilNav,pilPanel,"hundred");
+
 /* ================= PAIN ================= */
 const painTabs=document.getElementById("painTabs"),painPanel=document.getElementById("painPanel");
 function renderPain(k){
@@ -967,6 +1122,8 @@ const IDX=[];function flash(el){el.classList.remove("flash");void el.offsetWidth
 document.querySelectorAll("[data-topic]").forEach(a=>IDX.push({k:"章節",t:a.dataset.topic.split("：")[0],x:a.dataset.topic+" "+a.textContent.replace(/\s+/g," "),go:()=>{a.scrollIntoView({block:"start"});flash(a)}}));
 M.forEach(m=>IDX.push({k:"肌肉",t:m.zh+" "+m.en,x:[m.p,m.act,m.bad||"",m.pain||"",REGIONS[m.r]].join(" "),b:m.zh+m.en,go:()=>select(m.id,true)}));
 MOVES.forEach(v=>IDX.push({k:"動作",t:v.t,x:v.d+" "+v.comp.join(" "),b:v.t,go:()=>{renderMove(v.k);mvPanel.scrollIntoView({block:"center"});flash(mvPanel)}}));
+GYM.forEach(v=>IDX.push({k:"器材",t:v.t+" "+v.en,x:v.steps.join(" ")+" "+v.err.join(" ")+" "+v.prime.map(i=>MI[i].zh).join(" "),b:v.t+v.en,go:()=>{renderEx(GYM,gymNav,gymPanel,v.id);document.getElementById("gymBlock").scrollIntoView({block:"start"});flash(gymPanel)}}));
+PIL.forEach(v=>IDX.push({k:"皮拉提斯",t:v.t+" "+v.en,x:v.steps.join(" ")+" "+v.err.join(" ")+" "+v.prime.map(i=>MI[i].zh).join(" "),b:v.t+v.en,go:()=>{renderEx(PIL,pilNav,pilPanel,v.id);document.getElementById("pilBlock").scrollIntoView({block:"start"});flash(pilPanel)}}));
 PAIN.forEach(v=>IDX.push({k:"痛",t:v.t+"痛",x:v.chain.join(" ")+" "+v.note+" "+v.m.map(i=>MI[i].zh).join(" "),b:v.t,go:()=>{renderPain(v.k);document.getElementById("painBlock").scrollIntoView({block:"start"});flash(painPanel)}}));
 GLOSS.forEach((g,i)=>IDX.push({k:"名詞",t:g[0],x:g.join(" "),b:g[0]+g[1],go:()=>{const el=document.getElementById("g-"+i);el.scrollIntoView({block:"center"});flash(el)}}));
 const qEl=document.getElementById("q"),rEl=document.getElementById("results");let hits=[],hs=0;
