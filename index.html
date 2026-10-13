@@ -80,7 +80,16 @@ nav.toc a.active{background:var(--muscle-soft);color:var(--muscle);font-weight:7
 
 main{padding-inline:clamp(16px,3.5vw,48px);padding-block:32px 80px;min-width:0}
 .wrap{max-width:1060px}
-section.chap{padding-top:44px;scroll-margin-top:12px}
+section.chap{display:none;scroll-margin-top:12px}
+section.chap.active{display:block;animation:tabin .25s ease}
+@keyframes tabin{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){section.chap.active{animation:none}}
+.pager{display:flex;justify-content:space-between;gap:12px;margin-top:40px;padding-top:18px;border-top:1px solid var(--line)}
+.pager a{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:0;max-width:48%}
+.pager a:hover{border-color:var(--muscle)}
+.pager a span{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.pager a b{font-size:15px}
+.pager a.next{margin-left:auto;text-align:right}
 section.chap:first-child{padding-top:0}
 .eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muscle)}
 h1,h2{font-family:var(--f-display);font-weight:900;line-height:1.25;text-wrap:balance;margin:4px 0 6px}
@@ -1374,11 +1383,30 @@ document.addEventListener("keydown",e=>{if(e.key==="/"&&!/INPUT|TEXTAREA/.test(d
   new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:["data-theme"]});sync();
 })();
 
-/* ================= TOC ================= */
-const tocLinks=[...document.querySelectorAll("#toc a")],secs=tocLinks.map(a=>document.querySelector(a.getAttribute("href")));
-function spy(){let cur=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<140)cur=i});tocLinks.forEach((a,i)=>a.classList.toggle("active",i===cur));
-  const a=tocLinks[cur];if(a&&innerWidth<=900){const n=a.parentElement,l=a.offsetLeft-n.offsetLeft;if(l<n.scrollLeft||l>n.scrollLeft+n.clientWidth-80)n.scrollLeft=l-16}}
-addEventListener("scroll",spy,{passive:true});spy();
+/* ================= TABS ================= */
+const tocLinks=[...document.querySelectorAll("#toc a")],secs=[...document.querySelectorAll("section.chap")];
+const tabIds=secs.map(x=>x.id);
+secs.forEach((sec,i)=>{const pv=secs[i-1],nx=secs[i+1],nm=x=>x.querySelector("h1,h2").textContent;
+  const lk=x=>tocLinks.find(a=>a.getAttribute("href")==="#"+x.id).textContent.replace(/^\d+/,"").trim();
+  const d=document.createElement("nav");d.className="pager";d.setAttribute("aria-label","章節切換");
+  d.innerHTML=(pv?`<a href="#${pv.id}"><span>← 上一章</span><b>${lk(pv)}</b></a>`:"")+(nx?`<a class="next" href="#${nx.id}"><span>下一章 →</span><b>${lk(nx)}</b></a>`:"");sec.appendChild(d)});
+let curTab=null;
+function showTab(id,keepScroll){
+  if(!tabIds.includes(id))id="map";
+  if(curTab!==id){secs.forEach(x=>x.classList.toggle("active",x.id===id));curTab=id;
+    tocLinks.forEach(a=>{const on=a.getAttribute("href")==="#"+id;a.classList.toggle("active",on);if(on)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+    const a=tocLinks.find(x=>x.classList.contains("active"));if(a&&innerWidth<=900){const n=a.parentElement;n.scrollLeft=a.offsetLeft-n.offsetLeft-16}
+    try{localStorage.setItem("muscle-tab",id)}catch(e){}}
+  if(!keepScroll)scrollTo({top:0,behavior:"instant"});
+}
+/* 任何跳轉到其他頁籤內的元素時，先切換頁籤 */
+const _siv=Element.prototype.scrollIntoView;
+Element.prototype.scrollIntoView=function(o){const sec=this.closest&&this.closest("section.chap");if(sec&&sec.id!==curTab){if(location.hash!=="#"+sec.id)history.replaceState(null,"","#"+sec.id);showTab(sec.id,true)}return _siv.call(this,o)};
+document.addEventListener("click",e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute("href").slice(1);if(!tabIds.includes(id))return;
+  e.preventDefault();if(location.hash!=="#"+id)history.pushState(null,"","#"+id);showTab(id)});
+addEventListener("popstate",()=>showTab(location.hash.slice(1)||"map"));
+addEventListener("hashchange",()=>showTab(location.hash.slice(1)||"map"));
+(function(){let start=location.hash.slice(1);if(!tabIds.includes(start)){try{start=localStorage.getItem("muscle-tab")}catch(e){}}showTab(tabIds.includes(start)?start:"map")})();
 </script>
 
 </body>
