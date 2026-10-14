@@ -1,6 +1,6 @@
 {
-  "name": "肌肉學習地圖",
-  "short_name": "肌肉地圖",
+  "name": "MuscleMind 肌智網",
+  "short_name": "MuscleMind",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#F3F5F3",
