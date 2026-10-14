@@ -20,7 +20,7 @@
 <style>
 /* Layout: 圖譜式 — 左側目錄＋搜尋；主區以可點擊的人體肌肉圖為核心，每章先圖後字。紅＝主角/緊繃，橘＝協同，紫＝拮抗，藍＝穩定/無力，黃＝痛區 */
 :root{
-  --paper:#F3F5F3; --c1:#B3263E; --c2:#D07F14; --c3:#1F6FA8; --bone:#EFE8D8; --bone-line:#A3957A; --fig-skin:#E7BE9C; --fig-line:#9A7258; --fig-shirt:#4D6577; --fig-short:#26323C; --fig-shoe:#1A2026; --fig-far:#C9A386; --fig-hair:#2B2420; --frame:#B9C2C8; --frame-d:#6E7A84; --pad:#2F3943; --pad-d:#1D242B; --pad-hi:#55626F; --plate:#59656F; --plate2:#7B8791; --mat:#9CC3D3;  --surface:#FFFFFF; --ink:#17201E; --ink-2:#4B5955; --ink-3:#7A8783; --line:#D6DDD9;
+  --paper:#F3F5F3; --av-bg:#FBE3E8; --c1:#B3263E; --c2:#D07F14; --c3:#1F6FA8; --bone:#EFE8D8; --bone-line:#A3957A; --fig-skin:#E7BE9C; --fig-line:#9A7258; --fig-shirt:#4D6577; --fig-short:#26323C; --fig-shoe:#1A2026; --fig-far:#C9A386; --fig-hair:#2B2420; --frame:#B9C2C8; --frame-d:#6E7A84; --pad:#2F3943; --pad-d:#1D242B; --pad-hi:#55626F; --plate:#59656F; --plate2:#7B8791; --mat:#9CC3D3;  --surface:#FFFFFF; --ink:#17201E; --ink-2:#4B5955; --ink-3:#7A8783; --line:#D6DDD9;
   --muscle:#B3263E; --muscle-soft:#F5E2E6; --tendon:#2C6884; --tendon-soft:#E0ECF1;
   --syn:#D07F14; --ant:#6A57B0; --zone:#E5A50F; --warn:#9A5B00; --warn-soft:#FBF0DC;
   --skin:#E2E7E4; --skin-line:#C5CEC9; --m-idle:#E8C9CF; --m-hover:#D79AA7;
@@ -29,12 +29,12 @@
   --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#101615; --c1:#E0457A; --c2:#C28620; --c3:#3D8BCB; --bone:#4A463C; --bone-line:#9A907A; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
+  --paper:#101615; --av-bg:#4A2830; --c1:#E0457A; --c2:#C28620; --c3:#3D8BCB; --bone:#4A463C; --bone-line:#9A907A; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
   --muscle:#EA6A80; --muscle-soft:#3A1D24; --tendon:#6FB2D2; --tendon-soft:#15303B;
   --syn:#EBA24B; --ant:#A592EA; --zone:#F2BE45; --warn:#E9B25A; --warn-soft:#3A2C12;
   --skin:#25302D; --skin-line:#35423E; --m-idle:#4A2C33; --m-hover:#6E3D49; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --paper:#101615; --c1:#E0457A; --c2:#C28620; --c3:#3D8BCB; --bone:#4A463C; --bone-line:#9A907A; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
+  --paper:#101615; --av-bg:#4A2830; --c1:#E0457A; --c2:#C28620; --c3:#3D8BCB; --bone:#4A463C; --bone-line:#9A907A; --fig-skin:#D7AC8A; --fig-line:#6E4E3B; --fig-shirt:#6F8A9E; --fig-short:#3B4A57; --fig-shoe:#0B0F12; --fig-far:#9C7D66; --fig-hair:#1A1512; --frame:#7F8B94; --frame-d:#56616A; --pad:#3A4652; --pad-d:#1B2229; --pad-hi:#5E6B78; --plate:#4E5A64; --plate2:#6A7680; --mat:#2F5666;  --surface:#171F1D; --ink:#E4EBE8; --ink-2:#A3B1AC; --ink-3:#74827D; --line:#2A3633;
   --muscle:#EA6A80; --muscle-soft:#3A1D24; --tendon:#6FB2D2; --tendon-soft:#15303B;
   --syn:#EBA24B; --ant:#A592EA; --zone:#F2BE45; --warn:#E9B25A; --warn-soft:#3A2C12;
   --skin:#25302D; --skin-line:#35423E; --m-idle:#4A2C33; --m-hover:#6E3D49; color-scheme:dark}
@@ -341,6 +341,39 @@ svg.pelvis{width:100%;height:auto;display:block;margin:6px 0;background:linear-g
 .coach-fab .fb{fill:#fff} .coach-fab .fd rect{fill:var(--muscle)}
 .coach-fab .fx{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;opacity:0;transform:rotate(-90deg)}
 .coach-fab.open svg:first-child{opacity:0;transform:scale(.6)} .coach-fab.open .fx{opacity:1;transform:none}
+
+.coach-av{display:block}
+.coach-av .av-bg{fill:var(--av-bg)}
+.coach-av .av-skin{fill:#F1C7A3;stroke:#B9825F;stroke-width:.6}
+.coach-av .av-hair{fill:#2E2420}
+.coach-av .av-band{fill:#C8203F}
+.coach-av .av-bandline{fill:none;stroke:#fff;stroke-width:1.1;opacity:.85}
+.coach-av .av-shirt{fill:#2C6884}
+.coach-av .av-collar{fill:none;stroke:#fff;stroke-width:2;stroke-linejoin:round}
+.coach-av .av-cord{stroke:#F2B632;stroke-width:1.3}
+.coach-av .av-whistle{fill:#E9EEF1;stroke:#7E8B94;stroke-width:.7}
+.coach-av .av-hole{fill:#7E8B94}
+.coach-av .av-brow{fill:none;stroke:#2E2420;stroke-width:1.4;stroke-linecap:round}
+.coach-av .av-eye{fill:#2E2420} .coach-av .av-glint{fill:#fff}
+.coach-av .av-cheek{fill:#EE8E8E;opacity:.55}
+.coach-av .av-mouth{fill:#9E2B3C;stroke:#9E2B3C;stroke-width:.8;stroke-linejoin:round}
+.coach-fab{background:var(--surface)!important;padding:0;border:3px solid var(--muscle)!important;overflow:visible}
+.coach-fab .coach-av{width:100%;height:100%;border-radius:50%;grid-area:1/1;transition:opacity .2s,transform .2s}
+.coach-fab .fx{stroke:var(--muscle)!important}
+.coach-fab.open .coach-av{opacity:0;transform:scale(.6)}
+.coach-fab.open .fab-dot{display:none}
+.fab-dot{position:absolute;right:-1px;top:1px;width:14px;height:14px;border-radius:50%;background:#2FAE60;border:2.5px solid var(--surface)}
+@media (prefers-reduced-motion: no-preference){.coach-fab:not(.open){animation:wave 3.6s ease-in-out 2s 2}}
+@keyframes wave{0%,70%,100%{transform:none}75%{transform:rotate(-10deg)}80%{transform:rotate(9deg)}85%{transform:rotate(-6deg)}90%{transform:rotate(4deg)}}
+.coach-panel header .cav{position:relative;width:40px;height:40px;flex:none}
+.coach-panel header .cav .coach-av{width:40px;height:40px}
+.cav .online{position:absolute;right:-1px;bottom:0;width:11px;height:11px;border-radius:50%;background:#2FAE60;border:2px solid var(--paper)}
+.cm.bot{flex-direction:row;align-items:flex-start;gap:8px;max-width:94%}
+.cm.bot .cchips{flex-basis:100%;margin-left:38px}
+.cm.bot{flex-wrap:wrap}
+.cmini{width:30px;height:30px;flex:none;margin-top:2px}
+.cmini .coach-av{width:30px;height:30px}
+.cm.bot .cb{min-width:0;flex:1}
 .coach-hint{position:absolute;right:68px;bottom:14px;white-space:nowrap;background:var(--ink);color:var(--paper);padding:6px 12px;border-radius:999px;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.18)}
 .coach-panel{position:absolute;right:0;bottom:70px;width:min(380px,calc(100vw - 32px));height:min(580px,calc(100vh - 120px));background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.25);display:flex;flex-direction:column;overflow:hidden;animation:cpop .2s ease}
 .coach-panel[hidden]{display:none}
@@ -1758,9 +1791,9 @@ function answer(raw){
   const T=t=>ents.filter(e=>e.type===t);
   let ex=ents.filter(e=>e.type==="gym"||e.type==="pil"),mv=T("mv"),mu=T("mu"),pr=T("pr"),bd=T("bd"),tp=T("tp"),gl=T("gl");
   // 閒聊
-  if(/^(你好|嗨|哈囉|hi|hello|hey|安安|早安|午安|晚安|在嗎)/.test(q)&&ents.length===0)return kind("greet",S(pick(["嗨嗨！我是肌肉教練 👋 今天想練哪裡，還是哪裡不舒服呢？","哈囉～有什麼想問的儘管問！動作、肌肉、痠痛都可以聊。"]),{chips:true}));
+  if(/^(你好|嗨|哈囉|hi|hello|hey|安安|早安|午安|晚安|在嗎)/.test(q)&&ents.length===0)return kind("greet",S(pick(["嗨嗨！我是阿肌教練 👋 今天想練哪裡，還是哪裡不舒服呢？","哈囉～有什麼想問的儘管問！動作、肌肉、痠痛都可以聊。"]),{chips:true}));
   if(/(謝謝|感謝|thank|3q|感恩)/.test(q)&&ents.length===0)return kind("thanks",S(pick(["不客氣！練習加油，有問題隨時找我 💪","不會～記得動作穩、慢慢來！","隨時都在！祝你練得開心 😄"])));
-  if(/(你是誰|你會什麼|你能做|你可以做|會回答什麼)/.test(q))return kind("who",S("我是這個網站的肌肉教練 🤖💪 我會根據網站內容回答，擅長：<ul><li>器材和皮拉提斯動作怎麼做、練到哪裡</li><li>想練某個部位該做什麼</li><li>哪裡痠痛可能跟哪些肌肉有關</li><li>增肌、減脂、恢復這類常見觀念</li></ul>不過我不是醫生，沒辦法幫你診斷喔！",{chips:true}));
+  if(/(你是誰|你會什麼|你能做|你可以做|會回答什麼)/.test(q))return kind("who",S("我是阿肌，這個網站的虛擬教練 💪 我會根據網站內容回答，擅長：<ul><li>器材和皮拉提斯動作怎麼做、練到哪裡</li><li>想練某個部位該做什麼</li><li>哪裡痠痛可能跟哪些肌肉有關</li><li>增肌、減脂、恢復這類常見觀念</li></ul>不過我不是醫生，沒辦法幫你診斷喔！",{chips:true}));
   if(ents.length===0&&/(好累|好懶|不想動|不想運動|沒動力|提不起勁|懶得|沒力)/.test(q))return kind("motivate",S(pick(["懂～有些天就是提不起勁 😆 試試看只做 10 分鐘就好，開始了常常就會想繼續。真的很累的話，休息也是訓練的一部分喔！","沒關係，今天就輕鬆一點：散步 20 分鐘或做幾個皮拉提斯動作也很棒。持續比完美更重要 💪"]),{s:["百次拍擊怎麼做？","怎麼恢復比較快？"]}));
   if(/^(掰|再見|bye|881|晚安囉)/.test(q))return kind("bye",S("掰掰～記得多喝水、睡飽一點 😴"));
   // 錯字容錯
@@ -1802,16 +1835,52 @@ function answer(raw){
 }
 
 /* ---------- 介面 ---------- */
+const AVS=`<svg viewBox="0 0 64 64" class="coach-av" aria-hidden="true"><circle cx="32" cy="32" r="32" class="av-bg"/><path d="M12,64 Q12,46 32,45 Q52,46 52,64 Z" class="av-shirt"/><path d="M24,46 L32,56 L40,46" class="av-collar"/><path d="M26,46 Q32,58 38,46" fill="none" class="av-cord"/><rect x="29.2" y="51" width="7" height="4.6" rx="2" class="av-whistle"/><circle cx="30.4" cy="53.3" r="1.1" class="av-hole"/><rect x="28" y="38" width="8" height="8" rx="3" class="av-skin"/><ellipse cx="17.6" cy="29" rx="3" ry="4" class="av-skin"/><ellipse cx="46.4" cy="29" rx="3" ry="4" class="av-skin"/><ellipse cx="32" cy="27.5" rx="14.5" ry="15.5" class="av-skin"/><path d="M17.4,24 Q16,9 32,9 Q48,9 46.6,24 Q42,15 32,15.5 Q22,15 17.4,24 Z" class="av-hair"/><path d="M17.3,20.6 Q32,13 46.7,20.6 L46.9,25 Q32,17.6 17.1,25 Z" class="av-band"/><path d="M17.4,22.4 Q32,15.4 46.6,22.4" class="av-bandline"/><path d="M22.6,27.4 q3,-2.4 6,0 M35.4,27.4 q3,-2.4 6,0" class="av-brow"/><circle cx="25.6" cy="30.6" r="1.9" class="av-eye"/><circle cx="38.4" cy="30.6" r="1.9" class="av-eye"/><circle cx="26.2" cy="30" r=".6" class="av-glint"/><circle cx="39" cy="30" r=".6" class="av-glint"/><ellipse cx="21.6" cy="35" rx="2.6" ry="1.6" class="av-cheek"/><ellipse cx="42.4" cy="35" rx="2.6" ry="1.6" class="av-cheek"/><path d="M27,35.6 Q32,40.6 37,35.6 Q32,37.4 27,35.6 Z" class="av-mouth"/></svg>`;
 const wrap=document.createElement("div");wrap.className="coach";
 wrap.innerHTML=`
 <div class="coach-hint" id="coachHint" hidden>有問題問我 👋</div>
 <button class="coach-fab" id="coachFab" aria-label="開啟虛擬教練" aria-expanded="false">
-  <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8,12 a6,6 0 0 1 6,-6 h20 a6,6 0 0 1 6,6 v14 a6,6 0 0 1 -6,6 h-12 l-8,7 v-7 h0 a6,6 0 0 1 -6,-6 z" class="fb"/><g class="fd"><rect x="16" y="17" width="16" height="3" rx="1.5"/><rect x="12.5" y="13.5" width="4" height="10" rx="1.4"/><rect x="31.5" y="13.5" width="4" height="10" rx="1.4"/></g></svg>
+  <svg viewBox="0 0 64 64" class="coach-av" aria-hidden="true">
+<circle cx="32" cy="32" r="32" class="av-bg"/>
+<path d="M12,64 Q12,46 32,45 Q52,46 52,64 Z" class="av-shirt"/>
+<path d="M24,46 L32,56 L40,46" class="av-collar"/>
+<path d="M26,46 Q32,58 38,46" fill="none" class="av-cord"/>
+<rect x="29.2" y="51" width="7" height="4.6" rx="2" class="av-whistle"/><circle cx="30.4" cy="53.3" r="1.1" class="av-hole"/>
+<rect x="28" y="38" width="8" height="8" rx="3" class="av-skin"/>
+<ellipse cx="17.6" cy="29" rx="3" ry="4" class="av-skin"/><ellipse cx="46.4" cy="29" rx="3" ry="4" class="av-skin"/>
+<ellipse cx="32" cy="27.5" rx="14.5" ry="15.5" class="av-skin"/>
+<path d="M17.4,24 Q16,9 32,9 Q48,9 46.6,24 Q42,15 32,15.5 Q22,15 17.4,24 Z" class="av-hair"/>
+<path d="M17.3,20.6 Q32,13 46.7,20.6 L46.9,25 Q32,17.6 17.1,25 Z" class="av-band"/>
+<path d="M17.4,22.4 Q32,15.4 46.6,22.4" class="av-bandline"/>
+<path d="M22.6,27.4 q3,-2.4 6,0 M35.4,27.4 q3,-2.4 6,0" class="av-brow"/>
+<circle cx="25.6" cy="30.6" r="1.9" class="av-eye"/><circle cx="38.4" cy="30.6" r="1.9" class="av-eye"/>
+<circle cx="26.2" cy="30" r=".6" class="av-glint"/><circle cx="39" cy="30" r=".6" class="av-glint"/>
+<ellipse cx="21.6" cy="35" rx="2.6" ry="1.6" class="av-cheek"/><ellipse cx="42.4" cy="35" rx="2.6" ry="1.6" class="av-cheek"/>
+<path d="M27,35.6 Q32,40.6 37,35.6 Q32,37.4 27,35.6 Z" class="av-mouth"/>
+</svg>
+  <span class="fab-dot" aria-hidden="true"></span>
   <svg viewBox="0 0 24 24" class="fx" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
 </button>
 <section class="coach-panel" id="coachPanel" role="dialog" aria-label="虛擬教練" hidden>
-  <header><div class="cav"><svg viewBox="0 0 48 48"><rect width="48" height="48" rx="13" fill="var(--muscle-soft)"/><g transform="rotate(-35 24 24)"><line x1="5" y1="24" x2="13" y2="24" stroke="var(--tendon)" stroke-width="3.6" stroke-linecap="round"/><line x1="35" y1="24" x2="43" y2="24" stroke="var(--tendon)" stroke-width="3.6" stroke-linecap="round"/><path d="M11,24 Q24,7 37,24 Q24,41 11,24 Z" fill="var(--muscle)"/></g></svg></div>
-    <div><b>肌肉教練</b><span>根據本站內容回答 · 非醫療診斷</span></div>
+  <header><div class="cav"><svg viewBox="0 0 64 64" class="coach-av" aria-hidden="true">
+<circle cx="32" cy="32" r="32" class="av-bg"/>
+<path d="M12,64 Q12,46 32,45 Q52,46 52,64 Z" class="av-shirt"/>
+<path d="M24,46 L32,56 L40,46" class="av-collar"/>
+<path d="M26,46 Q32,58 38,46" fill="none" class="av-cord"/>
+<rect x="29.2" y="51" width="7" height="4.6" rx="2" class="av-whistle"/><circle cx="30.4" cy="53.3" r="1.1" class="av-hole"/>
+<rect x="28" y="38" width="8" height="8" rx="3" class="av-skin"/>
+<ellipse cx="17.6" cy="29" rx="3" ry="4" class="av-skin"/><ellipse cx="46.4" cy="29" rx="3" ry="4" class="av-skin"/>
+<ellipse cx="32" cy="27.5" rx="14.5" ry="15.5" class="av-skin"/>
+<path d="M17.4,24 Q16,9 32,9 Q48,9 46.6,24 Q42,15 32,15.5 Q22,15 17.4,24 Z" class="av-hair"/>
+<path d="M17.3,20.6 Q32,13 46.7,20.6 L46.9,25 Q32,17.6 17.1,25 Z" class="av-band"/>
+<path d="M17.4,22.4 Q32,15.4 46.6,22.4" class="av-bandline"/>
+<path d="M22.6,27.4 q3,-2.4 6,0 M35.4,27.4 q3,-2.4 6,0" class="av-brow"/>
+<circle cx="25.6" cy="30.6" r="1.9" class="av-eye"/><circle cx="38.4" cy="30.6" r="1.9" class="av-eye"/>
+<circle cx="26.2" cy="30" r=".6" class="av-glint"/><circle cx="39" cy="30" r=".6" class="av-glint"/>
+<ellipse cx="21.6" cy="35" rx="2.6" ry="1.6" class="av-cheek"/><ellipse cx="42.4" cy="35" rx="2.6" ry="1.6" class="av-cheek"/>
+<path d="M27,35.6 Q32,40.6 37,35.6 Q32,37.4 27,35.6 Z" class="av-mouth"/>
+</svg><span class="online" aria-hidden="true"></span></div>
+    <div><b>阿肌教練</b><span>線上 · 根據本站內容回答，非醫療診斷</span></div>
     <button class="cclose" id="coachClose" aria-label="關閉">✕</button></header>
   <div class="cmsgs" id="coachMsgs" aria-live="polite"></div>
   <form class="cin" id="coachForm"><input id="coachInput" type="text" placeholder="問我任何肌肉或動作的問題…" autocomplete="off" aria-label="輸入問題"><button type="submit" aria-label="送出"><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg></button></form>
@@ -1822,14 +1891,14 @@ const CHIPS=["深蹲練到哪裡？","滑輪下拉怎麼做？","想練臀部","
 const PCHIPS=["下背痛","肩頸痠","膝蓋前面痛","手肘痛","腳跟痛","頭痛"];
 function add(role,html,acts,chips){
   const d=document.createElement("div");d.className="cm "+role;
-  d.innerHTML=(role==="bot"?`<div class="cb">${html}${acts&&acts.length?`<div class="cacts">${acts.join("")}</div>`:""}</div>`:`<div class="cb">${esc(html)}</div>`);
+  d.innerHTML=(role==="bot"?`<div class="cmini">${AVS}</div><div class="cb">${html}${acts&&acts.length?`<div class="cacts">${acts.join("")}</div>`:""}</div>`:`<div class="cb">${esc(html)}</div>`);
   const cl=chips===true?CHIPS:chips==="pain"?PCHIPS:Array.isArray(chips)?chips:null;
   if(cl&&cl.length){msgs.querySelectorAll(".cchips.follow").forEach(x=>x.remove());d.innerHTML+=`<div class="cchips${Array.isArray(chips)?" follow":""}">${cl.map(c=>`<button class="cchip" data-q="${esc(c)}">${esc(c)}</button>`).join("")}</div>`}
   msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
 }
 function ask(text){
   text=text.trim();if(!text)return;add("user",text);inp.value="";
-  const t=document.createElement("div");t.className="cm bot typing";t.innerHTML=`<div class="cb"><i></i><i></i><i></i></div>`;msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;
+  const t=document.createElement("div");t.className="cm bot typing";t.innerHTML=`<div class="cmini">${AVS}</div><div class="cb"><i></i><i></i><i></i></div>`;msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;
   let r;try{r=answer(text)}catch(e){r=null}
   r=r||{h:"抱歉，我沒聽懂 😅 可以換個說法嗎？",chips:true};
   const delay=Math.min(1400,380+r.h.replace(/<[^>]+>/g,"").length*4);
@@ -1837,7 +1906,7 @@ function ask(text){
 }
 let opened=false;
 function toggle(open){panel.hidden=!open;fab.classList.toggle("open",open);fab.setAttribute("aria-expanded",open);hint.hidden=true;
-  if(open){if(!opened){opened=true;add("bot","嗨！我是<b>肌肉教練</b> 👋<br>想知道某個動作怎麼做、想練哪裡，或是哪裡卡卡的，都可以直接問我～",[],true)}setTimeout(()=>inp.focus(),50)}}
+  if(open){if(!opened){opened=true;add("bot","嗨！我是<b>阿肌教練</b> 👋<br>想知道某個動作怎麼做、想練哪裡，或是哪裡卡卡的，都可以直接問我～",[],true)}setTimeout(()=>inp.focus(),50)}}
 fab.addEventListener("click",()=>toggle(panel.hidden));
 wrap.querySelector("#coachClose").addEventListener("click",()=>toggle(false));
 form.addEventListener("submit",e=>{e.preventDefault();ask(inp.value)});
