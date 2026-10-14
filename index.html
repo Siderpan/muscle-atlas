@@ -1585,94 +1585,223 @@ document.addEventListener("keydown",e=>{if(e.key==="/"&&!/INPUT|TEXTAREA/.test(d
 
 /* ================= 虛擬教練 ================= */
 (function(){
-const EXA={pulldown:["滑輪下拉","下拉","高拉","lat pulldown"],row:["坐姿划船","划船","seated row"],chestpress:["胸推機","胸推","推胸"],shoulderpress:["肩推機","肩推"],pecdeck:["蝴蝶機","夾胸","飛鳥"],facepull:["面拉","face pull"],pushdown:["三頭下壓","繩索下壓","下壓"],curl:["啞鈴彎舉","二頭彎舉","彎舉"],legpress:["腿推機","腿推","腿舉"],legext:["腿伸展","伸膝"],legcurl:["腿彎舉","勾腿"],hipabd:["髖外展","外展機","臀中肌機"],hipthrust:["臀推","hip thrust"],calfraise:["提踵","踮腳","小腿上提"],backext:["羅馬椅","背伸","山羊挺身"],
- hundred:["百次拍擊","百次","hundred"],rollup:["捲上","roll up"],legcircle:["單腿畫圈","畫圈"],rolling:["滾球"],slstretch:["單腿伸展"],crisscross:["十字交叉","交叉捲腹"],spinestretch:["脊椎前伸"],swan:["天鵝"],swimming:["游泳式","游泳"],sidekick:["側躺抬腿","側抬腿"],clam:["蚌殼"],bridge:["肩橋","橋式"],mermaid:["美人魚"],plank:["平板支撐","平板","棒式","前撐","plank"],footwork:["核心床","footwork","腳部動作"]};
-const MVA={squat:["深蹲","squat"],hinge:["硬舉","髖鉸鏈","撿東西"],push:["伏地挺身","臥推"],pull:["引體向上"],overhead:["舉手過頭","過頭推"],gait:["走路","步行"]};
-const MUA={biceps:["二頭"],triceps:["三頭","蝴蝶袖"],deltoid:["三角肌"],pecmaj:["胸肌","胸大"],pecmin:["胸小"],lats:["背闊"],uptrap:["上斜方","斜方肌"],lowtrap:["下斜方","中下斜方"],glutemax:["臀大"],glutemed:["臀中"],glutemin:["臀小"],quads:["股四頭"],hamstrings:["膕旁","大腿後側肌"],gastroc:["腓腸","小腿肚"],soleus:["比目魚"],rectus:["腹直","六塊肌"],ta:["腹橫"],extobl:["外斜"],intobl:["內斜"],erector:["豎脊"],iliopsoas:["髂腰","腰大肌","髖屈肌"],adductors:["內收肌"],piriformis:["梨狀"],tfl:["闊筋膜","髂脛束"],supraspinatus:["棘上"],infraspinatus:["棘下"],subscap:["肩胛下肌"],serratus:["前鋸"],rhomboid:["菱形"],levator:["提肩胛"],scm:["胸鎖乳突"],ql:["腰方"],multifidus:["多裂"],tibant:["脛前肌"],tibpost:["脛後肌"],peroneals:["腓骨肌"],diaphragm:["橫膈"],pelvicfloor:["骨盆底"],masseter:["咬肌"],suboccipital:["枕下"],dnf:["深層頸屈"],footintrinsic:["足底肌","足內在"],wristext:["前臂伸肌","網球肘"],wristflex:["前臂屈肌","高爾夫球肘"],brachialis:["肱肌"],brachioradialis:["肱橈"],teresminor:["小圓肌"]};
-const PAINK={head:["頭痛","太陽穴","後腦","偏頭"],neck:["肩頸","脖子","頸部","落枕","頸"],shoulder:["肩前","舉手","肩膀","肩關節","夾擠","五十肩"],midback:["肩胛中間","肩胛骨中間","背中間","兩片肩胛"],elbow:["手肘","網球肘","高爾夫球肘","前臂"],lowback:["下背","腰痛","腰痠","腰"],buttock:["屁股","臀部","坐骨","腿後"],groin:["鼠蹊","胯下","大腿內側"],kneefront:["膝蓋前","膝前","髕骨","膝蓋"],kneeside:["膝外","膝蓋外","大腿外側","髂脛束"],shin:["脛","小腿前","小腿痛"],heel:["腳跟","足底","腳底","足弓","筋膜炎"]};
-const TRAIN={"胸":["pecmaj"],"背":["lats","rhomboid","lowtrap"],"肩":["deltoid","infraspinatus"],"二頭":["biceps"],"手臂":["biceps","triceps"],"三頭":["triceps"],"蝴蝶袖":["triceps"],"大腿前":["quads"],"大腿後":["hamstrings"],"腿":["quads","hamstrings","glutemax"],"臀":["glutemax","glutemed"],"屁股":["glutemax","glutemed"],"翹臀":["glutemax","glutemed"],"核心":["ta","rectus","extobl"],"腹":["rectus","ta","extobl"],"肚子":["rectus","ta","extobl"],"小腿":["gastroc","soleus"],"下背":["erector","multifidus"],"圓肩":["lowtrap","rhomboid","infraspinatus","serratus"],"駝背":["lowtrap","rhomboid","erector"],"姿勢":["lowtrap","dnf","glutemax"]};
-const TOPICS=[
- {k:["乳酸"],a:"運動中的灼熱感和代謝產物有關，大約一小時內就清除了。<b>隔天的痠痛不是乳酸</b>，主要是離心動作或新動作造成的微小損傷與發炎。",go:["tab","soreness","看運動後痠痛曲線"]},
- {k:["延遲性","doms","隔天痠","練完痠","練完很痠","肌肉痠痛","痠痛多久","鐵腿"],a:"運動後痠痛通常在 <b>12–24 小時後出現、24–72 小時最痛</b>，3–5 天自己緩解。<ul><li>輕度活動、睡飽最有幫助</li><li>同樣動作再做一次，痠痛會明顯減輕（重複效應）</li><li>沒痠不代表沒練到</li></ul>若出現劇痛、明顯腫脹、尿液變茶色，請立即就醫。",go:["tab","soreness","看痠痛曲線"]},
- {k:["伸展","拉筋"],a:"伸展能改善柔軟度，但<b>幾乎不能預防痠痛</b>。<ul><li>熱身用動態伸展（擺腿、繞肩）</li><li>靜態伸展放在運動後，每個部位 20–30 秒</li><li>覺得「緊」不一定要拉：被拉長硬撐的肌肉（例如圓肩時肩胛中間）反而需要強化</li></ul>",go:["tab","soreness","看「該伸展嗎」"]},
- {k:["冰敷","熱敷","冰浴"],a:"<ul><li><b>冰敷</b>：短期止痛，適合急性扭傷紅腫的頭兩天；想長肌肉時，練完不要馬上冰浴</li><li><b>熱敷</b>：放鬆、減少僵硬，適合慢性痠緊；急性紅腫熱期間避免</li></ul>",go:["tab","recovery","看恢復方法比較"]},
- {k:["恢復","休息","睡眠","蛋白質","滾筒","按摩","筋膜槍"],a:"恢復效果由高到低：<ol><li>睡眠 7–9 小時</li><li>漸進增加訓練量</li><li>足夠蛋白質，分散在各餐</li><li>輕度活動</li><li>按摩、滾筒：短期舒緩，適合熱身前</li></ol>",go:["tab","recovery","看恢復方法比較"]},
- {k:["呼吸","憋氣"],a:"<ul><li><b>重訓</b>：出力時吐氣、回程吸氣，不要憋氣（高血壓者尤其注意）</li><li><b>皮拉提斯</b>：側肋呼吸，吸氣時肋骨往兩側、往後擴張，吐氣時收攏、腹部內收</li></ul>",go:["tab","pilates","看皮拉提斯原則"]},
- {k:["中立","印記","骨盆位置"],a:"<ul><li><b>中立骨盆</b>：髂前上棘與恥骨同高，下背和墊子間有小空隙，腳踩地的動作多用</li><li><b>印記骨盆</b>：骨盆微後傾，下背輕貼墊子；雙腳抬起、腹肌還不穩時使用</li></ul>",go:["tab","pilates","看骨盆剖視圖"]},
- {k:["快肌","慢肌","紅肌","白肌","肌纖維"],a:"每塊肌肉都混合三種纖維：<ul><li><b>慢肌（I 型）</b>：耐力好，例如比目魚肌</li><li><b>中間型（IIa）</b></li><li><b>快肌（IIx）</b>：爆發力強、容易累，衝刺跳躍才會用到</li></ul>比例多半是天生的，訓練可以提升各型纖維的能力。",go:["tab","structure","看纖維比較"]},
- {k:["向心","離心","等長","收縮方式"],a:"<ul><li><b>向心</b>：邊出力邊變短（舉起）</li><li><b>離心</b>：邊出力邊被拉長（放下）；最能承重，最容易痠</li><li><b>等長</b>：出力但長度不變（撐住）</li></ul>",go:["tab","mechanism","看三種出力方式"]},
- {k:["能量","燃料","有氧","無氧","燃脂"],a:"三大能量系統同時運作，比例隨時間改變：<ul><li>約 10 秒內以<b>磷酸肌酸</b>為主</li><li>數十秒的高強度以<b>醣解</b>為主</li><li>約 1 分鐘時有氧和無氧各半，越久有氧越主導</li></ul>",go:["tab","mechanism","看能量系統圖"]},
- {k:["重量","幾下","組數","次數","多重"],a:"一般建議：<ul><li>選能做 <b>8–12 下</b>、最後兩下吃力但姿勢不跑掉的重量</li><li>每個動作 2–4 組，組間休息 1–2 分鐘</li><li>上 1–2 秒、放下 2–3 秒</li><li>每週慢慢增加，不要一次加太多</li></ul>",go:["tab","gym","看器材通用原則"]},
- {k:["熱身"],a:"熱身 5–10 分鐘：<ul><li>輕鬆有氧讓身體變熱</li><li>動態伸展：繞肩、擺腿、弓箭步走</li><li>正式動作先用輕重量做一組</li></ul>"},
- {k:["抽筋"],a:"抽筋時<b>輕輕把那塊肌肉拉長</b>並維持，例如小腿抽筋就把腳尖往身體方向拉。常見原因是疲勞與神經肌肉控制異常，脫水與電解質是次要因素。經常夜間抽筋建議就醫檢查。"},
- {k:["代償"],a:"代償是該出力的肌肉沒力，旁邊的肌肉跑來幫忙。短期能撐，長期幫忙的那塊會累、會痛。例如臀肌沒力時，下背和大腿後側就容易代償。",go:["tab","roles","看分工合作"]}
-];
-const RED=[/胸口.{0,3}(痛|悶|壓|緊)/,/胸(悶|痛)/,/(尿|小便).{0,4}(茶|可樂|深|褐)/,/喘不過/,/(昏倒|暈倒|意識)/,/大小便(失禁|控制不)/,/(突然).{0,6}(無力|麻)/,/(會陰|胯下).{0,3}麻/,/(骨折|變形|無法承重|不能走)/,/啪.{0,4}(一聲|聲)/,/(小腿).{0,6}(紅腫|腫脹).{0,4}(熱|痛)?/];
-const PAINW=/(痛|痠|酸|緊|不舒服|卡|麻|刺|僵|腫)/;
-const norm=s=>s.toLowerCase().replace(/[？?！!。，,、\s]/g,"");
-const has=(q,arr)=>{let best=0;arr.forEach(w=>{if(q.includes(norm(w)))best=Math.max(best,w.length)});return best};
-const btn=(label,act)=>`<button class="cbtn" data-cact="${act}">${label}</button>`;
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const norm=s=>String(s).toLowerCase().replace(/[？?！!。，,、：:；;（）()「」\s~～…]/g,"");
+const list=a=>a.length<2?(a[0]||""):a.slice(0,-1).join("、")+"和"+a[a.length-1];
 const mName=id=>MI[id]?MI[id].zh:id;
-const mBtns=ids=>ids.filter(id=>MI[id]).map(id=>btn(MI[id].zh,"m:"+id)).join("");
+const btn=(label,act)=>`<button class="cbtn" data-cact="${act}">${label}</button>`;
+const baseT=t=>t.replace(/（.*?）/g,"");
 
-function exAnswer(lib,id,q){
-  const v=lib.find(x=>x.id===id),isP=lib===PIL;let h=`<b>${v.t}</b>（${v.en}）<br>`;
-  const wantSteps=/(怎麼|如何|步驟|做法|教我|姿勢)/.test(q),wantErr=/(錯|注意|受傷|痛)/.test(q),wantMus=/(練到|哪裡|哪些|肌肉|部位)/.test(q);
-  if(wantMus||!(wantSteps||wantErr))h+=`主要練到：${v.prime.map(mName).join("、")}${v.syn.length?`；協同：${v.syn.map(mName).join("、")}`:""}<br>`;
-  if(wantSteps||!(wantErr||wantMus))h+=`<ol>${v.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>`;
-  if(wantErr||!(wantSteps||wantMus))h+=`常見錯誤：<ul>${v.err.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>`;
-  h+=`呼吸：${esc(v.br)}${v.note?`<br>提醒：${esc(v.note)}`:""}`;
-  return {h,acts:[btn("看動作圖解",(isP?"p:":"g:")+id)]};
+/* ---------- 別名 ---------- */
+const EXA={pulldown:["滑輪下拉","下拉","高拉","背部下拉","lat pulldown","pulldown"],row:["坐姿划船","划船","坐姿拉背","seated row"],chestpress:["胸推機","胸推","推胸","坐姿推胸","chest press"],shoulderpress:["肩推機","肩推","坐姿推舉","shoulder press"],pecdeck:["蝴蝶機","夾胸","飛鳥","pec deck"],facepull:["繩索面拉","面拉","face pull"],pushdown:["三頭下壓","繩索下壓","下壓","pushdown"],curl:["啞鈴彎舉","二頭彎舉","彎舉","錘式彎舉","curl"],legpress:["腿推機","腿推","腿舉","倒蹬","leg press"],legext:["腿伸展機","腿伸展","伸膝機","坐姿伸膝","leg extension"],legcurl:["腿彎舉機","腿彎舉","勾腿","leg curl"],hipabd:["髖外展機","髖外展","外展機","夾腿機外開","hip abduction"],hipthrust:["臀推","槓鈴臀推","hip thrust"],calfraise:["提踵","踮腳尖","踮腳","小腿上提","calf raise"],backext:["羅馬椅背伸","羅馬椅","背伸","山羊挺身","back extension"],
+ hundred:["百次拍擊","百次","拍擊","hundred"],rollup:["捲上","捲起","roll up","rollup"],legcircle:["單腿畫圈","畫圈","leg circle"],rolling:["滾球","像球一樣滾","rolling like a ball"],slstretch:["單腿伸展","single leg stretch"],crisscross:["十字交叉","交叉捲腹","crisscross"],spinestretch:["脊椎前伸","脊椎伸展","spine stretch"],swan:["天鵝式","天鵝","swan"],swimming:["游泳式","游泳"],sidekick:["側躺抬腿","側抬腿","側踢"],clam:["蚌殼式","蚌殼","clam"],bridge:["肩橋","臀橋","橋式","bridge"],mermaid:["美人魚","mermaid"],plank:["平板支撐","平板","棒式","前撐","plank"],footwork:["核心床腳部動作","核心床","footwork","腳部動作","reformer"]};
+const MVA={squat:["深蹲","squat"],hinge:["硬舉","髖鉸鏈","撿東西","deadlift"],push:["伏地挺身","臥推","俯地挺身","push up","pushup"],pull:["引體向上","引體","pull up","pullup"],overhead:["舉手過頭","過頭推舉","過頭"],gait:["走路","步行","走路姿勢"]};
+const MUA={biceps:["二頭肌","二頭","肱二頭"],triceps:["三頭肌","三頭","肱三頭"],deltoid:["三角肌"],pecmaj:["胸肌","胸大肌"],pecmin:["胸小肌"],lats:["背闊肌","背闊"],uptrap:["上斜方肌","上斜方","斜方肌"],lowtrap:["中下斜方","下斜方","中斜方"],glutemax:["臀大肌","臀大"],glutemed:["臀中肌","臀中"],glutemin:["臀小肌","臀小"],quads:["股四頭肌","股四頭","四頭肌"],hamstrings:["膕旁肌","大腿後肌","腿後肌","膕繩肌"],gastroc:["腓腸肌","腓腸","小腿肚"],soleus:["比目魚肌","比目魚"],rectus:["腹直肌","腹直","六塊肌"],ta:["腹橫肌","腹橫"],extobl:["腹外斜肌","外斜"],intobl:["腹內斜肌","內斜"],erector:["豎脊肌","豎脊","背肌群"],iliopsoas:["髂腰肌","髂腰","腰大肌","髖屈肌"],adductors:["內收肌群","內收肌","內收"],piriformis:["梨狀肌","梨狀"],tfl:["闊筋膜張肌","闊筋膜"],supraspinatus:["棘上肌","棘上"],infraspinatus:["棘下肌","棘下"],subscap:["肩胛下肌"],serratus:["前鋸肌","前鋸"],rhomboid:["菱形肌","菱形"],levator:["提肩胛肌","提肩胛"],scm:["胸鎖乳突肌","胸鎖乳突"],ql:["腰方肌","腰方"],multifidus:["多裂肌","多裂"],tibant:["脛前肌"],tibpost:["脛後肌"],peroneals:["腓骨肌","腓骨長肌"],diaphragm:["橫膈膜","橫膈"],pelvicfloor:["骨盆底肌","骨盆底"],masseter:["咬肌"],suboccipital:["枕下肌群","枕下肌","枕下"],dnf:["深層頸屈肌","頸屈肌"],footintrinsic:["足內在肌","足底肌","腳底肌"],wristext:["前臂伸肌","伸腕肌"],wristflex:["前臂屈肌","屈腕肌"],brachialis:["肱肌"],brachioradialis:["肱橈肌","肱橈"],teresminor:["小圓肌"]};
+const PAINK={head:["頭痛","太陽穴","後腦","偏頭痛","頭"],neck:["肩頸","脖子","頸部","落枕","頸"],shoulder:["肩膀","肩前","肩關節","夾擠","五十肩","冰凍肩","舉手","肩"],midback:["肩胛中間","肩胛骨中間","背中間","兩片肩胛","肩胛骨之間","上背"],elbow:["手肘","網球肘","高爾夫球肘","前臂","手腕"],lowback:["下背","腰痛","腰痠","腰酸","腰","尾椎"],buttock:["屁股","臀部","坐骨","腿後","臀"],groin:["鼠蹊","胯下","大腿內側","髖前"],kneefront:["膝蓋前","膝前","髕骨","膝蓋","膝"],kneeside:["膝外","膝蓋外","大腿外側","髂脛束","膝蓋側邊"],shin:["脛","小腿前","脛骨","小腿"],heel:["腳跟","足底","腳底","足弓","筋膜炎","腳掌"]};
+const BODY=[
+ {k:"胸部",a:["胸部","胸"],ids:["pecmaj"]},{k:"背部",a:["背部","背"],ids:["lats","rhomboid","lowtrap"]},{k:"下背",a:["下背","腰部","腰"],ids:["erector","multifidus","ta"]},
+ {k:"肩膀",a:["肩膀","肩部","肩"],ids:["deltoid","infraspinatus","supraspinatus"]},{k:"手臂",a:["手臂","臂"],ids:["biceps","triceps"]},{k:"蝴蝶袖",a:["蝴蝶袖","掰掰肉"],ids:["triceps"]},
+ {k:"腿",a:["大腿","腿部","腿"],ids:["quads","hamstrings","glutemax"]},{k:"大腿前側",a:["大腿前側","大腿前"],ids:["quads"]},{k:"大腿後側",a:["大腿後側","大腿後"],ids:["hamstrings"]},{k:"大腿內側",a:["大腿內側","大腿內"],ids:["adductors"]},
+ {k:"臀部",a:["臀部","屁股","翹臀","蜜桃臀","臀"],ids:["glutemax","glutemed"]},{k:"核心",a:["核心","腹肌","腹部","小腹","肚子","腹"],ids:["rectus","ta","extobl"]},{k:"側腰",a:["側腰","腰側","馬甲線","人魚線"],ids:["extobl","intobl"]},
+ {k:"小腿",a:["小腿"],ids:["gastroc","soleus"]},{k:"圓肩",a:["圓肩","肩膀內捲"],ids:["lowtrap","rhomboid","infraspinatus","serratus"]},{k:"體態",a:["駝背","體態","姿勢","烏龜頸","頭前傾"],ids:["lowtrap","rhomboid","erector","dnf"]},{k:"足弓",a:["足弓","扁平足"],ids:["tibpost","footintrinsic"]}];
+
+/* ---------- 主題知識 ---------- */
+const TOPICS=[
+ {id:"doms",k:["延遲性肌肉痠痛","延遲性","doms","鐵腿","隔天痠","隔天很痠","隔天好痠","練完痠","練完很痠","練完好痠","運動後痠","痠痛多久","痠好幾天"],a:()=>`${pick(["哈，這就是傳說中的「延遲性肌肉痠痛」啦！","練完隔天痠到懷疑人生？很正常～"])}<br>通常在運動後 <b>12–24 小時</b>開始痠，<b>24–72 小時</b>最痛，大概 3–5 天就會自己好。<ul><li>動一動、散散步，會比完全躺著舒服</li><li>睡飽、吃夠蛋白質最有幫助</li><li>同樣的動作下次再做，就不會那麼痠了（身體學聰明了）</li></ul>沒有痠也不代表沒練到喔！不過如果是<b>劇痛、明顯腫起來、或尿變成茶色</b>，那就不是一般痠痛，要馬上就醫。`,go:["看痠痛曲線","t:soreness"],s:["乳酸會造成痠痛嗎？","冰敷還是熱敷？"]},
+ {id:"lactic",k:["乳酸"],a:()=>`這是很常見的誤會！運動當下那種「燒燒的」感覺，跟代謝產物堆積有關，但它們<b>大約一小時內就清掉了</b>。<br>所以隔天的痠痛<b>不是乳酸</b>，而是肌肉做了不熟悉的動作（尤其是「放下」的離心動作）產生的微小損傷和發炎，正在修復中 🛠️`,go:["看痠痛曲線","t:soreness"],s:["練完隔天很痠怎麼辦？","什麼是離心收縮？"]},
+ {id:"stretch",k:["伸展","拉筋","柔軟度","拉開"],a:()=>`伸展可以讓你更柔軟，但老實說它<b>幾乎沒辦法預防痠痛</b> 😅<ul><li><b>運動前</b>：做動態伸展，像繞肩、擺腿、弓箭步走</li><li><b>運動後</b>：靜態伸展，每個部位停 20–30 秒，不要彈震</li></ul>小提醒：覺得「緊」不一定都要拉喔！像圓肩時肩胛中間的緊，其實是被拉長硬撐，<b>練背</b>反而比較有效。`,go:["看「該伸展嗎」","t:soreness"],s:["想改善圓肩","熱身要做什麼？"]},
+ {id:"icehot",k:["冰敷","熱敷","冰浴","冷敷"],a:()=>`簡單記：<b>新傷冰、舊傷熱</b>。<ul><li>🧊 <b>冰敷</b>：剛扭到、紅腫熱痛的頭 1–2 天，可以短暫止痛消腫，一次 10–15 分鐘</li><li>🔥 <b>熱敷</b>：慢性的痠緊、僵硬，幫助放鬆；紅腫發熱時先不要</li></ul>另外，如果你的目標是長肌肉，練完<b>不建議馬上泡冰浴</b>，可能會削弱訓練效果。`,go:["看恢復方法","t:recovery"],s:["怎麼恢復比較快？"]},
+ {id:"recover",k:["恢復","休息日","睡眠","滾筒","按摩","筋膜槍","放鬆"],a:()=>`恢復這件事，CP 值排行大概是這樣：<ol><li>😴 <b>睡飽 7–9 小時</b>，冠軍無誤</li><li>📈 訓練量<b>慢慢加</b>，不要一次爆量</li><li>🍗 吃夠蛋白質，分散在各餐</li><li>🚶 休息日做點輕鬆活動</li><li>按摩、滾筒、筋膜槍：短期舒服一點，適合熱身前用</li></ol>`,go:["看恢復方法比較","t:recovery"],s:["蛋白質要吃多少？","冰敷還是熱敷？"]},
+ {id:"breath",k:["呼吸","憋氣","怎麼吸氣","吐氣"],a:()=>`呼吸看你在做什麼：<ul><li>🏋️ <b>重訓</b>：用力時吐氣、回來時吸氣，<b>不要憋氣</b>（有高血壓的話更要注意）</li><li>🧘 <b>皮拉提斯</b>：用「側肋呼吸」，吸氣時肋骨往兩側和後面撐開，吐氣時肋骨收攏、肚子往內收</li></ul>`,go:["看皮拉提斯原則","t:pilates"],s:["什麼是中立骨盆？"]},
+ {id:"pelvis",k:["中立骨盆","印記骨盆","中立","印記","骨盆位置","骨盆前傾","骨盆後傾"],a:()=>`皮拉提斯常聽到的兩個骨盆位置：<ul><li><b>中立骨盆</b>：骨盆前面的骨突和恥骨一樣高，下背和墊子之間留一個小空隙。腳踩地的動作大多用這個</li><li><b>印記骨盆</b>：骨盆微微往後倒，下背輕輕貼住墊子。當雙腳抬起、腹肌還撐不太住時用它保護下背</li></ul>`,go:["看骨盆剖視圖","t:pilates"],s:["百次拍擊怎麼做？"]},
+ {id:"fiber",k:["快肌","慢肌","紅肌","白肌","肌纖維"],a:()=>`每塊肌肉都是三種纖維的混合體：<ul><li>🐢 <b>慢肌</b>：耐力王，像比目魚肌，整天撐你站著</li><li>⚖️ <b>中間型</b>：速度和耐力都還行</li><li>🐇 <b>快肌</b>：爆發力強但很快就累，衝刺、跳躍時才會出場</li></ul>比例大多是天生的，但訓練可以讓每一種都變得更強。想練到快肌，就需要比較重的重量或衝刺類訓練。`,go:["看纖維比較","t:structure"]},
+ {id:"contract",k:["向心收縮","離心收縮","等長收縮","向心","離心","等長","收縮方式"],a:()=>`肌肉出力有三種方式，用啞鈴彎舉來想最好懂：<ul><li>⬆️ <b>向心</b>：舉起來，肌肉邊出力邊變短</li><li>⬇️ <b>離心</b>：慢慢放下，肌肉邊出力邊被拉長。它最能承重，也最容易讓你隔天痠</li><li>⏸️ <b>等長</b>：停在半空中撐住，長度不變，像平板支撐</li></ul>`,go:["看三種出力方式","t:mechanism"],s:["乳酸會造成痠痛嗎？"]},
+ {id:"energy",k:["能量系統","燃料","無氧","磷酸肌酸","醣解","atp"],a:()=>`身體有三套供能系統，一直都同時在運作，只是比例會變：<ul><li>⚡ 前 10 秒左右：<b>磷酸肌酸</b>主打，負責爆發</li><li>🔥 幾十秒的高強度：<b>醣解</b>主打</li><li>🫁 大約 1 分鐘時有氧和無氧差不多各半，越久<b>有氧</b>越主導</li></ul>`,go:["看能量系統圖","t:mechanism"]},
+ {id:"cardio",k:["有氧運動","有氧","跑步","慢跑","心肺","飛輪"],a:()=>`有氧對心肺和整體健康超重要！一般建議成人每週至少 <b>150 分鐘中等強度</b>（例如快走，還能說話但沒辦法唱歌的程度），或 75 分鐘較高強度。<br>如果同一天也要重訓，可以<b>先重訓、後有氧</b>，讓肌肉在最有力的時候練重量。`,s:["想減脂怎麼練？","一週要練幾次？"]},
+ {id:"reps",k:["幾組幾下","幾組","幾下","組數","次數","多重","重量怎麼選","選重量"],a:()=>`給你一個好上手的原則 👇<ul><li>選一個能做 <b>8–12 下</b>的重量，最後兩下會吃力，但姿勢還沒跑掉</li><li>每個動作做 <b>2–4 組</b>，組間休息 1–2 分鐘</li><li>舉起 1–2 秒、放下 2–3 秒，不要甩</li><li>12 下變得很輕鬆了，再小幅加重</li></ul>`,go:["看器材通用原則","t:gym"],s:["新手要怎麼開始？"]},
+ {id:"warmup",k:["熱身","暖身"],a:()=>`熱身大概 5–10 分鐘就夠：<ol><li>輕鬆有氧讓身體熱起來，像快走或飛輪</li><li>動態伸展：繞肩、擺腿、弓箭步走</li><li>正式開始前，先用輕重量做一組當練習</li></ol>這樣關節比較靈活，受傷機會也會降低 👍`,s:["伸展有用嗎？"]},
+ {id:"cramp",k:["抽筋"],a:()=>`抽筋的時候，<b>輕輕把那塊肌肉拉長</b>，維持到它鬆開。像小腿抽筋，就把腳尖往自己的方向拉。<br>常見原因是肌肉太累、神經控制亂掉，水分和電解質不足算是次要因素。如果常常半夜抽筋，建議給醫師看一下。`},
+ {id:"comp",k:["代償","借力"],a:()=>`代償就是「該出力的那塊肌肉偷懶，旁邊的肌肉跑來幫忙」。短時間撐得住，但長期幫忙的那塊會很累、很容易痛。<br>最經典的例子：臀肌沒在工作，下背和大腿後側就一直幫忙 → 下背痠、大腿後側緊。`,go:["看分工合作","t:roles"],s:["想練臀部","下背痛"]},
+ {id:"bulk",k:["增肌","長肌肉","肌肥大","變壯","練大隻"],a:()=>`想長肌肉，三個關鍵記起來 💪<ol><li><b>漸進超負荷</b>：重量或次數要慢慢往上加，身體才有理由長肌肉</li><li><b>吃夠蛋白質</b>：常見建議是每公斤體重每天約 1.6 公克，分散在各餐</li><li><b>睡飽</b>：肌肉是在休息時長出來的</li></ol>同一個肌群一週練 2 次左右，效果通常比一次練到爆更好。`,s:["蛋白質要吃多少？","幾組幾下比較好？"]},
+ {id:"fatloss",k:["減脂","減肥","瘦身","燃脂","減重","變瘦","瘦下來"],a:()=>`減脂的核心其實很樸實：<b>吃進去的熱量 &lt; 消耗的熱量</b>。<ul><li>飲食控制是主力，運動是好幫手</li><li>重訓幫你保住肌肉，瘦下來才會緊實</li><li>有氧增加消耗、照顧心肺</li><li>睡眠不足會讓你更想吃東西喔 😴</li></ul>`,s:["可以只瘦肚子嗎？","有氧要做多久？"]},
+ {id:"spot",k:["局部瘦身","局部瘦","瘦肚子","瘦小腹","瘦大腿","瘦手臂","瘦腰","消小腹","消掰掰肉","瘦蝴蝶袖"],a:()=>`先說個不太好聽但很重要的事實：<b>局部瘦身是做不到的</b> 😅<br>做很多仰臥起坐，腹肌會變強，但肚子上的脂肪不會因此特別消掉。脂肪是全身一起減的。<br>比較有效的組合是：<b>飲食控制熱量 + 全身重訓 + 有氧</b>。等體脂降下來，你練出來的肌肉線條就會浮現了 ✨`,s:["想減脂怎麼練？","想練核心"]},
+ {id:"freq",k:["多久練一次","一週練幾次","一週要練幾次","每週幾次","頻率","每天練","天天練","練幾天"],a:()=>`一般建議：<ul><li>同一個肌群，一週練 <b>2 次左右</b></li><li>練過的部位，休息約 <b>48 小時</b>再練</li><li>新手每週 2–3 次全身訓練就很夠了</li></ul>每天都想動？可以輪流練不同部位，或是休息日去散步、做皮拉提斯 😊`,s:["新手要怎麼開始？"]},
+ {id:"newbie",k:["新手","初學","剛開始","入門","菜單","課表","從哪開始","怎麼開始"],a:()=>`歡迎加入！新手可以每週 2–3 次，每次練全身，像這樣：<ul><li>🦵 下肢：腿推機、髖外展機</li><li>💪 推：胸推機</li><li>🔙 拉：滑輪下拉、坐姿划船</li><li>🧘 核心：百次拍擊、肩橋</li></ul>每個動作 2–3 組、每組 10–12 下，先把動作做對，再慢慢加重量。前兩週會痠是正常的～`,s:["滑輪下拉怎麼做？","腿推機會練到哪？","幾組幾下比較好？"]},
+ {id:"pvw",k:["皮拉提斯跟重訓","皮拉提斯和重訓","重訓跟皮拉提斯","重訓和皮拉提斯","皮拉提斯好處","什麼是皮拉提斯","皮拉提斯是什麼","皮拉提斯有用嗎"],a:()=>`兩個是好朋友，不是對手 🤝<ul><li>🧘 <b>皮拉提斯</b>：強調核心控制、呼吸、身體排列和柔軟度，很適合改善姿勢和穩定度</li><li>🏋️ <b>重訓</b>：比較容易做到漸進加重，增肌、增加骨密度效果較明顯</li></ul>時間允許的話兩個都做最理想。`,go:["看皮拉提斯動作","t:pilates"]},
+ {id:"sitting",k:["久坐","坐很久","上班族","辦公室","整天坐"],a:()=>`久坐族最常見的狀況：<b>髂腰肌變短、臀肌偷懶</b>，久了就容易下背痛、骨盆前傾。<ul><li>每 30–60 分鐘起來走一走</li><li>伸展髖屈肌：弓箭步，後腳那側的屁股夾緊</li><li>練臀部：臀橋、蚌殼式、髖外展</li></ul>`,s:["下背痛","想練臀部"]},
+ {id:"valgus",k:["膝內扣","膝蓋內扣","膝蓋往內","x型腿"],a:()=>`膝蓋內扣通常不是膝蓋本身的錯，常見原因有：<ul><li>臀中肌、臀大肌力量不夠，撐不住大腿</li><li>足弓塌陷，讓小腿往內轉</li><li>腳踝太緊，往前彎不夠</li></ul>可以練：髖外展機、蚌殼式、側躺抬腿。深蹲時想像膝蓋對準第二、三根腳趾。`,s:["蚌殼式怎麼做？","膝蓋前面痛"]},
+ {id:"core",k:["核心肌群","核心是什麼","什麼是核心"],a:()=>`核心不是只有六塊肌喔！它比較像一個<b>圓柱</b>：<ul><li>屋頂：橫膈膜</li><li>前面和兩側：腹橫肌、腹斜肌、腹直肌</li><li>後面：多裂肌、豎脊肌</li><li>地板：骨盆底肌</li></ul>它們一起穩住脊椎，讓手腳能好好出力。`,s:["想練核心","腹橫肌是做什麼的？"]},
+ {id:"protein",k:["蛋白質","高蛋白","乳清","吃什麼"],a:()=>`有在訓練的話，常見建議是<b>每公斤體重每天約 1.2–1.6 公克</b>蛋白質，平均分到各餐會比一次吃很多好。<br>雞蛋、豆腐、魚、雞肉、牛奶、優格都是好來源。有腎臟問題的話，請先問醫師或營養師喔。`,s:["想增肌怎麼練？"]},
+ {id:"injury",k:["扭傷","拉傷","扭到","閃到"],a:()=>`剛扭到或拉傷的頭 1–2 天：<ul><li>先休息，別硬撐著繼續練</li><li>冰敷 10–15 分鐘，可以消腫止痛</li><li>可以的話抬高患部</li></ul>等不那麼痛之後，再慢慢恢復活動。如果<b>無法承重、腫得很厲害、聽到「啪」一聲，或兩週都沒改善</b>，請去看醫師。`,s:["冰敷還是熱敷？"]}
+];
+
+/* ---------- 實體擷取 ---------- */
+const ENT=[];
+GYM.forEach(v=>ENT.push({type:"gym",id:v.id,a:[...(EXA[v.id]||[]),baseT(v.t),v.en]}));
+PIL.forEach(v=>ENT.push({type:"pil",id:v.id,a:[...(EXA[v.id]||[]),baseT(v.t),v.en]}));
+MOVES.forEach(v=>ENT.push({type:"mv",id:v.k,a:[...(MVA[v.k]||[]),v.t]}));
+M.forEach(m=>ENT.push({type:"mu",id:m.id,a:[...(MUA[m.id]||[]),baseT(m.zh),m.en]}));
+PAIN.forEach(v=>ENT.push({type:"pr",id:v.k,a:PAINK[v.k]||[v.t]}));
+BODY.forEach((b,i)=>ENT.push({type:"bd",id:i,a:b.a}));
+TOPICS.forEach(t=>ENT.push({type:"tp",id:t.id,a:t.k}));
+GLOSS.forEach((g,i)=>ENT.push({type:"gl",id:i,a:[...g[0].split(" / "),...g[1].split(" / ")].filter(x=>x.length>1)}));
+ENT.forEach(e=>e.n=[...new Set(e.a.map(norm).filter(Boolean))]);
+function findAll(q){
+  const out=[];
+  ENT.forEach(e=>{let best=null;e.n.forEach(a=>{const i=q.indexOf(a);if(i>=0&&(!best||a.length>best.len))best={type:e.type,id:e.id,start:i,len:a.length,word:a}});if(best)out.push(best)});
+  return out.filter(e=>!out.some(o=>o!==e&&o.len>e.len&&o.start<=e.start&&o.start+o.len>=e.start+e.len)).sort((a,b)=>a.start-b.start);
 }
-function answer(raw){
-  const q=norm(raw);
-  if(!q)return null;
-  if(RED.some(r=>r.test(raw)))return {h:`⚠️ 你描述的情況可能需要<b>盡快就醫</b>，不建議自己處理或繼續運動。<ul><li>胸口壓迫痛、喘不過氣、意識不清、大小便失禁：請立即撥打 <b>119</b> 或到急診</li><li>尿液變茶色合併劇烈肌肉痛：可能是橫紋肌溶解，請立即就醫</li><li>受傷後無法承重、聽到「啪」一聲後無力、單側小腿紅腫熱痛：請盡快看醫師</li></ul>`,acts:[btn("看就醫警訊","t:recovery")]};
-  if(/^(你好|嗨|哈囉|hi|hello|安安|早安|午安|晚安)/.test(q))return {h:"你好！我是肌肉教練。可以問我：<ul><li>某個動作怎麼做，例如「滑輪下拉怎麼做」</li><li>想練哪裡，例如「想練臀部」</li><li>哪裡痠痛，例如「下背痛跟哪些肌肉有關」</li><li>某塊肌肉的功能，例如「臀中肌是做什麼的」</li></ul>",chips:true};
-  if(/(謝謝|感謝|thank)/.test(q))return {h:"不客氣！練習時記得動作慢、姿勢穩，有問題隨時問我 💪"};
-  if(/(你是誰|你會什麼|你能做|功能)/.test(q))return answer("你好");
-  // exercise
+const bigr=s=>{const r=[];for(let i=0;i<s.length-1;i++)r.push(s.slice(i,i+2));return r};
+function fuzzy(q){ // 錯字容錯：比對雙字組
   let best=null;
-  const consider=(score,fn)=>{if(score>=1&&(!best||score>best.s))best={s:score,fn}};
-  GYM.forEach(v=>consider(has(q,EXA[v.id]||[v.t])&&has(q,EXA[v.id]||[v.t])+.3,()=>exAnswer(GYM,v.id,q)));
-  PIL.forEach(v=>consider(has(q,EXA[v.id]||[v.t])&&has(q,EXA[v.id]||[v.t])+.3,()=>exAnswer(PIL,v.id,q)));
-  MOVES.forEach(v=>consider(has(q,MVA[v.k]||[v.t])&&has(q,MVA[v.k]||[v.t])+.2,()=>({h:`<b>${v.t}</b>：${esc(v.d)}<br>主力：${v.prime.map(mName).join("、")}<br>穩定：${v.stab.map(mName).join("、")}<br>${v.ct||"常見錯誤"}：<ul>${v.comp.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>`,acts:[btn("看動作拆解","v:"+v.k)]})));
-  const exBest=best;best=null;
-  // pain
-  const painIntent=PAINW.test(raw);
-  if(painIntent){
-    if(/(隔天|練完|運動後|延遲|鐵腿)/.test(q)){const t=TOPICS.find(t=>t.k.includes("延遲性"));return {h:t.a,acts:[btn(t.go[2],"t:"+t.go[1])]}}
-    let pk=null,ps=0;PAIN.forEach(v=>{const s=has(q,PAINK[v.k]||[]);if(s>ps){ps=s;pk=v}});
-    if(pk&&(!exBest||ps>=exBest.s-.3)){
-      return {h:`<b>${pk.t}</b>可能相關的肌肉：${pk.m.map(mName).join("、")}<br>常見連鎖：${pk.chain.join(" → ")}<br><span class="cnote">${esc(pk.note)}</span><br><span class="cnote">以上是學習參考，不是診斷。痛超過 2 週、越來越痛，或有麻、無力，請看醫師或物理治療師。</span>`,acts:[btn("看痠痛地圖","pain:"+pk.k),mBtns(pk.m.slice(0,3))]};
-    }
-  }
-  if(exBest&&exBest.s>=2)return exBest.fn();
-  // train target
-  if(/(練|鍛鍊|訓練|強化|增強|改善|雕塑|瘦)/.test(q)){
-    let tk=null,ts=0;Object.keys(TRAIN).forEach(k=>{if(q.includes(k)&&k.length>ts){ts=k.length;tk=k}});
-    if(tk){const ids=TRAIN[tk];const pick=lib=>lib.filter(v=>v.prime.some(i=>ids.includes(i)));
-      const g=pick(GYM),p=pick(PIL);
-      if(g.length||p.length)return {h:`想練<b>${tk}</b>，可以從這些動作開始：${g.length?`<br>器材：${g.map(v=>v.t).join("、")}`:""}${p.length?`<br>皮拉提斯：${p.map(v=>v.t).join("、")}`:""}<br><span class="cnote">每個動作 2–4 組、每組 8–12 下，動作慢、姿勢穩比重量重要。</span>`,acts:[...g.slice(0,3).map(v=>btn(v.t,"g:"+v.id)),...p.slice(0,2).map(v=>btn(v.t,"p:"+v.id))]};
-    }
-  }
-  // muscle
-  let mb=null,ms=0;M.forEach(m=>{const names=[m.zh.replace(/（.*?）/g,""),m.en,...(MUA[m.id]||[])];const s=has(q,names);if(s>ms){ms=s;mb=m}});
-  if(mb&&ms>=2){const m=mb;
-    return {h:`<b>${m.zh}</b>（${m.en}）<br>${esc(m.p)}<ul><li>負責：${esc(m.act)}</li>${m.syn.length?`<li>夥伴：${m.syn.map(mName).join("、")}</li>`:""}${m.ant.length?`<li>對手：${m.ant.map(mName).join("、")}</li>`:""}${m.bad?`<li>出問題時：${esc(m.bad)}</li>`:""}${m.tip?`<li>小提醒：${esc(m.tip)}</li>`:""}</ul>`,acts:[btn("在人體圖上看","m:"+m.id),...[...GYM,...PIL].filter(v=>v.prime.includes(m.id)).slice(0,2).map(v=>btn("練法："+v.t,(GYM.includes(v)?"g:":"p:")+v.id))]};}
-  if(exBest)return exBest.fn();
-  // topics
-  let tb=null,tsc=0;TOPICS.forEach(t=>{const s=has(q,t.k);if(s>tsc){tsc=s;tb=t}});
-  if(tb)return {h:tb.a,acts:tb.go?[btn(tb.go[2],"t:"+tb.go[1])]:[]};
-  // glossary
-  let gb=null,gs=0;GLOSS.forEach((g,i)=>{const s=has(q,[...g[0].split(" / "),...g[1].split(" / ")]);if(s>gs){gs=s;gb=i}});
-  if(gb!==null&&gs>=2){const g=GLOSS[gb];return {h:`<b>${g[0]}</b>（${g[1]}）：${esc(g[2])}`,acts:[btn("看名詞速查","t:glossary")]}}
-  // pain without location
-  if(painIntent)return {h:"哪個部位不舒服呢？可以說得具體一點，例如「下背痛」「膝蓋前面痛」「肩頸緊」。",chips:"pain"};
-  return {h:"這個問題我可能答不好 😅 我是根據本站內容回答的簡易教練，比較擅長：肌肉功能、器材與皮拉提斯動作、痠痛部位的可能原因、恢復方法。試試下面的問題：",chips:true};
+  ENT.filter(e=>["gym","pil","mv","mu"].includes(e.type)).forEach(e=>e.n.forEach(a=>{if(a.length<3||/[a-z]/.test(a))return;const bg=bigr(a),hit=bg.filter(b=>q.includes(b)).length,r=hit/bg.length;
+    if(hit>=2&&r>=.6&&(!best||r>best.r||(r===best.r&&a.length>best.len)))best={type:e.type,id:e.id,r,len:a.length}}));
+  return best;
 }
 
-/* UI */
+/* ---------- 意圖 ---------- */
+const RED=[/胸口.{0,4}(痛|悶|壓|緊)/,/胸(悶|痛)/,/(尿|小便).{0,5}(茶|可樂|深色|褐|醬油)/,/喘不過/,/呼吸困難/,/(昏倒|暈倒|昏迷|意識不清)/,/大小便.{0,2}(失禁|控制不)/,/(突然).{0,6}(無力|麻|說不出話)/,/(會陰|胯下).{0,3}麻/,/(骨折|變形|無法承重|不能走路|沒辦法走)/,/啪.{0,3}(一聲|的一聲|聲)/,/小腿.{0,6}(紅腫|腫脹)/,/(嘴歪|臉歪)/];
+const RX={
+ how:/(怎麼做|怎麼練|怎麼用|怎麼調|如何做|如何練|如何使用|做法|步驟|教我|要領|姿勢|正確|技巧|怎樣做|方法)/,
+ worked:/(練到|練哪|哪裡|哪些肌|什麼肌|部位|練什麼|效果|功效|作用|有什麼用|好處)/,
+ err:/(錯誤|注意|地雷|避免|做錯|常犯|小心|要點|不要)/,
+ pain:/(痛|痠|酸|緊繃|很緊|好緊|緊緊|卡卡|卡住|不舒服|麻|刺痛|僵硬|腫)/,
+ nopain:/(不痛|沒痛|不會痛|不痠)/,
+ target:/(想練|要練|練出|練練|加強|強化|鍛鍊|訓練|改善|增加|雕塑|變大|變翹|變壯|變緊實|練什麼|怎麼練|推薦|練.{0,2}(動作|器材))/,
+ what:/(是什麼|是做什麼|做什麼的|什麼是|功能|負責|介紹|是幹嘛|幹嘛的|有什麼用)/,
+ where:/(在哪|位置|在什麼地方)/,
+ cmp:/(差在哪|差別|差異|比較|哪個好|哪一個|還是|vs|和.{1,8}一樣)/,
+ doms:/(隔天|練完|運動後|延遲|鐵腿|昨天練|前天練)/,
+ follow:/^(那|它|這個|這動作|那個|那它|那要|然後|還有)/
+};
+const ctx={last:null};
+const S=(h,o={})=>Object.assign({h},o);
+const kind=(k,r)=>{r.kind=k;return r};
+
+/* ---------- 回答組裝 ---------- */
+const PN={head:"頭",neck:"肩頸",shoulder:"肩膀",midback:"肩胛中間",elbow:"手肘",lowback:"下背",buttock:"屁股",groin:"鼠蹊",kneefront:"膝蓋",kneeside:"膝蓋外側",shin:"小腿",heel:"腳跟"};
+function libOf(t){return t==="pil"?PIL:GYM}
+function exAns(type,id,I){
+  const lib=libOf(type),v=lib.find(x=>x.id===id),isP=type==="pil";
+  ctx.last={type,id};
+  const prime=list(v.prime.map(mName)),syn=list(v.syn.map(mName)),stab=list(v.stab.map(mName));
+  const acts=[btn("看動作圖解",(isP?"p:":"g:")+id)];
+  if(I.worked&&!I.how&&!I.err){
+    return kind("ex-worked",S(`${pick([`${v.t}主要在練<b>${prime}</b>！`,`做${v.t}時，出最多力的是<b>${prime}</b> 💪`,`${v.t}的主角是<b>${prime}</b>。`])}${v.syn.length?`${syn}也會一起幫忙出力`:""}${v.stab.length?`${v.syn.length?"，":""}${stab}負責把身體穩住`:""}。${v.str?`<br>同時也會伸展到${list(v.str.map(mName))}。`:""}`,{acts,s:[`${v.t}怎麼做？`,`${v.t}要注意什麼？`]}));
+  }
+  if(I.err&&!I.how){
+    return kind("ex-err",S(`${pick([`${v.t}最常踩的地雷有這幾個，避開就很棒了：`,`做${v.t}時，小心這幾個常見錯誤 👀`])}<ul>${v.err.map(s=>`<li>${esc(s)}</li>`).join("")}</ul>${v.note?`另外，${esc(v.note)}`:""}`,{acts,s:[`${v.t}怎麼做？`,`${v.t}練到哪裡？`]}));
+  }
+  const open=pick([`來，${v.t}這樣做 👇`,`${v.t}抓住這幾個重點就對了：`,`好問題！${v.t}的做法是：`]);
+  return kind("ex-how",S(`${open}<ol>${v.steps.map(s=>`<li>${esc(s)}</li>`).join("")}</ol>🫁 呼吸：${esc(v.br)}${v.note?`<br>💡 ${esc(v.note)}`:""}${!I.how?`<br>主要練到：${prime}`:""}<br><span class="cnote">${pick(["動作慢一點、穩一點，比重量重要喔！","第一次做先用輕一點的重量試試看。","對著鏡子做，比較容易發現姿勢跑掉。"])}</span>`,{acts,s:[`${v.t}常見錯誤？`,`${v.t}練到哪裡？`]}));
+}
+function mvAns(k,I){
+  const v=MOVES.find(x=>x.k===k);ctx.last={type:"mv",id:k};
+  const acts=[btn("看動作拆解","v:"+k)];
+  const prime=list(v.prime.map(mName)),stab=list(v.stab.map(mName));
+  if(I.err&&!I.worked)return kind("mv-err",S(`${v.t}${pick(["常見的問題和原因：","最容易出包的地方："])}<ul>${v.comp.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>`,{acts}));
+  return kind("mv",S(`${pick([`${v.t}主要靠<b>${prime}</b>出力`,`做${v.t}時，主力是<b>${prime}</b>`])}，${v.syn.length?`${list(v.syn.map(mName))}在旁邊幫忙，`:""}${stab}負責穩定。<br>${esc(v.d)}<br>${v.ct||"常見問題"}：<ul>${v.comp.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>`,{acts,s:k==="squat"?["膝蓋內扣怎麼辦？","想練臀部"]:[]}));
+}
+function trainers(ids){
+  const sc=v=>(ids.includes(v.prime[0])?2:0)+v.prime.filter(i=>ids.includes(i)).length*2+v.syn.filter(i=>ids.includes(i)).length+(v.lv==="初階"?.5:0);
+  const g=GYM.filter(v=>sc(v)>=2).sort((a,b)=>sc(b)-sc(a)),p=PIL.filter(v=>sc(v)>=2).sort((a,b)=>sc(b)-sc(a));
+  return {g:g.slice(0,3),p:p.slice(0,3)};
+}
+function trainAns(label,ids){
+  const {g,p}=trainers(ids);
+  if(!g.length&&!p.length){const m=MI[ids[0]];return kind("train",S(`想練${label}嗎？${m&&m.tip?`可以試試：${esc(m.tip)}`:"本站目前沒有專門的動作，可以先從全身訓練開始喔。"}`))}
+  ctx.last=g[0]?{type:"gym",id:g[0].id}:{type:"pil",id:p[0].id};
+  return kind("train",S(`${pick([`想練${label}？好目標 💪 推薦你從這幾個開始：`,`練${label}的話，這幾個動作很適合：`,`${label}交給這幾個動作就對了 👇`])}${g.length?`<br>🏋️ 器材：${g.map(v=>`<b>${v.t}</b>`).join("、")}`:""}${p.length?`<br>🧘 皮拉提斯：${p.map(v=>`<b>${v.t}</b>`).join("、")}`:""}<br><span class="cnote">${ids.length<=4&&!ids.every(i=>label.includes(mName(i)))?`目標肌肉：${list(ids.map(mName))}。`:""}每個動作 2–4 組、每組 8–12 下，動作穩比重量重要。</span>`,{acts:[...g.map(v=>btn(baseT(v.t),"g:"+v.id)),...p.slice(0,2).map(v=>btn(v.t,"p:"+v.id))],s:[`${baseT((g[0]||p[0]).t)}怎麼做？`]}));
+}
+function muAns(id,I){
+  const m=MI[id];ctx.last={type:"mu",id};
+  const {g,p}=trainers([id]);const tr=[...g,...p].slice(0,3);
+  if(I.target)return trainAns(m.zh,[id]);
+  let h=`${pick([`<b>${m.zh}</b>簡單說就是：${esc(m.p)}。`,`來認識一下<b>${m.zh}</b>（${m.en}）！${esc(m.p)}。`])}<br>它主要負責<b>${esc(m.act)}</b>。`;
+  if(I.where)h+=`<br>📍 位置：從${esc(m.o)}連到${esc(m.i)}。`;
+  if(m.syn.length)h+=`<br>🤝 好搭檔：${list(m.syn.map(mName))}`;
+  if(m.ant.length)h+=`<br>⚔️ 唱反調的：${list(m.ant.map(mName))}`;
+  if(m.bad)h+=`<br>⚠️ 常見狀況：${esc(m.bad)}`;
+  if(m.tip)h+=`<br>💡 ${esc(m.tip)}`;
+  if(tr.length)h+=`<br>想練它可以做：${tr.map(v=>v.t).join("、")}`;
+  return kind("mu",S(h,{acts:[btn("在人體圖上看","m:"+id),...tr.slice(0,2).map(v=>btn(baseT(v.t),(GYM.includes(v)?"g:":"p:")+v.id))],s:tr[0]?[`${baseT(tr[0].t)}怎麼做？`]:[]}));
+}
+function muPainAns(id){
+  const m=MI[id];ctx.last={type:"mu",id};
+  return kind("mu-pain",S(`${m.zh}不舒服的話，${m.pain?`常會感覺痛在<b>${esc(m.pain)}</b>。`:""}${m.bad?`<br>常見原因：${esc(m.bad)}`:""}${m.tip?`<br>💡 可以試試：${esc(m.tip)}`:""}<br><span class="cnote">這是學習參考不是診斷，痛超過兩週或越來越痛，記得找醫師或物理治療師看看。</span>`,{acts:[btn("在人體圖上看","m:"+id)]}));
+}
+function painAns(k){
+  const v=PAIN.find(x=>x.k===k),n=PN[k]||v.t;ctx.last={type:"pr",id:k};
+  return kind("pain",S(`${pick([`${n}不舒服喔？先別緊張，我們一起來看看～`,`${n}痛真的很常見！`,`了解，${n}卡卡的很困擾吧 😣`])}<br>通常跟這幾塊肌肉比較有關：<b>${list(v.m.map(mName))}</b>。<br>很常見的連鎖是：${v.chain.join(" → ")}。<br>${esc(v.note)}<br><span class="cnote">我只能提供學習參考，不是診斷喔。痛超過兩週、越來越痛，或有麻、無力，記得找醫師或物理治療師。</span>`,{acts:[btn("看痠痛地圖","pain:"+k),...v.m.slice(0,2).map(id=>btn(mName(id),"m:"+id))],s:[`${mName(v.m[0])}是做什麼的？`]}));
+}
+function exPainAns(e,pr){
+  const isMv=e.type==="mv",v=isMv?MOVES.find(x=>x.k===e.id):libOf(e.type).find(x=>x.id===e.id);
+  ctx.last={type:e.type,id:e.id};
+  const errs=isMv?v.comp:v.err,where=pr?PAIN.find(x=>x.k===pr.id):null;
+  return kind("ex-pain",S(`做${v.t}會${where?(pr.word&&pr.word.length>=2?pr.word:(PN[where.k]||where.t)):""}不舒服啊…${pick(["通常是姿勢的小細節出了問題。","多半是重量或姿勢需要調整一下。"])}先檢查有沒有這些狀況：<ul>${errs.map(c=>`<li>${esc(c)}</li>`).join("")}</ul>${where?`${PN[where.k]||where.t}的不舒服也常跟${list(where.m.slice(0,3).map(mName))}有關。<br>`:""}建議先<b>減輕重量、縮小動作範圍</b>，還是痛就先暫停這個動作。<span class="cnote">持續疼痛請找醫師或物理治療師評估。</span>`,{acts:[btn("看正確動作",isMv?"v:"+e.id:(e.type==="pil"?"p:":"g:")+e.id),...(where?[btn("看痠痛地圖","pain:"+where.k)]:[])]}));
+}
+function cmpAns(a,b){
+  const get=e=>e.type==="mv"?MOVES.find(x=>x.k===e.id):libOf(e.type).find(x=>x.id===e.id);
+  const va=get(a),vb=get(b);
+  const shared=va.prime.filter(i=>vb.prime.includes(i));
+  const lvl=[va,vb].find(v=>v.lv==="初階");
+  return kind("cmp",S(`${pick(["好問題！來比一比 👇","兩個各有特色："])}<ul><li><b>${va.t}</b>：主要練${list(va.prime.map(mName))}</li><li><b>${vb.t}</b>：主要練${list(vb.prime.map(mName))}</li></ul>${shared.length?`它們都會練到${list(shared.map(mName))}，可以挑一個當主菜、另一個當配菜。`:"它們練的部位不太一樣，可以在同一次訓練裡互相搭配。"}${lvl&&!(va.lv===vb.lv)?`<br>如果是新手，<b>${lvl.t}</b>會比較好上手。`:""}`,{s:[`${baseT(va.t)}怎麼做？`,`${baseT(vb.t)}怎麼做？`]}));
+}
+function topicAns(id){const t=TOPICS.find(x=>x.id===id);return kind("topic:"+id,S(t.a(),{acts:t.go?[btn(t.go[0],t.go[1])]:[],s:t.s||[]}))}
+function glossAns(i){const g=GLOSS[i];return kind("gloss",S(`<b>${g[0]}</b>（${g[1]}）：${esc(g[2])}`,{acts:[btn("看名詞速查","t:glossary")]}))}
+
+function answer(raw){
+  const q=norm(raw);if(!q)return null;
+  if(RED.some(r=>r.test(raw)))return kind("red",S(`⚠️ 你說的情況可能需要<b>盡快就醫</b>，先不要自己處理或繼續運動喔。<ul><li>胸口壓迫痛、喘不過氣、意識不清、大小便失禁、突然單側無力：請馬上撥 <b>119</b> 或去急診</li><li>尿液變茶色又合併肌肉劇痛：可能是橫紋肌溶解，請立即就醫</li><li>受傷後不能走、聽到「啪」一聲後無力、單側小腿紅腫：請盡快看醫師</li></ul>`,{acts:[btn("看就醫警訊","t:recovery")]}));
+  const I={};Object.keys(RX).forEach(k=>I[k]=RX[k].test(q));if(I.nopain)I.pain=false;
+  let ents=findAll(q);
+  const T=t=>ents.filter(e=>e.type===t);
+  let ex=ents.filter(e=>e.type==="gym"||e.type==="pil"),mv=T("mv"),mu=T("mu"),pr=T("pr"),bd=T("bd"),tp=T("tp"),gl=T("gl");
+  // 閒聊
+  if(/^(你好|嗨|哈囉|hi|hello|hey|安安|早安|午安|晚安|在嗎)/.test(q)&&ents.length===0)return kind("greet",S(pick(["嗨嗨！我是肌肉教練 👋 今天想練哪裡，還是哪裡不舒服呢？","哈囉～有什麼想問的儘管問！動作、肌肉、痠痛都可以聊。"]),{chips:true}));
+  if(/(謝謝|感謝|thank|3q|感恩)/.test(q)&&ents.length===0)return kind("thanks",S(pick(["不客氣！練習加油，有問題隨時找我 💪","不會～記得動作穩、慢慢來！","隨時都在！祝你練得開心 😄"])));
+  if(/(你是誰|你會什麼|你能做|你可以做|會回答什麼)/.test(q))return kind("who",S("我是這個網站的肌肉教練 🤖💪 我會根據網站內容回答，擅長：<ul><li>器材和皮拉提斯動作怎麼做、練到哪裡</li><li>想練某個部位該做什麼</li><li>哪裡痠痛可能跟哪些肌肉有關</li><li>增肌、減脂、恢復這類常見觀念</li></ul>不過我不是醫生，沒辦法幫你診斷喔！",{chips:true}));
+  if(ents.length===0&&/(好累|好懶|不想動|不想運動|沒動力|提不起勁|懶得|沒力)/.test(q))return kind("motivate",S(pick(["懂～有些天就是提不起勁 😆 試試看只做 10 分鐘就好，開始了常常就會想繼續。真的很累的話，休息也是訓練的一部分喔！","沒關係，今天就輕鬆一點：散步 20 分鐘或做幾個皮拉提斯動作也很棒。持續比完美更重要 💪"]),{s:["百次拍擊怎麼做？","怎麼恢復比較快？"]}));
+  if(/^(掰|再見|bye|881|晚安囉)/.test(q))return kind("bye",S("掰掰～記得多喝水、睡飽一點 😴"));
+  // 錯字容錯
+  if(!ents.length){const f=fuzzy(q);if(f){const e={type:f.type,id:f.id,start:0,len:f.len};if(f.type==="mu")mu=[e];else if(f.type==="mv")mv=[e];else ex=[e];ents.push(e)}}
+  // 延遲性痠痛
+  if(I.doms&&I.pain||tp.some(t=>t.id==="doms"))return topicAns("doms");
+  // 局部瘦身
+  if(tp.some(t=>t.id==="spot")||/瘦.{0,3}(肚|腹|腰|大腿|手臂|蝴蝶袖|小腿|屁股)/.test(q))return topicAns("spot");
+  // 比較
+  const acts=[...ex,...mv];
+  if(I.cmp&&acts.length>=2)return cmpAns(acts[0],acts[1]);
+  // 動作 + 疼痛
+  if(I.pain&&acts.length)return exPainAns(acts[0],pr[0]);
+  // 部位疼痛
+  if(I.pain&&pr.length&&!(mu.length&&mu[0].len>=pr[0].len))return painAns(pr[0].id);
+  if(I.pain&&mu.length)return muPainAns(mu[0].id);
+  if(I.pain&&bd.length){const b=BODY[bd[0].id];const pk=PAIN.find(p=>(PAINK[p.k]||[]).some(a=>b.a.includes(a)));if(pk)return painAns(pk.k)}
+  if(pr.length&&!bd.length&&!I.target&&!ex.length&&!mv.length&&!mu.length&&!tp.length)return painAns(pr[0].id);
+  // 動作
+  if(ex.length)return exAns(ex[0].type,ex[0].id,I);
+  if(mv.length)return mvAns(mv[0].id,I);
+  // 主題
+  if(tp.length)return topicAns(tp[0].id);
+  // 練某部位
+  if(bd.length&&(I.target||!mu.length)){const b=BODY[bd[0].id];return trainAns(b.k,b.ids)}
+  if(mu.length)return muAns(mu[0].id,I);
+  if(gl.length)return glossAns(gl[0].id);
+  // 追問上一題
+  if(ctx.last&&(I.how||I.worked||I.err||I.follow||I.pain||I.what)){
+    const L=ctx.last;
+    if(L.type==="gym"||L.type==="pil"){if(I.pain)return exPainAns({type:L.type,id:L.id},null);return exAns(L.type,L.id,I)}
+    if(L.type==="mv"){if(I.pain)return exPainAns({type:"mv",id:L.id},null);return mvAns(L.id,I)}
+    if(L.type==="mu"){if(I.how||I.target)return trainAns(MI[L.id].zh,[L.id]);if(I.pain)return muPainAns(L.id);return muAns(L.id,I)}
+    if(L.type==="pr"&&(I.target||I.how)){const v=PAIN.find(x=>x.k===L.id);return trainAns(`和${PN[L.id]||v.t}有關的肌肉`,v.m.slice(0,3))}
+  }
+  if(I.pain)return kind("ask-where",S(pick(["哪裡不舒服呢？說具體一點我比較能幫上忙，例如「下背痛」「膝蓋前面痛」「肩頸緊」。","嗯…是哪個部位呢？可以點下面的選項，或直接告訴我 👇"]),{chips:"pain"}));
+  if(I.target)return kind("ask-target",S("想練哪個部位呢？例如「想練臀部」「想練核心」「想改善圓肩」都可以問我 💪",{s:["想練臀部","想練核心","想改善圓肩","想練背"]}));
+  return kind("fallback",S(pick(["嗯…這題有點超出我的專長了 😅 我比較擅長肌肉、器材、皮拉提斯和痠痛的問題，試試看這些：","這個我可能答不好耶 🙏 換個方式問問看？或是點下面的範例："]),{chips:true}));
+}
+
+/* ---------- 介面 ---------- */
 const wrap=document.createElement("div");wrap.className="coach";
 wrap.innerHTML=`
 <div class="coach-hint" id="coachHint" hidden>有問題問我 👋</div>
@@ -1685,27 +1814,30 @@ wrap.innerHTML=`
     <div><b>肌肉教練</b><span>根據本站內容回答 · 非醫療診斷</span></div>
     <button class="cclose" id="coachClose" aria-label="關閉">✕</button></header>
   <div class="cmsgs" id="coachMsgs" aria-live="polite"></div>
-  <form class="cin" id="coachForm"><input id="coachInput" type="text" placeholder="輸入問題，例如：深蹲練到哪裡？" autocomplete="off" aria-label="輸入問題"><button type="submit" aria-label="送出"><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg></button></form>
+  <form class="cin" id="coachForm"><input id="coachInput" type="text" placeholder="問我任何肌肉或動作的問題…" autocomplete="off" aria-label="輸入問題"><button type="submit" aria-label="送出"><svg viewBox="0 0 24 24"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg></button></form>
 </section>`;
 document.body.appendChild(wrap);
 const fab=wrap.querySelector("#coachFab"),panel=wrap.querySelector("#coachPanel"),msgs=wrap.querySelector("#coachMsgs"),form=wrap.querySelector("#coachForm"),inp=wrap.querySelector("#coachInput"),hint=wrap.querySelector("#coachHint");
-const CHIPS=["深蹲練到哪裡？","滑輪下拉怎麼做？","想練臀部","下背痛","膝蓋前面痛","練完隔天很痠","臀中肌是做什麼的","百次拍擊怎麼做"];
+const CHIPS=["深蹲練到哪裡？","滑輪下拉怎麼做？","想練臀部","下背痛","練完隔天很痠","可以只瘦肚子嗎？","新手要怎麼開始？","百次拍擊怎麼做？"];
 const PCHIPS=["下背痛","肩頸痠","膝蓋前面痛","手肘痛","腳跟痛","頭痛"];
 function add(role,html,acts,chips){
   const d=document.createElement("div");d.className="cm "+role;
   d.innerHTML=(role==="bot"?`<div class="cb">${html}${acts&&acts.length?`<div class="cacts">${acts.join("")}</div>`:""}</div>`:`<div class="cb">${esc(html)}</div>`);
-  if(chips){const list=chips==="pain"?PCHIPS:CHIPS;d.innerHTML+=`<div class="cchips">${list.map(c=>`<button class="cchip" data-q="${c}">${c}</button>`).join("")}</div>`}
+  const cl=chips===true?CHIPS:chips==="pain"?PCHIPS:Array.isArray(chips)?chips:null;
+  if(cl&&cl.length){msgs.querySelectorAll(".cchips.follow").forEach(x=>x.remove());d.innerHTML+=`<div class="cchips${Array.isArray(chips)?" follow":""}">${cl.map(c=>`<button class="cchip" data-q="${esc(c)}">${esc(c)}</button>`).join("")}</div>`}
   msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;
 }
 function ask(text){
   text=text.trim();if(!text)return;add("user",text);inp.value="";
   const t=document.createElement("div");t.className="cm bot typing";t.innerHTML=`<div class="cb"><i></i><i></i><i></i></div>`;msgs.appendChild(t);msgs.scrollTop=msgs.scrollHeight;
-  setTimeout(()=>{t.remove();let r;try{r=answer(text)}catch(e){r=null}
-    r=r||{h:"抱歉，我沒有理解這個問題，可以換個說法嗎？",chips:true};add("bot",r.h,r.acts,r.chips)},450+Math.random()*350);
+  let r;try{r=answer(text)}catch(e){r=null}
+  r=r||{h:"抱歉，我沒聽懂 😅 可以換個說法嗎？",chips:true};
+  const delay=Math.min(1400,380+r.h.replace(/<[^>]+>/g,"").length*4);
+  setTimeout(()=>{t.remove();add("bot",r.h,r.acts,r.chips||r.s)},delay);
 }
 let opened=false;
 function toggle(open){panel.hidden=!open;fab.classList.toggle("open",open);fab.setAttribute("aria-expanded",open);hint.hidden=true;
-  if(open){if(!opened){opened=true;add("bot","你好！我是<b>肌肉教練</b> 👋<br>可以問我肌肉功能、器材或皮拉提斯動作怎麼做、哪裡痠痛可能跟哪些肌肉有關。",[],true)}setTimeout(()=>inp.focus(),50)}}
+  if(open){if(!opened){opened=true;add("bot","嗨！我是<b>肌肉教練</b> 👋<br>想知道某個動作怎麼做、想練哪裡，或是哪裡卡卡的，都可以直接問我～",[],true)}setTimeout(()=>inp.focus(),50)}}
 fab.addEventListener("click",()=>toggle(panel.hidden));
 wrap.querySelector("#coachClose").addEventListener("click",()=>toggle(false));
 form.addEventListener("submit",e=>{e.preventDefault();ask(inp.value)});
@@ -1722,7 +1854,7 @@ msgs.addEventListener("click",e=>{
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!panel.hidden)toggle(false)});
 setTimeout(()=>{if(panel.hidden&&!opened){hint.hidden=false;setTimeout(()=>hint.hidden=true,6000)}},2500);
-window.coachAnswer=answer;
+window.coachAnswer=answer;window.coachCtx=ctx;
 })();
 
 /* ================= TABS ================= */
